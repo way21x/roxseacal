@@ -726,7 +726,7 @@
               </b-form-select>
               <b-form-select class="col-3" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
               </b-form-select>
-              <b-form-select class="col-3" v-model="selected_card" :options="filteredEnchant" value-field="attr" text-field="attr">
+              <b-form-select class="col-3" v-model="selected_enchant" :options="filteredEnchant" value-field="location" text-field="location">
               </b-form-select>
             </b-tab>
 
@@ -758,8 +758,11 @@
       data() {
         return {
           message: [],
+          cards: [],
+          enchant: [],
           selected: '',
-          selected_card: ''
+          selected_card: '',
+          selected_enchant: '',
         }
       },
       mounted() {
@@ -803,8 +806,8 @@
           return this.cards.filter( v => v.itemsubtype.match("01:武器"))
         },
         filteredEnchant: function() {
-          return this.enchant.filter( v => v.part.match("雙手"))
-        },
+          return this.enchant.filter( x => x.location.match("普隆德拉"))
+        }
       }
     })
   </script>
