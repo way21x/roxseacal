@@ -724,6 +724,10 @@
             <b-tab title="Tab 1" active>
               <b-form-select class="col-3" v-model="selected" :options="filteredWeapons" value-field="effectbase" text-field="itemname">
               </b-form-select>
+              <b-form-select class="col-3" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
+              </b-form-select>
+              <b-form-select class="col-3" v-model="selected_card" :options="filteredEnchant" value-field="attr" text-field="attr">
+              </b-form-select>
             </b-tab>
 
             <b-tab title="Tab 2">
@@ -734,6 +738,8 @@
 
 
         <span>Selected: {{ selected }}</span>
+        <span>Selected Card: {{ selected_card }}</span>
+        <span>Selected Enchant: {{ selected_enchant }}</span>
 
 
       </div>
@@ -752,7 +758,8 @@
       data() {
         return {
           message: [],
-          selected: ''
+          selected: '',
+          selected_card: ''
         }
       },
       mounted() {
@@ -775,13 +782,29 @@
           )
           .catch(error => {
             console.log(error);
+          }),
+          axios
+          .get(`https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json`)
+          .then(
+            response => {
+              this.enchant = response.data;
+            }
+          )
+          .catch(error => {
+            console.log(error);
           })
       },
       computed: {
         filteredWeapons: function() {
           let filtered = ["1-15:長弓", "1-17:短弓"];
           return this.message.filter( v => v.joblimit.match("弓箭手") && v.itemtype.match("1:武器"))
-        }
+        },
+        filteredCards: function() {
+          return this.cards.filter( v => v.itemsubtype.match("01:武器"))
+        },
+        filteredEnchant: function() {
+          return this.enchant.filter( v => v.part.match("雙手"))
+        },
       }
     })
   </script>
