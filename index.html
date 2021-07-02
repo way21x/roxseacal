@@ -726,7 +726,7 @@
               </b-form-select>
               <b-form-select class="col-3" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
               </b-form-select>
-              <b-form-select class="col-3" v-model="selected_enchant" :options="filteredEnchant" value-field="location" text-field="location">
+              <b-form-select class="col-3" v-model="selected_enchant" :options="filteredEnchant" value-field="attr" text-field="attr">
               </b-form-select>
             </b-tab>
 
@@ -806,7 +806,7 @@
           return this.cards.filter( v => v.itemsubtype.match("01:武器"))
         },
         filteredEnchant: function() {
-          return this.enchant.filter( x => x.location.match("普隆德拉"))
+          return this.enchant.filter( v => v.parts.match("雙手"))
         }
       }
     })
