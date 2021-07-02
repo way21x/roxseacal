@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.80.0">
+  <title>Checkout example · Bootstrap v4.6</title>
+
+  
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.css"/>
+
+</head>
+
+<body class="bg-light">
+
+  <div class="container" id="app">
+    <div class="row">
+      <div class="col-md-12">
+
+        <!-- info -->
+        <div class="col-12">
+          <h4 class="mb-3">Basic Info</h4>
+          <div class="row">
+            <div class="col-12">
+              <select name="" id="" class="form-control">
+                <option value="">Select Class</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <select name="" id="" class="form-control">
+                <option value="">Base Level</option>
+              </select>
+            </div>
+            <div class="col-2 text-end">Current Base EXP</div>
+            <div class="col-4 ">
+              <input type="text" name="" id="" class="form-control" value="0">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 ">
+              <select name="" id="" class="form-control">
+                <option value="">Job Level</option>
+              </select>
+            </div>
+            <div class="col-2 text-end">Current Job EXP</div>
+            <div class="col-4 ">
+              <input type="text" name="" id="" class="form-control" value="0">
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- stat -->
+        <div class="col-12">
+          <h4 class="mb-3">Stat</h4>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">STR</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">AGI</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">VIT</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">INT</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">DEX</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-2">LUK</div>
+                <div class="col-sm-10">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Tabs -->
+        <div class="col-12">
+          <h4 class="mb-3">Equiments</h4>
+
+          <!-- Tabs List -->
+          <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="pill" href="#weapon">Weapon</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#Accessories">Accessories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#Ammor">Ammor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#Costume">Costume</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="weapon" class="container tab-pane active"><br>
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+            </div>
+            <div id="Accessories" class="container tab-pane fade"><br>
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+            </div>
+            <div id="Ammor" class="container tab-pane fade"><br>
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-3">
+                  <select name="" id="" class="form-control">
+                    <option value="">Left Weapon</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Upgrade</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Refine</option>
+                  </select>
+                </div>
+                <div class="col-3" style="padding-right: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Enhance III</option>
+                  </select>
+                </div>
+                <div class="col-2" style="padding-left: 0%;">
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Lv. 1</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Card I</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card II</option>
+                  </select>
+                  <select name="" id="" class="form-control">
+                    <option value="">Card III</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+            </div>
+            <div id="Costume" class="container tab-pane fade"><br>
+              <!-- weapon -->
+              <div class="row">
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Head</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Eyes</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select name="" id="" class="form-control">
+                    <option value="">Face</option>
+                  </select>
+                </div>
+              </div>
+              <hr class="my-4">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Basic Stats -->
+        <div class="col-12">
+          <h4 class="mb-3">Basic Stats</h4>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+
+                <div class="col-3">Max HP</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">P.ATK</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">DEF</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">P.PEN</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">ASPD</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">Hit</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">Crit</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="row">
+                <div class="col-3">Max SP</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">M.ATK</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">M.DEF</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">M.DEF PEN</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">haste</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">Flee</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-3">Anti-Crit</div>
+                <div class="col-9">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+
+        <!-- Advance -->
+        <div class="col-12">
+          <h4 class="mb-3">Advanced Stats</h4>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+
+                <div class="col-5">Final Attack Speed</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">HP Regen</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">Crit DMG Bonus</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">Final Physical DEF</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">Final P.PEN</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="row">
+                <div class="col-5">Final Crit</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">SP Regen</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">Movement Speed</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">P.DMG Reduction</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+                <div class="col-5">Final Magic Defence</div>
+                <div class="col-7">
+                  <input type="text" name="" id="" class="form-control">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+
+        <div >
+          {{ message }}
+      </div>
+
+
+        <div>
+            <b-tabs pills card>
+              <b-tab title="Tab 1" active><b-card-text>Tab contents 1</b-card-text></b-tab>
+              <b-tab title="Tab 2"><b-card-text>Tab contents 2</b-card-text></b-tab>
+            </b-tabs>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.js" integrity="sha512-Z0dNfC81uEXC2iTTXtE0rM18I3ATkwn1m8Lxe0onw/uPEEkCmVZd+H8GTeYGkAZv50yvoSR5N3hoy/Do2hNSkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            },
+            mounted(){
+              axios
+         .get(`http://www.pixel-line.com/rox/jsonformatter.json`, {
+           Headers: {'Access-Control-Allow-Origin': '*'},
+           useCredentails: false,
+          })
+         .then(
+            response => {
+                console.log(response);
+                this.projects = response.data;
+            }
+        )
+        .catch(error=> {console.log(error);})
+            }
+        })
+        
+    </script>
+
+</body>
+
+</html>
