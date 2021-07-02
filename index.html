@@ -765,6 +765,16 @@
           )
           .catch(error => {
             console.log(error);
+          }),
+          axios
+          .get(`https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json`)
+          .then(
+            response => {
+              this.cards = response.data;
+            }
+          )
+          .catch(error => {
+            console.log(error);
           })
       },
       computed: {
