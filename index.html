@@ -724,19 +724,22 @@
             <b-tab title="Tab 1" active>
               <b-row>
                 <b-col cols="3">
-                  <b-form-select class="" v-model="selected" :options="filteredWeapons" value-field="effectbase" text-field="itemname">
+                  <b-form-select class="" v-model="selected" :options="filteredWeapons" value-field="effectbase"
+                    text-field="itemname">
                   </b-form-select>
                 </b-col>
                 <b-col cols="3" style="padding-right: 0%;">
-                  <b-form-select class="" v-model="selected_enchant" :options="filteredEnchant" value-field="attr" text-field="attr">
+                  <b-form-select class="" v-model="selected_enchant" :options="filteredEnchant" value-field="attr"
+                    text-field="attr">
                   </b-form-select>
                 </b-col>
                 <b-col cols="2" style="padding-left: 0%;">
-                  <b-form-select class="" v-model="selected_enchantLevel" :options="enchants">
+                  <b-form-select class="" v-model="selected_enchantLevel" :options="enchantOption">
                   </b-form-select>
                 </b-col>
                 <b-col cols="4">
-                  <b-form-select class="" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
+                  <b-form-select class="" v-model="selected_card" :options="filteredCards" value-field="effect"
+                    text-field="itemname">
                   </b-form-select>
                 </b-col>
               </b-row>
@@ -748,12 +751,11 @@
           </b-tabs>
         </b-container>
 
-
         <span>Selected: {{ selected }}</span><br>
         <span>Selected Card: {{ selected_card }}</span><br>
         <span>Selected Enchant: {{ selected_enchant }}</span><br>
         <span>Selected Enchant Level: {{ selected_enchantLevel }}</span><br>
-
+{{ filteredEnchant }}
 
       </div>
     </div>
@@ -770,58 +772,55 @@
       el: '#app',
       data() {
         return {
-          message: [],
+          weapons: [],
           cards: [],
-          enchant: [],
+          enchants: [],
           selected: '',
           selected_card: '',
           selected_enchant: '',
           selected_enchantLevel: '',
-          enchants: ["力量","敏捷","體質","智力","靈巧","幸運"]
+          enchantOption: ["力量", "敏捷", "體質", "智力", "靈巧", "幸運"],
+        }
+      },
+      methods: {
+        requestHandlder() {
+          axios.all([this.req_1(), this.req_2(), this.req_3()]).then(
+            axios.spread((...response) => {
+              this.weapons = response[0].data;
+              this.cards = response[1].data;
+              this.enchants = response[2].data;
+            })
+          ).catch(errors => {
+            console.log(errors);
+          })
+        },
+        req_1() {
+          return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter.json');
+        },
+        req_2() {
+          return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json');
+        },
+        req_3() {
+          return axios.get(
+            'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
         }
       },
       mounted() {
-        axios
-          .get(`https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter.json`)
-          .then(
-            response => {
-              this.message = response.data;
-            }
-          )
-          .catch(error => {
-            console.log(error);
-          }),
-          axios
-          .get(`https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json`)
-          .then(
-            response => {
-              this.cards = response.data;
-            }
-          )
-          .catch(error => {
-            console.log(error);
-          }),
-          axios
-          .get(`https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json`)
-          .then(
-            response => {
-              this.enchant = response.data;
-            }
-          )
-          .catch(error => {
-            console.log(error);
-          })
+        this.requestHandlder()
       },
       computed: {
-        filteredWeapons: function() {
+        filteredWeapons: function () {
           let filtered = ["1-15:長弓", "1-17:短弓"];
-          return this.message.filter( v => v.joblimit.match("弓箭手") && v.itemtype.match("1:武器"))
+          return this.weapons.filter(v => v.joblimit.match("弓箭手") && v.itemtype.match("1:武器"))
         },
-        filteredCards: function() {
-          return this.cards.filter( v => v.itemsubtype.match("01:武器"))
+        filteredCards: function () {
+          return this.cards.filter(v => v.itemsubtype.match("01:武器"))
         },
-        filteredEnchant: function() {
-          return this.enchant.filter( v => v.parts.match("雙手"))
+        filteredEnchant: function () {
+          return this.enchants.filter(v => v.parts.match("雙手"))
+        },
+        filteredEnchantOption() {
+          return [...new set(filteredEnchant)]
         }
       }
     })
