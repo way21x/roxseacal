@@ -728,11 +728,12 @@
                     text-field="itemname">
                   </b-form-select>
                 </b-col>
-                <b-col cols="2" style="padding-left: 0%;">
+                <b-col cols="3" style="padding-right: 0%;">
                   <b-form-select class="" v-model="selected_enchantLevel" :options="enchantOption">
+                    <option value="">Enchant</option>
                   </b-form-select>
                 </b-col>
-                <b-col cols="3" style="padding-right: 0%;">
+                <b-col cols="2" style="padding-left: 0%;">
                   <b-form-select class="" v-model="selected_enchant" :options="filteredEnchant" value-field="attr"
                     text-field="attr">
                   </b-form-select>
@@ -767,64 +768,7 @@
     integrity="sha512-Z0dNfC81uEXC2iTTXtE0rM18I3ATkwn1m8Lxe0onw/uPEEkCmVZd+H8GTeYGkAZv50yvoSR5N3hoy/Do2hNSkw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script>
-    new Vue({
-      el: '#app',
-      data() {
-        return {
-          weapons: [],
-          cards: [],
-          enchants: [],
-          selected: '',
-          selected_card: '',
-          selected_enchant: '',
-          selected_enchantLevel: '',
-          enchantOption: ["力量", "敏捷", "體質", "智力", "靈巧", "幸運"],
-        }
-      },
-      methods: {
-        requestHandlder() {
-          axios.all([this.req_1(), this.req_2(), this.req_3()]).then(
-            axios.spread((...response) => {
-              this.weapons = response[0].data;
-              this.cards = response[1].data;
-              this.enchants = response[2].data;
-            })
-          ).catch(errors => {
-            console.log(errors);
-          })
-        },
-        req_1() {
-          return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter.json');
-        },
-        req_2() {
-          return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json');
-        },
-        req_3() {
-          return axios.get(
-            'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
-        }
-      },
-      mounted() {
-        this.requestHandlder()
-      },
-      computed: {
-        filteredWeapons: function () {
-          let filtered = ["1-15:長弓", "1-17:短弓"];
-          return this.weapons.filter(v => v.joblimit.match("弓箭手") && v.itemtype.match("1:武器"))
-        },
-        filteredCards: function () {
-          return this.cards.filter(v => v.itemsubtype.match("01:武器"))
-        },
-        filteredEnchant: function () {
-          return this.enchants.filter(v => v.parts.match("雙手"))
-        },
-        filteredEnchantOption() {
-          return [...new set(filteredEnchant)]
-        }
-      }
-    })
-  </script>
+  <script type="module" src="./app.js"></script>
 
 
 </body>
