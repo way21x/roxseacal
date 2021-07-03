@@ -719,27 +719,40 @@
 
         <hr class="my-4">
 
-        <div>
+        <b-container>
           <b-tabs pills card>
             <b-tab title="Tab 1" active>
-              <b-form-select class="col-3" v-model="selected" :options="filteredWeapons" value-field="effectbase" text-field="itemname">
-              </b-form-select>
-              <b-form-select class="col-3" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
-              </b-form-select>
-              <b-form-select class="col-3" v-model="selected_enchant" :options="filteredEnchant" value-field="attr" text-field="attr">
-              </b-form-select>
+              <b-row>
+                <b-col cols="3">
+                  <b-form-select class="" v-model="selected" :options="filteredWeapons" value-field="effectbase" text-field="itemname">
+                  </b-form-select>
+                </b-col>
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select class="" v-model="selected_enchant" :options="filteredEnchant" value-field="attr" text-field="attr">
+                  </b-form-select>
+                </b-col>
+                <b-col cols="2" style="padding-left: 0%;">
+                  <b-form-select class="" v-model="selected_enchantLevel" :options="enchants">
+                  </b-form-select>
+                </b-col>
+                <b-col cols="4">
+                  <b-form-select class="" v-model="selected_card" :options="filteredCards" value-field="effect" text-field="itemname">
+                  </b-form-select>
+                </b-col>
+              </b-row>
             </b-tab>
 
             <b-tab title="Tab 2">
               <b-card-text>Tab contents 2</b-card-text>
             </b-tab>
           </b-tabs>
-        </div>
+        </b-container>
 
 
-        <span>Selected: {{ selected }}</span>
-        <span>Selected Card: {{ selected_card }}</span>
-        <span>Selected Enchant: {{ selected_enchant }}</span>
+        <span>Selected: {{ selected }}</span><br>
+        <span>Selected Card: {{ selected_card }}</span><br>
+        <span>Selected Enchant: {{ selected_enchant }}</span><br>
+        <span>Selected Enchant Level: {{ selected_enchantLevel }}</span><br>
 
 
       </div>
@@ -763,6 +776,8 @@
           selected: '',
           selected_card: '',
           selected_enchant: '',
+          selected_enchantLevel: '',
+          enchants: ["力量","敏捷","體質","智力","靈巧","幸運"]
         }
       },
       mounted() {
