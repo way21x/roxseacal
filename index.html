@@ -129,21 +129,41 @@
               <b-tab title="Weapons" active>
                 <b-row>
                   <b-col cols="3">
-                    <custom-select v-model="equipmentResults.equipment_1" valueData="effectbase" y="itemname" :options="filteredWeapons('弓箭手','1:武器')" title="Choose Weapon I"></custom-select>
-                  </b-col>
-                  <b-col cols="3" style="padding-right: 0%;">
-                    <custom-select v-model="selected_enchant" valueData="enchantItemNo" y="attrName" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
-                  </b-col>
-                  <b-col cols="2" style="padding-left: 0%;">
-                    <custom-select v-model="selected_enchantLevel" valueData="attrValue" y="attrValue" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
-                  </b-col>
-  
-                  <b-col cols="4">
-                    <b-form-select class="" v-model="selected_card" :options="filteredCards" value-field="effect"
-                      text-field="itemname">
+                    <b-form-select v-model="equipmentResults.equipment_1" :options="filteredWeapons('弓箭手','1:武器')" class="mb-3" value-field="effectbase" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                    </template>
                     </b-form-select>
                   </b-col>
+
+                  <b-col cols="3" style="padding-right: 0%;">
+                    <b-form-select v-model="enchantResults.enchant_1[0]" :options="filteredEnchant('雙手')" class="mb-3" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant --</b-form-select-option>
+                    </template>
+                    </b-form-select>
+                  </b-col>
+
+                  <b-col cols="2" style="padding-left: 0%;">
+                    <b-form-select v-model="enchantResults.enchant_1[1]" :options="filteredEnchant('雙手')" class="mb-3" value-field="attrValue" text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                    </b-form-select>
+                  </b-col>
+
+                  <b-col cols="3" style="padding-right: 0%;">
+                    <b-form-select v-model="cardResults.card_1" :options="filteredCards('01:武器')" class="mb-3" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card --</b-form-select-option>
+                    </template>
+                    </b-form-select>
+                  </b-col>
+
                 </b-row>
+                {{ cardResults }} <br><br>
+                {{ equipmentResults }} <br><br>
+                {{ enchantResults }} <br><br>
               </b-tab>
   
               <b-tab title="Accessories">
@@ -744,7 +764,8 @@
         <span>{{ cardResults.card_1 }}</span><br>
         <span>{{ cardResults.card_2 }}</span><br>
         <span>{{ cardResults.card_3 }}</span><br>
-{{filteredEnchant('雙手')[1]}}
+
+
         
 
       </div>

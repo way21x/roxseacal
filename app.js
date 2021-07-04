@@ -95,7 +95,7 @@ new Vue({
       weapons: [],
       cards: [],
       enchants: [],
-      selected: 'default',
+      selected: null,
       selected_card: '',
       selected_enchant: '',
       selected_enchantLevel: '',
@@ -125,8 +125,11 @@ new Vue({
         'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
     },
     filteredWeapons(job, weapon) {
-      let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
+      //let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
       return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon))
+      // return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon)).map(function(x){
+      // return { valueData : x.effectbase, y : x.itemname };
+      // });
     },
     filteredCards(attr) {
       return this.cards.filter(v => v.itemsubtype.match(attr))
