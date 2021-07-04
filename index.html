@@ -132,14 +132,9 @@
                     <custom-select v-model="equipmentResults.equipment_1" :options="filteredWeapons('弓箭手','1:武器')" title="Choose Weapon I"></custom-select>
                   </b-col>
                   <b-col cols="3" style="padding-right: 0%;">
-                    <b-form-select class="" v-model="selected_enchantLevel" :options="enchantOption">
-                      <option value="">Enchant</option>
-                    </b-form-select>
+                    <custom-select v-model="selected_enchant" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
                   </b-col>
                   <b-col cols="2" style="padding-left: 0%;">
-                    <b-form-select class="" v-model="selected_enchant" :options="filteredEnchant" value-field="attr"
-                      text-field="attr">
-                    </b-form-select>
                   </b-col>
   
                   <b-col cols="4">
@@ -752,7 +747,7 @@
         <span>{{ cardResults.card_1 }}</span><br>
         <span>{{ cardResults.card_2 }}</span><br>
         <span>{{ cardResults.card_3 }}</span><br>
-
+{{filteredEnchant('雙手')[1]}}
         
 
       </div>

@@ -122,7 +122,7 @@ new Vue({
     },
     req_3() {
       return axios.get(
-        'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
+        'https://raw.githubusercontent.com/way21x/roxseacal/main/data/test.json');
     },
     filteredWeapons(job, weapon) {
       let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
@@ -130,6 +130,9 @@ new Vue({
     },
     filteredCards(attr) {
       return this.cards.filter(v => v.itemsubtype.match(attr))
+    },
+    filteredEnchant(attr) {
+      return this.enchants.filter(v => v.parts.match(attr))
     }
   },
   watch: {
@@ -139,9 +142,7 @@ new Vue({
     this.requestHandlder()
   },
   computed: {
-    filteredEnchant: function () {
-      return this.enchants.filter(v => v.parts.match("雙手"))
-    }
+    
   }
 })
 

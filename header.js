@@ -2,7 +2,7 @@ export default {
   template: `
   <select class="form-control" @change="change">
     <option value="">{{ title }}</option>
-    <option v-for="option in options" :value="option.effectbase || option.effect">{{ option.itemname }}</option>
+    <option v-for="option in options" :value="option.effectbase || option.effect || option.attrName">{{ option.itemname || option.attrName }}</option>
   </select>
   `,
   props: ['options', 'title'],
