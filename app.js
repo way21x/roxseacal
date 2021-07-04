@@ -122,7 +122,7 @@ new Vue({
     },
     req_3() {
       return axios.get(
-        'https://raw.githubusercontent.com/way21x/roxseacal/main/data/test.json');
+        'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
     },
     filteredWeapons(job, weapon) {
       let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];

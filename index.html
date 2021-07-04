@@ -129,12 +129,13 @@
               <b-tab title="Weapons" active>
                 <b-row>
                   <b-col cols="3">
-                    <custom-select v-model="equipmentResults.equipment_1" :options="filteredWeapons('弓箭手','1:武器')" title="Choose Weapon I"></custom-select>
+                    <custom-select v-model="equipmentResults.equipment_1" valueData="effectbase" y="itemname" :options="filteredWeapons('弓箭手','1:武器')" title="Choose Weapon I"></custom-select>
                   </b-col>
                   <b-col cols="3" style="padding-right: 0%;">
-                    <custom-select v-model="selected_enchant" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
+                    <custom-select v-model="selected_enchant" valueData="enchantItemNo" y="attrName" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
                   </b-col>
                   <b-col cols="2" style="padding-left: 0%;">
+                    <custom-select v-model="selected_enchantLevel" valueData="attrValue" y="attrValue" :options="filteredEnchant('雙手')" title="Choose Enchant I"></custom-select>
                   </b-col>
   
                   <b-col cols="4">
@@ -174,7 +175,6 @@
               <!-- weapon -->
               <div class="row">
                 <div class="col-3">
-                  <custom-select v-model="selected" :options="filteredWeapons" title="Choose Weapon"></custom-select>
                   <select name="" id="" class="form-control">
                     <option value="">Upgrade</option>
                   </select>
@@ -205,9 +205,6 @@
                   </select>
                 </div>
                 <div class="col-4">
-                  <custom-select v-model="cardResults.card_1" :options="filteredCards('01:武器')" title="Choose Card I"></custom-select>
-                  <custom-select v-model="cardResults.card_2" :options="filteredCards('01:武器')" title="Choose Card II"></custom-select>
-                  <custom-select v-model="cardResults.card_3" :options="filteredCards('01:武器')" title="Choose Card III"></custom-select>
                 </div>
               </div>
               <hr class="my-4">
