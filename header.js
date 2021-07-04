@@ -1,13 +1,19 @@
 export default {
   template: `
-    <div>
-     <h1>Single-file JavaScript Component</h1>
-     <p>{{ message }}</p>
-    </div>
+  <select class="form-control" @change="change">
+    <option value="">{{ title }}</option>
+    <option v-for="option in options" :value="option.effectbase || option.effect">{{ option.itemname }}</option>
+  </select>
   `,
+  props: ['options', 'title'],
   data() {
     return {
-      message: 'Oh hai from the component'
+      test: [],
+    }
+  },
+  methods: {
+    change(e) {
+      this.$emit("input", e.target.value);
     }
   }
 }
