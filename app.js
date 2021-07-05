@@ -7,6 +7,16 @@ new Vue({
   },
   data() {
     return {
+      classOptions: [
+        "弓箭手", "獵人", "神射手", "盜賊", "刺客", "十字刺客"
+      ],
+      refineOptions: [
+        { level: "Lv 1 - 物理攻击 +10%, 攻速 +10%", data: "物理攻击 +10%, 攻速 +10%" },
+      ],
+      upgradeOptions: [
+        { level: "Lv 1 - 物理攻击 +25, 攻速 +25", data: "物理攻击 +25, 攻速 +25" },
+      ],
+      selectedClass: null,
       cardResults: {
         card_1: null,
         card_2: null,
@@ -49,28 +59,28 @@ new Vue({
       },
       enchantResults: {
         enchant_1: [null, null],
-        enchant_2: null,
-        enchant_3: null,
-        enchant_4: null,
-        enchant_5: null,
-        enchant_6: null,
-        enchant_7: null,
-        enchant_8: null,
-        enchant_9: null,
-        enchant_11: null,
-        enchant_12: null,
-        enchant_13: null,
-        enchant_14: null,
-        enchant_15: null,
-        enchant_16: null,
-        enchant_17: null,
-        enchant_18: null,
-        enchant_19: null,
-        enchant_20: null,
-        enchant_21: null,
-        enchant_22: null,
-        enchant_23: null,
-        enchant_24: null
+        enchant_2: [null, null],
+        enchant_3: [null, null],
+        enchant_4: [null, null],
+        enchant_5: [null, null],
+        enchant_6: [null, null],
+        enchant_7: [null, null],
+        enchant_8: [null, null],
+        enchant_9: [null, null],
+        enchant_11: [null, null],
+        enchant_12: [null, null],
+        enchant_13: [null, null],
+        enchant_14: [null, null],
+        enchant_15: [null, null],
+        enchant_16: [null, null],
+        enchant_17: [null, null],
+        enchant_18: [null, null],
+        enchant_19: [null, null],
+        enchant_20: [null, null],
+        enchant_21: [null, null],
+        enchant_22: [null, null],
+        enchant_23: [null, null],
+        enchant_24: [null, null]
       },
       upgradeResults: {
         upgrade_1: null,
@@ -122,7 +132,7 @@ new Vue({
     },
     req_3() {
       return axios.get(
-        'https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_enchant.json');
+        './data/jsonformatter_enchant.json');
     },
     filteredWeapons(job, weapon) {
       //let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
@@ -135,7 +145,26 @@ new Vue({
       return this.cards.filter(v => v.itemsubtype.match(attr))
     },
     filteredEnchant(attr) {
-      return this.enchants.filter(v => v.parts.match(attr))
+      // return this.enchants.filter(v => v.parts.match(attr))
+      const k = this.enchants.filter(v => v.parts.match(attr))
+      let tempArray = [];
+      for (let item of k) {
+        (tempItem => {
+          if (!(tempItem.length > 0 && tempItem.find(x => x.attrName === item.attrName))) tempArray.push(item);
+        })(tempArray.filter(x => x.attrName === item.attrName))
+      }
+      return tempArray;
+    },
+    filteredEnchantLevel(attr, enchant) {
+      // return this.enchants.filter(v => v.parts.match(attr))
+      const k = this.enchants.filter(v => v.parts.match(attr) && v.attrName.match(enchant))
+      let tempArray = [];
+      for (let item of k) {
+        (tempItem => {
+          if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
+        })(tempArray.filter(x => x.attrValue === item.attrValue))
+      }
+      return tempArray;
     }
   },
   watch: {
