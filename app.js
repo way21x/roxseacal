@@ -27,6 +27,7 @@ new Vue({
         card_7: null,
         card_8: null,
         card_9: null,
+        card_10: null,
         card_11: null,
         card_12: null,
         card_13: null,
@@ -55,6 +56,7 @@ new Vue({
         equipment_7: null,
         equipment_8: null,
         equipment_9: null,
+        equipment_10: null,
         equipment_11: null
       },
       enchantResults: {
@@ -103,14 +105,25 @@ new Vue({
         refine_7: null,
         refine_8: null
       },
-      weapons: [],
-      cards: [],
-      enchants: [],
+      weapons: [], // raw data
+      cards: [], // raw data
+      enchants: [], // raw data
+      accessoryCards: [], // store for reuse
+      weaponCards: [], // store for reuse
+      accessoryEnchants: [], // store for reuse
+      weaponEnchants: [], // store for reuse
+      basicStats: {
+        hp: [null, null],
+      },
+      hp: '',
+      mp: '',
       selected: null,
       selected_card: '',
       selected_enchant: '',
       selected_enchantLevel: '',
       enchantOption: ["力量", "敏捷", "體質", "智力", "靈巧", "幸運"],
+      from_amount: "",
+            to_amount: ""
     }
   },
   methods: {
@@ -120,6 +133,7 @@ new Vue({
           this.weapons = response[0].data;
           this.cards = response[1].data;
           this.enchants = response[2].data;
+          this.accessoryCards = response[1].data.filter(v => v.itemsubtype.match('06:飾品'))
         })
       ).catch(errors => {
         console.log(errors);
@@ -141,6 +155,12 @@ new Vue({
       // return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon)).map(function(x){
       // return { valueData : x.effectbase, y : x.itemname };
       // });
+    },
+    filteredTalisman() {
+      return this.weapons.filter(v => v.itemsubtype.match('5-2:護符'))
+    },
+    filteredAccessory() {
+      return this.weapons.filter(v => v.itemsubtype.match('5-1:飾品'))
     },
     filteredCards(attr) {
       return this.cards.filter(v => v.itemsubtype.match(attr))
@@ -166,17 +186,22 @@ new Vue({
         })(tempArray.filter(x => x.attrValue === item.attrValue))
       }
       return tempArray;
-    }
+    },
+    add: function() {
+      this.to_amount = Number(this.from_amount);
+  }
   },
   watch: {
 
   },
   mounted() {
-    this.requestHandlder()
+    this.requestHandlder();
   },
   computed: {
-    
+    cloneParent: function() {
+      return Number(this.from_amount);
   }
+  },
 })
 
 

@@ -38,24 +38,24 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <select name="" id="" class="form-control">
+              <select class="form-control">
                 <option value="">Base Level</option>
               </select>
             </div>
             <div class="col-2 text-end">Current Base EXP</div>
             <div class="col-4 ">
-              <input type="text" name="" id="" class="form-control" value="0">
+              <input type="text" class="form-control" value="0">
             </div>
           </div>
           <div class="row">
             <div class="col-6 ">
-              <select name="" id="" class="form-control">
+              <select class="form-control">
                 <option value="">Job Level</option>
               </select>
             </div>
             <div class="col-2 text-end">Current Job EXP</div>
             <div class="col-4 ">
-              <input type="text" name="" id="" class="form-control" value="0">
+              <input type="text" class="form-control" value="0">
             </div>
           </div>
         </div>
@@ -74,26 +74,26 @@
 
                 <div class="col-4">STR</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">VIT</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">DEX</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -107,26 +107,26 @@
 
                 <div class="col-4">AGI</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">INT</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">LUK</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -139,7 +139,7 @@
 
         <!-- Basic Stats -->
         <div class="col-12">
-          <h4 class="mb-3">Basic Stats</h4>
+          <h4 class="mb-3">Basic Stats</h4>from_amount:{{ from_amount }} to_amount:{{ to_amount }} 
 
           <div class="row">
             <div class="col-6">
@@ -148,60 +148,60 @@
                 <div class="col-4 text-center">Before equiment</div>
                 <div class="col-4 text-center">Total</div>
 
-                <div class="col-4">Max HP</div>
+                <div class="col-4">Max HP</div> 
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <b-form-input v-model="from_amount" @keyup="add"></b-form-input>
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <b-form-input :value="cloneParent" disabled></b-form-input>
                 </div>
 
                 <div class="col-4">P.ATK</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">DEF</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">P.PEN</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">ASPD</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Hit</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Crit</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -215,58 +215,58 @@
 
                 <div class="col-4">Max SP</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">M.ATK</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">M.DEF</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">M.DEF PEN</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">haste</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Flee</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Anti-Crit</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -287,42 +287,42 @@
 
                 <div class="col-4">Final Attack Speed</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">HP Regen</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Crit DMG Bonus</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Final Physical DEF</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Final P.PEN</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -332,42 +332,42 @@
               <div class="row">
                 <div class="col-4">Final Crit</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">SP Regen</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Movement Speed</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">P.DMG Reduction</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Final Magic Defence</div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control">
+                  <input type="text" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" name="" id="" class="form-control" disabled>
+                  <input type="text" class="form-control" disabled>
                 </div>
 
               </div>
@@ -490,9 +490,9 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null"
-                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    :options="filteredTalisman()" value-field="effectbase" text-field="itemname">
                     <template #first>
-                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                      <b-form-select-option :value="null">-- Talisman --</b-form-select-option>
                     </template>
                   </b-form-select>
 
@@ -569,15 +569,13 @@
                     </template>
                   </b-form-select>
 
-                  <b-form-select v-model="cardResults.card_5" :disabled="equipmentResults.equipment_2 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_5" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card II --</b-form-select-option>
                     </template>
                   </b-form-select>
 
-                  <b-form-select v-model="cardResults.card_6" :disabled="equipmentResults.equipment_2 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_6" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card III --</b-form-select-option>
                     </template>
@@ -592,9 +590,9 @@
                 <b-col cols="4">
             
                   <b-form-select v-model="equipmentResults.equipment_3" :disabled="selectedClass == null"
-                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    :options="filteredAccessory()" value-field="effectbase" text-field="itemname">
                     <template #first>
-                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                      <b-form-select-option :value="null">-- Accessory I --</b-form-select-option>
                     </template>
                   </b-form-select>
             
@@ -671,15 +669,13 @@
                     </template>
                   </b-form-select>
             
-                  <b-form-select v-model="cardResults.card_8" :disabled="equipmentResults.equipment_3 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_8" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card II --</b-form-select-option>
                     </template>
                   </b-form-select>
             
-                  <b-form-select v-model="cardResults.card_9" :disabled="equipmentResults.equipment_3 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_9" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card III --</b-form-select-option>
                     </template>
@@ -694,9 +690,9 @@
                 <b-col cols="4">
             
                   <b-form-select v-model="equipmentResults.equipment_4" :disabled="selectedClass == null"
-                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    :options="filteredAccessory()" value-field="effectbase" text-field="itemname">
                     <template #first>
-                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                      <b-form-select-option :value="null">-- Accessory II --</b-form-select-option>
                     </template>
                   </b-form-select>
             
@@ -773,15 +769,13 @@
                     </template>
                   </b-form-select>
             
-                  <b-form-select v-model="cardResults.card_11" :disabled="equipmentResults.equipment_4 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_11" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card II --</b-form-select-option>
                     </template>
                   </b-form-select>
             
-                  <b-form-select v-model="cardResults.card_12" :disabled="equipmentResults.equipment_4 == null"
-                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                  <b-form-select v-model="cardResults.card_12" disabled>
                     <template #first>
                       <b-form-select-option :value="null">-- Card III --</b-form-select-option>
                     </template>
@@ -793,11 +787,10 @@
             </b-tab>
           </b-tabs>
 
-          {{ cardResults }} <br><br>
+          <!-- {{ cardResults }} <br><br>
           {{ equipmentResults }} <br><br>
           {{ enchantResults }} <br><br>
-          {{ refineResults }} <br><br>
-
+          {{ refineResults }} <br><br> -->
           <hr class="my-4">
 
         </div>
