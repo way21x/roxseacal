@@ -140,13 +140,13 @@
 
                       <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null" :options="upgradeOptions" value-field="data" text-field="level">
                         <template #first>
-                          <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                          <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
                         </template>
                       </b-form-select>
 
                     <b-form-select v-model="refineResults.refine_1" :disabled="equipmentResults.equipment_1 == null" :options="refineOptions" value-field="data" text-field="level">
                       <template #first>
-                        <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                        <b-form-select-option :value="null">-- Refine --</b-form-select-option>
                       </template>
                     </b-form-select>
                   </b-col>
@@ -154,19 +154,19 @@
                   <b-col cols="3" style="padding-right: 0%;">
                     <b-form-select v-model="enchantResults.enchant_1[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
                     <template #first>
-                      <b-form-select-option :value="null">-- Enchant --</b-form-select-option>
+                      <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
                     </template>
                     </b-form-select>
 
                     <b-form-select v-model="enchantResults.enchant_2[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
                       <template #first>
-                        <b-form-select-option :value="null">-- Enchant --</b-form-select-option>
+                        <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
                       </template>
                       </b-form-select>
 
                       <b-form-select v-model="enchantResults.enchant_3[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
                         <template #first>
-                          <b-form-select-option :value="null">-- Enchant --</b-form-select-option>
+                          <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
                         </template>
                         </b-form-select>
                   </b-col>
@@ -195,19 +195,19 @@
                   <b-col cols="3" style="padding-right: 0%;">
                     <b-form-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
                     <template #first>
-                      <b-form-select-option :value="null">-- Card --</b-form-select-option>
+                      <b-form-select-option :value="null">-- Card I --</b-form-select-option>
                     </template>
                     </b-form-select>
 
                     <b-form-select v-model="cardResults.card_2" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
                       <template #first>
-                        <b-form-select-option :value="null">-- Card --</b-form-select-option>
+                        <b-form-select-option :value="null">-- Card II --</b-form-select-option>
                       </template>
                       </b-form-select>
 
                       <b-form-select v-model="cardResults.card_3" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
                         <template #first>
-                          <b-form-select-option :value="null">-- Card --</b-form-select-option>
+                          <b-form-select-option :value="null">-- Card III --</b-form-select-option>
                         </template>
                         </b-form-select>
 
