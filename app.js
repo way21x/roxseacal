@@ -67,6 +67,7 @@ new Vue({
         enchant_7: [null, null],
         enchant_8: [null, null],
         enchant_9: [null, null],
+        enchant_10: [null, null],
         enchant_11: [null, null],
         enchant_12: [null, null],
         enchant_13: [null, null],

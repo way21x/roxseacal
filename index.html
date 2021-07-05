@@ -33,7 +33,7 @@
                 <template #first>
                   <b-form-select-option :value="null">-- Class --</b-form-select-option>
                 </template>
-                </b-form-select>
+              </b-form-select>
             </div>
           </div>
           <div class="row">
@@ -104,7 +104,7 @@
                 <div class="col-4"></div>
                 <div class="col-4 text-center">Before equiment</div>
                 <div class="col-4 text-center">Total</div>
-                
+
                 <div class="col-4">AGI</div>
                 <div class="col-4">
                   <input type="text" name="" id="" class="form-control">
@@ -212,7 +212,7 @@
                 <div class="col-4"></div>
                 <div class="col-4 text-center">Before equiment</div>
                 <div class="col-4 text-center">Total</div>
-                
+
                 <div class="col-4">Max SP</div>
                 <div class="col-4">
                   <input type="text" name="" id="" class="form-control">
@@ -381,107 +381,424 @@
         <div class="col-12">
           <h4 class="mb-3">Equiments</h4>
 
-            <b-tabs pills card>
-              <b-tab title="Weapons" active>
-                <b-row>
-                  <b-col cols="4">
+          <b-tabs pills card>
+            <b-tab title="Weapons" active>
+              <b-row>
+                <b-col cols="4">
 
-                    <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
+                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null"
+                    :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
                     </template>
-                    </b-form-select>
+                  </b-form-select>
 
-                      <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null" :options="upgradeOptions" value-field="data" text-field="level">
-                        <template #first>
-                          <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
-                        </template>
-                      </b-form-select>
+                  <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null"
+                    :options="upgradeOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                    <b-form-select v-model="refineResults.refine_1" :disabled="equipmentResults.equipment_1 == null" :options="refineOptions" value-field="data" text-field="level">
-                      <template #first>
-                        <b-form-select-option :value="null">-- Refine --</b-form-select-option>
-                      </template>
-                    </b-form-select>
-                  </b-col>
+                  <b-form-select v-model="refineResults.refine_1" :disabled="equipmentResults.equipment_1 == null"
+                    :options="refineOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Refine --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
 
-                  <b-col cols="3" style="padding-right: 0%;">
-                    <b-form-select v-model="enchantResults.enchant_1[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_1[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
                     <template #first>
                       <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
                     </template>
-                    </b-form-select>
+                  </b-form-select>
 
-                    <b-form-select v-model="enchantResults.enchant_2[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
-                      <template #first>
-                        <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
-                      </template>
-                      </b-form-select>
+                  <b-form-select v-model="enchantResults.enchant_2[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                      <b-form-select v-model="enchantResults.enchant_3[0]" :disabled="equipmentResults.equipment_1 == null" :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
-                        <template #first>
-                          <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
-                        </template>
-                        </b-form-select>
-                  </b-col>
+                  <b-form-select v-model="enchantResults.enchant_3[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('雙手')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
 
-                  <b-col cols="2" style="padding-left: 0%;">
-                    <b-form-select v-model="enchantResults.enchant_1[1]" :disabled="enchantResults.enchant_1[0] == null" :options="filteredEnchantLevel('雙手', enchantResults.enchant_1[0])" value-field="attrValue" text-field="attrValue">
+                <b-col cols="2" style="padding-left: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_1[1]" :disabled="enchantResults.enchant_1[0] == null"
+                    :options="filteredEnchantLevel('雙手', enchantResults.enchant_1[0])" value-field="attrValue"
+                    text-field="attrValue">
                     <template #first>
                       <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
                     </template>
-                    </b-form-select>
+                  </b-form-select>
 
-                    <b-form-select v-model="enchantResults.enchant_2[1]" :disabled="enchantResults.enchant_2[0] == null" :options="filteredEnchantLevel('雙手', enchantResults.enchant_1[0])" value-field="attrValue" text-field="attrValue">
-                      <template #first>
-                        <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
-                      </template>
-                      </b-form-select>
+                  <b-form-select v-model="enchantResults.enchant_2[1]" :disabled="enchantResults.enchant_2[0] == null"
+                    :options="filteredEnchantLevel('雙手', enchantResults.enchant_2[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                      <b-form-select v-model="enchantResults.enchant_3[1]" :disabled="enchantResults.enchant_3[0] == null" :options="filteredEnchantLevel('雙手', enchantResults.enchant_1[0])" value-field="attrValue" text-field="attrValue">
-                        <template #first>
-                          <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
-                        </template>
-                        </b-form-select>
+                  <b-form-select v-model="enchantResults.enchant_3[1]" :disabled="enchantResults.enchant_3[0] == null"
+                    :options="filteredEnchantLevel('雙手', enchantResults.enchant_3[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                  </b-col>
+                </b-col>
 
-                  <b-col cols="3" style="padding-right: 0%;">
-                    <b-form-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Card I --</b-form-select-option>
                     </template>
-                    </b-form-select>
+                  </b-form-select>
 
-                    <b-form-select v-model="cardResults.card_2" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
-                      <template #first>
-                        <b-form-select-option :value="null">-- Card II --</b-form-select-option>
-                      </template>
-                      </b-form-select>
+                  <b-form-select v-model="cardResults.card_2" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                      <b-form-select v-model="cardResults.card_3" :disabled="equipmentResults.equipment_1 == null" :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
-                        <template #first>
-                          <b-form-select-option :value="null">-- Card III --</b-form-select-option>
-                        </template>
-                        </b-form-select>
+                  <b-form-select v-model="cardResults.card_3" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredCards('01:武器')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-                  </b-col>
+                </b-col>
 
-                </b-row>
+              </b-row>
+            </b-tab>
 
-              </b-tab>
-  
-              <b-tab title="Accessories">
-                <b-card-text>Tab contents 2</b-card-text>
-              </b-tab>
-            </b-tabs>
+            <b-tab title="Accessories">
+              <b-row>
+                <b-col cols="4">
 
-            {{ cardResults }} <br><br>
-            {{ equipmentResults }} <br><br>
-            {{ enchantResults }} <br><br>
-            {{ refineResults }} <br><br>
+                  <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null"
+                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                    </template>
+                  </b-form-select>
 
-            <hr class="my-4">
+                  <b-form-select v-model="upgradeResults.upgrade_2" :disabled="equipmentResults.equipment_2 == null"
+                    :options="upgradeOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="refineResults.refine_2" :disabled="equipmentResults.equipment_2 == null"
+                    :options="refineOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Refine --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_4[0]" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="enchantResults.enchant_5[0]" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="enchantResults.enchant_6[0]" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+
+                <b-col cols="2" style="padding-left: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_4[1]" :disabled="enchantResults.enchant_4[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_4[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="enchantResults.enchant_5[1]" :disabled="enchantResults.enchant_5[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_5[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="enchantResults.enchant_6[1]" :disabled="enchantResults.enchant_6[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_6[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                </b-col>
+
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="cardResults.card_4" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="cardResults.card_5" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+
+                  <b-form-select v-model="cardResults.card_6" :disabled="equipmentResults.equipment_2 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+
+              </b-row>
+
+              <hr class="my-4">
+
+              <b-row>
+                <b-col cols="4">
+            
+                  <b-form-select v-model="equipmentResults.equipment_3" :disabled="selectedClass == null"
+                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="upgradeResults.upgrade_3" :disabled="equipmentResults.equipment_3 == null"
+                    :options="upgradeOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="refineResults.refine_3" :disabled="equipmentResults.equipment_3 == null"
+                    :options="refineOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Refine --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_7[0]" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_8[0]" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_9[0]" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+                <b-col cols="2" style="padding-left: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_7[1]" :disabled="enchantResults.enchant_7[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_7[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_8[1]" :disabled="enchantResults.enchant_8[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_8[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_9[1]" :disabled="enchantResults.enchant_9[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_9[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                </b-col>
+            
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="cardResults.card_7" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="cardResults.card_8" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="cardResults.card_9" :disabled="equipmentResults.equipment_3 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+              </b-row>
+
+              <hr class="my-4">
+
+              <b-row>
+                <b-col cols="4">
+            
+                  <b-form-select v-model="equipmentResults.equipment_4" :disabled="selectedClass == null"
+                    :options="filteredWeapons('所有職業','5:裝飾品')" value-field="effectbase" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="upgradeResults.upgrade_4" :disabled="equipmentResults.equipment_4 == null"
+                    :options="upgradeOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="refineResults.refine_4" :disabled="equipmentResults.equipment_4 == null"
+                    :options="refineOptions" value-field="data" text-field="level">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Refine --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_10[0]" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_11[0]" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_12[0]" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredEnchant('飾品')" value-field="attrName" text-field="attrName">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+                <b-col cols="2" style="padding-left: 0%;">
+                  <b-form-select v-model="enchantResults.enchant_10[1]" :disabled="enchantResults.enchant_10[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_10[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_11[1]" :disabled="enchantResults.enchant_11[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_11[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="enchantResults.enchant_12[1]" :disabled="enchantResults.enchant_12[0] == null"
+                    :options="filteredEnchantLevel('飾品', enchantResults.enchant_12[0])" value-field="attrValue"
+                    text-field="attrValue">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                </b-col>
+            
+                <b-col cols="3" style="padding-right: 0%;">
+                  <b-form-select v-model="cardResults.card_10" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card I --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="cardResults.card_11" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card II --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+            
+                  <b-form-select v-model="cardResults.card_12" :disabled="equipmentResults.equipment_4 == null"
+                    :options="filteredCards('06:飾品')" value-field="effect" text-field="itemname">
+                    <template #first>
+                      <b-form-select-option :value="null">-- Card III --</b-form-select-option>
+                    </template>
+                  </b-form-select>
+                </b-col>
+            
+              </b-row>
+
+            </b-tab>
+          </b-tabs>
+
+          {{ cardResults }} <br><br>
+          {{ equipmentResults }} <br><br>
+          {{ enchantResults }} <br><br>
+          {{ refineResults }} <br><br>
+
+          <hr class="my-4">
 
         </div>
 
@@ -497,7 +814,7 @@
         <span>{{ cardResults.card_3 }}</span><br>
 
 
-        
+
 
       </div>
     </div>
