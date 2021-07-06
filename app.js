@@ -112,18 +112,48 @@ new Vue({
       weaponCards: [], // store for reuse
       accessoryEnchants: [], // store for reuse
       weaponEnchants: [], // store for reuse
-      basicStats: {
-        hp: [null, null],
+      stats: {
+        str: {withoutEq: null, withEq: null},
+        vit: {withoutEq: null, withEq: null},
+        dex: {withoutEq: null, withEq: 10},
+        agi: {withoutEq: null, withEq: null},
+        int: {withoutEq: null, withEq: null},
+        luk: {withoutEq: null, withEq: null},
+        p_atk: {withoutEq: null, withEq: null},
+        p_pen: {withoutEq: null, withEq: null},
+        aspd: {withoutEq: null, withEq: null},
+        crit: {withoutEq: null, withEq: null},
+        haste: {withoutEq: null, withEq: null},
+        hp: {withoutEq: null, withEq: null},
+        sp: {withoutEq: null, withEq: null},
+        def: {withoutEq: null, withEq: null},
+        hit: {withoutEq: null, withEq: null},
+        flee: {withoutEq: null, withEq: null},
+        anti_crit: {withoutEq: null, withEq: null},
+        m_atk: {withoutEq: null, withEq: null},
+        m_def: {withoutEq: null, withEq: null},
+        m_pen: {withoutEq: null, withEq: null},
+        final_aspd: {withoutEq: null, withEq: null},
+        final_crit: {withoutEq: null, withEq: null},
+        crit_bonus: {withoutEq: 200, withEq: null},
+        final_p_def: {withoutEq: null, withEq: null},
+        final_m_def: {withoutEq: null, withEq: null},
+        final_p_pen: {withoutEq: null, withEq: null},
+        final_m_pen: {withoutEq: null, withEq: null},
+        hp_regen: {withoutEq: null, withEq: null},
+        sp_regen: {withoutEq: null, withEq: null},
+        p_dmg_reduction: {withoutEq: null, withEq: null},
+        m_dmg_reduction: {withoutEq: null, withEq: null},
+        move_speed: {withoutEq: null, withEq: null},
       },
-      hp: '',
-      mp: '',
+      test: {hp: 10, mp: 12},
       selected: null,
       selected_card: '',
       selected_enchant: '',
       selected_enchantLevel: '',
       enchantOption: ["力量", "敏捷", "體質", "智力", "靈巧", "幸運"],
       from_amount: "",
-            to_amount: ""
+      to_amount: ""
     }
   },
   methods: {
@@ -187,9 +217,23 @@ new Vue({
       }
       return tempArray;
     },
-    add: function() {
-      this.to_amount = Number(this.from_amount);
-  }
+    common(value, M, B) {
+      let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
+      return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
+    },
+    test_p_atk() {
+      let str = this.equipmentResults.equipment_1
+      if(str!= null){
+        let res = str.split(",")
+        var res1 = res.filter(v => v.length > 0 && v.indexOf("+") > -1).map(function(x){
+          var xres = x.split("+");
+         var xKey = xres[0];
+         var xValue = xres[1];
+        //  return { effectName : xKey, effectValue : xValue}; 
+        return this.enchantOption = { effectName : xKey, effectValue : xValue}
+       });
+      }
+    }
   },
   watch: {
 
@@ -198,9 +242,77 @@ new Vue({
     this.requestHandlder();
   },
   computed: {
-    cloneParent: function() {
-      return Number(this.from_amount);
-  }
+    dex() {
+      let dex_withoutEq = Number(this.stats.dex.withoutEq)
+      let dex_withEq = Number(this.stats.dex.withEq)
+      // return dex_withoutEq + dex_withEq
+      let x = dex_withoutEq + dex_withEq
+      console.log(x)
+      return Vue.set(this.stats.dex, 'withEq', x)
+    },
+    dex_to_p_atk() {
+      dex = dex()
+      return dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
+    },
+    p_atk() {
+      let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
+      let dex = 0
+      return p_atk_withoutEq + dex
+
+      // store to data propety
+      // return Vue.set(this.stats.p_atk, 'withEq', Number(this.stats.p_atk.withoutEq) * 5)
+    },
+    p_pen() {
+      let p_pen_withoutEq = Number(this.stats.p_pen.withoutEq)
+      let p_pen_withEq = Number(this.stats.p_pen.withEq)
+      return p_pen_withoutEq + p_pen_withEq
+    },
+    aspd() {
+      let aspd_withoutEq = Number(this.stats.aspd.withoutEq)
+      let aspd_withEq = Number(this.stats.aspd.withEq)
+      return aspd_withoutEq + aspd_withEq
+    },
+    crit() {
+      let p_crit_withoutEq = Number(this.stats.crit.withoutEq)
+      let p_crit_withEq = Number(this.stats.crit.withEq)
+      return p_crit_withoutEq + p_crit_withEq
+    },
+    haste() {
+      let haste_withoutEq = Number(this.stats.haste.withoutEq)
+      return haste_withoutEq * 5
+    },
+    final_aspd() {
+      let aspd_withoutEq = Number(this.stats.aspd.withoutEq)
+      let aspd_withEq = Number(this.stats.aspd.withEq)
+      let final_aspd_withEq = Number(this.stats.final_aspd.withEq)
+      let value = aspd_withoutEq + aspd_withEq
+      let common = Number(this.common(value, 50, 1).toFixed(2))
+      let total = final_aspd_withEq + common + "%"
+      return total
+    },
+    final_p_crit() {
+      let p_crit_withoutEq = Number(this.stats.crit.withoutEq)
+      let p_crit_withEq = Number(this.stats.crit.withEq)
+      let final_crit_withEq = Number(this.stats.final_crit.withEq)
+      let value = p_crit_withoutEq + p_crit_withEq
+      let common = Number(this.common(value, 25, 5).toFixed(2))
+      let total = final_crit_withEq + common + "%"
+      return total
+    },
+    crit_bonus() {
+      let crit_bonus_withoutEq = Number(this.stats.crit_bonus.withoutEq)
+      let crit_bonus_withEq = Number(this.stats.crit_bonus.withEq)
+      return crit_bonus_withoutEq + crit_bonus_withEq
+    },
+    final_p_pen() {
+      let p_pen_withoutEq = Number(this.stats.p_pen.withoutEq)
+      let p_pen_withEq = Number(this.stats.p_pen.withEq)
+      let final_p_pen_withEq = Number(this.stats.final_p_pen.withEq)
+      let value = p_pen_withoutEq + p_pen_withEq
+      let common = Number(this.common(value, 25, 5).toFixed(2))
+      let total = final_p_pen_withEq + common + "%"
+      return total
+    },
   },
 })
 

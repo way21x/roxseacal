@@ -69,7 +69,7 @@
             <div class="col-6">
               <div class="row">
                 <div class="col-4"></div>
-                <div class="col-4 text-center">Before equiment</div>
+                <div class="col-4 text-center">Without Equipment</div>
                 <div class="col-4 text-center">Total</div>
 
                 <div class="col-4">STR</div>
@@ -90,10 +90,10 @@
 
                 <div class="col-4">DEX</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.dex.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="dex" class="form-control" disabled>
                 </div>
 
               </div>
@@ -102,7 +102,7 @@
             <div class="col-6">
               <div class="row">
                 <div class="col-4"></div>
-                <div class="col-4 text-center">Before equiment</div>
+                <div class="col-4 text-center">Without Equipment</div>
                 <div class="col-4 text-center">Total</div>
 
                 <div class="col-4">AGI</div>
@@ -139,34 +139,34 @@
 
         <!-- Basic Stats -->
         <div class="col-12">
-          <h4 class="mb-3">Basic Stats</h4>from_amount:{{ from_amount }} to_amount:{{ to_amount }} 
+          <h4 class="mb-3">Basic Stats</h4>
 
           <div class="row">
             <div class="col-6">
               <div class="row">
                 <div class="col-4"></div>
-                <div class="col-4 text-center">Before equiment</div>
-                <div class="col-4 text-center">Total</div>
-
+                <div class="col-4 text-center">Without Equipment</div>
+                <div class="col-4 text-center">Total</div> 
+                
                 <div class="col-4">Max HP</div> 
                 <div class="col-4">
-                  <b-form-input v-model="from_amount" @keyup="add"></b-form-input>
+                  <b-form-input disabled></b-form-input>
                 </div>
                 <div class="col-4">
-                  <b-form-input :value="cloneParent" disabled></b-form-input>
+                  <b-form-input disabled></b-form-input>
                 </div>
 
                 <div class="col-4">P.ATK</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.p_atk.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="p_atk" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">DEF</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -174,23 +174,23 @@
 
                 <div class="col-4">P.PEN</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.p_pen.withoutEq" class="form-control" >
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="p_pen" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">ASPD</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.aspd.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="aspd" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Hit</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -198,10 +198,10 @@
 
                 <div class="col-4">Crit</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.crit.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="crit" class="form-control" disabled>
                 </div>
 
               </div>
@@ -210,12 +210,12 @@
             <div class="col-6">
               <div class="row">
                 <div class="col-4"></div>
-                <div class="col-4 text-center">Before equiment</div>
+                <div class="col-4 text-center">Without Equipment</div>
                 <div class="col-4 text-center">Total</div>
 
                 <div class="col-4">Max SP</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -223,7 +223,7 @@
 
                 <div class="col-4">M.ATK</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -231,7 +231,7 @@
 
                 <div class="col-4">M.DEF</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -239,7 +239,7 @@
 
                 <div class="col-4">M.DEF PEN</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -247,15 +247,15 @@
 
                 <div class="col-4">haste</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.haste.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="haste" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Flee</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -263,7 +263,7 @@
 
                 <div class="col-4">Anti-Crit</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -273,7 +273,7 @@
             </div>
           </div>
         </div>
-
+{{stats}}
         <hr class="my-4">
 
 
@@ -287,15 +287,15 @@
 
                 <div class="col-4">Final Attack Speed</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.final_aspd.withEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="final_aspd" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">HP Regen</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -303,15 +303,15 @@
 
                 <div class="col-4">Crit DMG Bonus</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.crit_bonus.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="crit_bonus" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">Final Physical DEF</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -319,10 +319,10 @@
 
                 <div class="col-4">Final P.PEN</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.final_p_pen.withEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="final_p_pen" class="form-control" disabled>
                 </div>
 
               </div>
@@ -332,15 +332,15 @@
               <div class="row">
                 <div class="col-4">Final Crit</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.final_crit.withEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="final_p_crit" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">SP Regen</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -348,7 +348,7 @@
 
                 <div class="col-4">Movement Speed</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -356,7 +356,7 @@
 
                 <div class="col-4">P.DMG Reduction</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -364,7 +364,7 @@
 
                 <div class="col-4">Final Magic Defence</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" disabled>
                 </div>
                 <div class="col-4">
                   <input type="text" class="form-control" disabled>
@@ -379,14 +379,14 @@
 
         <!-- Tabs -->
         <div class="col-12">
-          <h4 class="mb-3">Equiments</h4>
+          <h4 class="mb-3">Equipment</h4>
 
           <b-tabs pills card>
             <b-tab title="Weapons" active>
               <b-row>
                 <b-col cols="4">
 
-                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null"
+                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" @change="p_atk()"
                     :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
@@ -787,10 +787,7 @@
             </b-tab>
           </b-tabs>
 
-          <!-- {{ cardResults }} <br><br>
-          {{ equipmentResults }} <br><br>
-          {{ enchantResults }} <br><br>
-          {{ refineResults }} <br><br> -->
+
           <hr class="my-4">
 
         </div>
