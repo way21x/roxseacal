@@ -16,7 +16,7 @@ new Vue({
       upgradeOptions: [
         { level: "Lv 1 - 物理攻击 +25, 攻速 +25", data: "物理攻击 +25, 攻速 +25" },
       ],
-      selectedClass: null,
+      selectedClass: '弓箭手',
       cardResults: {
         card_1: null,
         card_2: null,
@@ -115,7 +115,7 @@ new Vue({
       stats: {
         str: {withoutEq: null, withEq: null},
         vit: {withoutEq: null, withEq: null},
-        dex: {withoutEq: null, withEq: 10},
+        dex: {withoutEq: null, withEq: null},
         agi: {withoutEq: null, withEq: null},
         int: {withoutEq: null, withEq: null},
         luk: {withoutEq: null, withEq: null},
@@ -146,13 +146,14 @@ new Vue({
         m_dmg_reduction: {withoutEq: null, withEq: null},
         move_speed: {withoutEq: null, withEq: null},
       },
+      eq_stats: [],
       test: {hp: 10, mp: 12},
       selected: null,
       selected_card: '',
       selected_enchant: '',
       selected_enchantLevel: '',
-      enchantOption: ["力量", "敏捷", "體質", "智力", "靈巧", "幸運"],
-      from_amount: "",
+      enchantOption: { test: null},
+      from_amount: [],
       to_amount: ""
     }
   },
@@ -170,7 +171,7 @@ new Vue({
       })
     },
     req_1() {
-      return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter.json');
+      return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_weapon.json');
     },
     req_2() {
       return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json');
@@ -182,7 +183,7 @@ new Vue({
     filteredWeapons(job, weapon) {
       //let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
       return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon))
-      // return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon)).map(function(x){
+      // this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon)).map(function(x){
       // return { valueData : x.effectbase, y : x.itemname };
       // });
     },
@@ -221,18 +222,73 @@ new Vue({
       let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
     },
-    test_p_atk() {
-      let str = this.equipmentResults.equipment_1
+    test_p_atk(event, eq) {
+      let str = event
+      var tempArray = []
       if(str!= null){
         let res = str.split(",")
         var res1 = res.filter(v => v.length > 0 && v.indexOf("+") > -1).map(function(x){
           var xres = x.split("+");
-         var xKey = xres[0];
-         var xValue = xres[1];
-        //  return { effectName : xKey, effectValue : xValue}; 
-        return this.enchantOption = { effectName : xKey, effectValue : xValue}
+          var xKey = xres[0];
+          var xValue = xres[1];
+          tempArray = ({eq_id: eq, effectName : xKey, effectValue : xValue}) 
+            //this.stats.p_atk.withEq = xValue
+            //Vue.set(this.stats.p_atk, 'withEq', xValue)
        });
+      //  return Vue.set(this,'eq_stats',tempArray)
+      if(this.eq_stats.length == 0){
+        this.eq_stats.push(tempArray)
+        console.log(tempArray)
+      }else{
+        this.eq_stats.forEach((element, index) => {
+          console.log(element)
+
+          // this.eq_stats.push(tempArray)
+          // console.log(element.eq_id, index)
+           if(element.eq_id === tempArray.eq_id){
+             console.log(index)
+            this.eq_stats.splice(index, 1)
+           }
+  
+         });
+         this.eq_stats.push(tempArray)
+
       }
+
+      //  return Vue.set(this,'eq_stats',tempArray)
+      // return this.eq_stats.push(tempArray)
+
+      }
+    },
+    edit_file() {
+      let uu = []
+      this.weapons.forEach((element, index) => {
+        let temp = {}
+        let str = element.effectbase
+
+        if(str.length > 0) {
+          let res = str.split(",")
+          res.forEach(element => {
+            if(element.length > 0){
+              let xres = element.split("+")
+              var xKe1 = xres[0];
+              var xValue = xres[1];
+              //temp.push(`${xKe1}: ${xValue}`)
+              temp[xKe1] = xValue
+            }
+          });
+          element.effectbase = temp
+          // console.log(element)
+        }
+        uu.push(element)
+
+        // this.from_amount.push(element)
+        // return this.from_amount
+        // this.from_amount = element
+        // return this.from_amount
+      });
+console.log(uu)
+return uu
     }
   },
   watch: {
@@ -245,20 +301,23 @@ new Vue({
     dex() {
       let dex_withoutEq = Number(this.stats.dex.withoutEq)
       let dex_withEq = Number(this.stats.dex.withEq)
-      // return dex_withoutEq + dex_withEq
-      let x = dex_withoutEq + dex_withEq
-      console.log(x)
-      return Vue.set(this.stats.dex, 'withEq', x)
+      return dex_withoutEq + dex_withEq
     },
-    dex_to_p_atk() {
+    dex_to_p_atk() { //??
       dex = dex()
       return dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
     },
     p_atk() {
-      let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
-      let dex = 0
-      return p_atk_withoutEq + dex
-
+      // let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
+      // console.log(this.eq_stats )
+      // if(this.eq_stats != null){
+      //   let x = this.eq_stats.filter(v => v.effectName.match('物理攻擊'))
+      //   if(x[0] != null){
+      //     return p_atk_withoutEq + Number(x[0].effectValue)
+      //   }else{
+      //     return p_atk_withoutEq
+      //   }
+      // }
       // store to data propety
       // return Vue.set(this.stats.p_atk, 'withEq', Number(this.stats.p_atk.withoutEq) * 5)
     },

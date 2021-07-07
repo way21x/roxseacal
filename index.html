@@ -90,8 +90,9 @@
 
                 <div class="col-4">DEX</div>
                 <div class="col-4">
-                  <input type="text" v-model="stats.dex.withoutEq" class="form-control">
+                  <input type="text" v-model.lazy="stats.dex.withoutEq" class="form-control">
                 </div>
+                  <input type="text" class="form-control" hidden>
                 <div class="col-4">
                   <input type="text" v-model="dex" class="form-control" disabled>
                 </div>
@@ -386,7 +387,7 @@
               <b-row>
                 <b-col cols="4">
 
-                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" @change="p_atk()"
+                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" @change="test_p_atk($event, 'eq_1')"
                     :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
@@ -489,7 +490,7 @@
               <b-row>
                 <b-col cols="4">
 
-                  <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null"
+                  <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null" @change="test_p_atk($event, 'eq_2')"
                     :options="filteredTalisman()" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Talisman --</b-form-select-option>
@@ -792,7 +793,9 @@
 
         </div>
 
-
+        <span>{{ eq_stats }}</span><br>
+        <br><br>
+        <span>{{ equipmentResults }}</span><br>
 
 
         <span>Selected: {{ selected }}</span><br>
@@ -802,7 +805,10 @@
         <span>{{ cardResults.card_1 }}</span><br>
         <span>{{ cardResults.card_2 }}</span><br>
         <span>{{ cardResults.card_3 }}</span><br>
+<br><br>
 
+{{edit_file()}}
+{{from_amount}}
 
 
 
