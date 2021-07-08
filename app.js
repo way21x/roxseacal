@@ -113,38 +113,38 @@ new Vue({
       accessoryEnchants: [], // store for reuse
       weaponEnchants: [], // store for reuse
       stats: {
-        str: {withoutEq: null, withEq: null},
-        vit: {withoutEq: null, withEq: null},
-        dex: {withoutEq: null, withEq: null},
-        agi: {withoutEq: null, withEq: null},
-        int: {withoutEq: null, withEq: null},
-        luk: {withoutEq: null, withEq: null},
-        p_atk: {withoutEq: null, withEq: null},
-        p_pen: {withoutEq: null, withEq: null},
-        aspd: {withoutEq: null, withEq: null},
-        crit: {withoutEq: null, withEq: null},
-        haste: {withoutEq: null, withEq: null},
-        hp: {withoutEq: null, withEq: null},
-        sp: {withoutEq: null, withEq: null},
-        def: {withoutEq: null, withEq: null},
-        hit: {withoutEq: null, withEq: null},
-        flee: {withoutEq: null, withEq: null},
-        anti_crit: {withoutEq: null, withEq: null},
-        m_atk: {withoutEq: null, withEq: null},
-        m_def: {withoutEq: null, withEq: null},
-        m_pen: {withoutEq: null, withEq: null},
-        final_aspd: {withoutEq: null, withEq: null},
-        final_crit: {withoutEq: null, withEq: null},
-        crit_bonus: {withoutEq: 200, withEq: null},
-        final_p_def: {withoutEq: null, withEq: null},
-        final_m_def: {withoutEq: null, withEq: null},
-        final_p_pen: {withoutEq: null, withEq: null},
-        final_m_pen: {withoutEq: null, withEq: null},
-        hp_regen: {withoutEq: null, withEq: null},
-        sp_regen: {withoutEq: null, withEq: null},
-        p_dmg_reduction: {withoutEq: null, withEq: null},
-        m_dmg_reduction: {withoutEq: null, withEq: null},
-        move_speed: {withoutEq: null, withEq: null},
+        str: {withoutEq: null, withEq: null, multiply: null,},
+        vit: {withoutEq: null, withEq: null, multiply: null,},
+        dex: {withoutEq: null, withEq: null, multiply: null,},
+        agi: {withoutEq: null, withEq: null, multiply: null,},
+        int: {withoutEq: null, withEq: null, multiply: null,},
+        luk: {withoutEq: null, withEq: null, multiply: null,},
+        p_atk: {withoutEq: null, withEq: null, multiply: null,},
+        p_pen: {withoutEq: null, withEq: null, multiply: null,},
+        aspd: {withoutEq: null, withEq: null, multiply: null,},
+        crit: {withoutEq: null, withEq: null, multiply: null,},
+        haste: {withoutEq: null, withEq: null, multiply: null,},
+        hp: {withoutEq: null, withEq: null, multiply: null,},
+        sp: {withoutEq: null, withEq: null, multiply: null,},
+        def: {withoutEq: null, withEq: null, multiply: null,},
+        hit: {withoutEq: null, withEq: null, multiply: null,},
+        flee: {withoutEq: null, withEq: null, multiply: null,},
+        anti_crit: {withoutEq: null, withEq: null, multiply: null,},
+        m_atk: {withoutEq: null, withEq: null, multiply: null,},
+        m_def: {withoutEq: null, withEq: null, multiply: null,},
+        m_pen: {withoutEq: null, withEq: null, multiply: null,},
+        final_aspd: {withoutEq: null, withEq: null, multiply: null,},
+        final_crit: {withoutEq: null, withEq: null, multiply: null,},
+        crit_bonus: {withoutEq: 200, withEq: null, multiply: null,},
+        final_p_def: {withoutEq: null, withEq: null, multiply: null,},
+        final_m_def: {withoutEq: null, withEq: null, multiply: null,},
+        final_p_pen: {withoutEq: null, withEq: null, multiply: null,},
+        final_m_pen: {withoutEq: null, withEq: null, multiply: null,},
+        hp_regen: {withoutEq: null, withEq: null, multiply: null,},
+        sp_regen: {withoutEq: null, withEq: null, multiply: null,},
+        p_dmg_reduction: {withoutEq: null, withEq: null, multiply: null,},
+        m_dmg_reduction: {withoutEq: null, withEq: null, multiply: null,},
+        move_speed: {withoutEq: null, withEq: null, multiply: null,},
       },
       eq_stats: [],
       test: {hp: 10, mp: 12},
@@ -223,44 +223,60 @@ new Vue({
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
     },
     test_p_atk(event, eq) {
-      let str = event
-      var tempArray = []
-      if(str!= null){
-        let res = str.split(",")
-        var res1 = res.filter(v => v.length > 0 && v.indexOf("+") > -1).map(function(x){
-          var xres = x.split("+");
-          var xKey = xres[0];
-          var xValue = xres[1];
-          tempArray = ({eq_id: eq, effectName : xKey, effectValue : xValue}) 
-            //this.stats.p_atk.withEq = xValue
-            //Vue.set(this.stats.p_atk, 'withEq', xValue)
-       });
-      //  return Vue.set(this,'eq_stats',tempArray)
-      if(this.eq_stats.length == 0){
-        this.eq_stats.push(tempArray)
-        console.log(tempArray)
-      }else{
-        this.eq_stats.forEach((element, index) => {
-          console.log(element)
+      // let results = this.equipmentResults
+      // let sum = 0
+      // for(let key in results) {
+      //   if(results[key] != null){ 
+      //     // key = eq_1
+      //     // results[key] = eq_1.result
+      //     // results[key]["物理攻擊"] = eq_1.result.物理攻擊
+      //     let x = results[key]
+      //     for(let t in x) {
+      //       if(t == "物理攻擊"){
+      //         sum += parseInt(x[t])
+      //       }
+      //     }
+      //   }
+      // }
+      // console.log(sum)
 
-          // this.eq_stats.push(tempArray)
-          // console.log(element.eq_id, index)
-           if(element.eq_id === tempArray.eq_id){
-             console.log(index)
-            this.eq_stats.splice(index, 1)
-           }
+      // console.log(str)
+      // if(str!= null){
+      //   let res = str.split(",")
+      //   var res1 = res.filter(v => v.length > 0 && v.indexOf("+") > -1).map(function(x){
+      //     var xres = x.split("+");
+      //     var xKey = xres[0];
+      //     var xValue = xres[1];
+      //     tempArray = ({eq_id: eq, effectName : xKey, effectValue : xValue}) 
+      //       //this.stats.p_atk.withEq = xValue
+      //       //Vue.set(this.stats.p_atk, 'withEq', xValue)
+      //  });
+      // //  return Vue.set(this,'eq_stats',tempArray)
+      // if(this.eq_stats.length == 0){
+      //   this.eq_stats.push(tempArray)
+      //   console.log(tempArray)
+      // }else{
+      //   this.eq_stats.forEach((element, index) => {
+      //     console.log(element)
+
+      //     // this.eq_stats.push(tempArray)
+      //     // console.log(element.eq_id, index)
+      //      if(element.eq_id === tempArray.eq_id){
+      //        console.log(index)
+      //       this.eq_stats.splice(index, 1)
+      //      }
   
-         });
-         this.eq_stats.push(tempArray)
+      //    });
+      //    this.eq_stats.push(tempArray)
 
-      }
+      // }
 
-      //  return Vue.set(this,'eq_stats',tempArray)
-      // return this.eq_stats.push(tempArray)
+      // //  return Vue.set(this,'eq_stats',tempArray)
+      // // return this.eq_stats.push(tempArray)
 
-      }
+      // }
     },
-    edit_file() {
+    edit_file_weapon() {
       let uu = []
       this.weapons.forEach((element, index) => {
         let temp = {}
@@ -278,17 +294,35 @@ new Vue({
             }
           });
           element.effectbase = temp
-          // console.log(element)
         }
         uu.push(element)
-
-        // this.from_amount.push(element)
-        // return this.from_amount
-        // this.from_amount = element
-        // return this.from_amount
       });
-console.log(uu)
-return uu
+      console.log(uu)
+      return uu
+    },
+    edit_file_card() {
+      let uu = []
+      this.cards.forEach((element, index) => {
+        let temp = {}
+        let str = element.effect
+
+        if(str.length > 0) {
+          let res = str.split(",")
+          res.forEach(element => {
+            if(element.length > 0){
+              let xres = element.split("+")
+              var xKe1 = xres[0];
+              var xValue = xres[1];
+              //temp.push(`${xKe1}: ${xValue}`)
+              temp[xKe1] = xValue
+            }
+          });
+          element.effect = temp
+        }
+        uu.push(element)
+      });
+      console.log(uu)
+      return uu
     }
   },
   watch: {
@@ -303,13 +337,54 @@ return uu
       let dex_withEq = Number(this.stats.dex.withEq)
       return dex_withoutEq + dex_withEq
     },
-    dex_to_p_atk() { //??
-      dex = dex()
-      return dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
+    enchant() {
+      let x = this.enchantResults
+      console.log(x)
     },
     p_atk() {
-      // let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
-      // console.log(this.eq_stats )
+      let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
+      let p_atk_withEq = 0
+      let p_atk_multiply = Number(this.stats.p_atk.multiply)
+      let equipmentResults = this.equipmentResults
+      let dex = this.stats.dex.withoutEq
+      let dex_to_atk = dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
+      let enchant_p_atk = 0
+      let enchantResults = this.enchantResults
+
+      // enchant calculation
+      for(let enchant_key in enchantResults) {
+        if(enchantResults[enchant_key][0] === "物理攻擊" && enchantResults[enchant_key][1] != null) {
+          if(enchantResults[enchant_key][1].includes("%")) {
+            p_atk_multiply += parseInt(enchantResults[enchant_key][1])
+          }else{
+            enchant_p_atk += parseInt(enchantResults[enchant_key][1])
+          }
+        }
+      }
+      // console.log(enchant_p_atk, p_atk_multiply)
+      // console.log('end')
+      
+      // equipment calculation
+      for(let equipment_key in equipmentResults) {
+        if(equipmentResults[equipment_key] != null){ 
+          // equipment_key = eq_1
+          // equipmentResults[equipment_key] = eq_1.result
+          // equipmentResults[equipment_key]["物理攻擊"] = eq_1.result.物理攻擊
+          let results = equipmentResults[equipment_key]
+          for(let target in results) {
+            if(target == "物理攻擊"){
+              p_atk_withEq += parseInt(results[target])
+            }
+          }
+        }
+      }
+
+      // card calculation
+      console.log(this.cardResults)
+
+      let p_atk = p_atk_withEq + p_atk_withoutEq + dex_to_atk + enchant_p_atk
+      return p_atk * ( 1 + p_atk_multiply / 100 )
+
       // if(this.eq_stats != null){
       //   let x = this.eq_stats.filter(v => v.effectName.match('物理攻擊'))
       //   if(x[0] != null){

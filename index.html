@@ -387,7 +387,7 @@
               <b-row>
                 <b-col cols="4">
 
-                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" @change="test_p_atk($event, 'eq_1')"
+                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" 
                     :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
@@ -490,7 +490,7 @@
               <b-row>
                 <b-col cols="4">
 
-                  <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null" @change="test_p_atk($event, 'eq_2')"
+                  <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null" 
                     :options="filteredTalisman()" value-field="effectbase" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Talisman --</b-form-select-option>
@@ -793,12 +793,12 @@
 
         </div>
 
-        <span>{{ eq_stats }}</span><br>
-        <br><br>
+
         <span>{{ equipmentResults }}</span><br>
+        <br>
 
-
-        <span>Selected: {{ selected }}</span><br>
+        <span>{{ enchantResults }}</span><br>
+        <br>
         <span>Selected Card: {{ selected_card }}</span><br>
         <span>Selected Enchant: {{ selected_enchant }}</span><br>
         <span>Selected Enchant Level: {{ selected_enchantLevel }}</span><br>
@@ -807,9 +807,8 @@
         <span>{{ cardResults.card_3 }}</span><br>
 <br><br>
 
-{{edit_file()}}
-{{from_amount}}
 
+{{edit_file_card()}}
 
 
       </div>
