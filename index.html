@@ -90,11 +90,11 @@
 
                 <div class="col-4">DEX</div>
                 <div class="col-4">
-                  <input type="text" v-model.lazy="stats.dex.withoutEq" class="form-control">
+                  <input type="text" v-model="stats.dex.withoutEq" class="form-control">
                 </div>
                   <input type="text" class="form-control" hidden>
                 <div class="col-4">
-                  <input type="text" v-model="dex" class="form-control" disabled>
+                  <input type="text" v-model="stats.dex.withEq" class="form-control" disabled>
                 </div>
 
               </div>
@@ -802,13 +802,9 @@
         <span>Selected Card: {{ selected_card }}</span><br>
         <span>Selected Enchant: {{ selected_enchant }}</span><br>
         <span>Selected Enchant Level: {{ selected_enchantLevel }}</span><br>
-        <span>{{ cardResults.card_1 }}</span><br>
-        <span>{{ cardResults.card_2 }}</span><br>
-        <span>{{ cardResults.card_3 }}</span><br>
+        <span>{{ cardResults }}</span><br>
 <br><br>
 
-
-{{edit_file_card()}}
 
 
       </div>
@@ -822,7 +818,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script type="module" src="app.js"></script>
-  <script type="module" src="header.js"></script>
+  <!-- <script type="module" src="header.js"></script> -->
 
 
 </body>

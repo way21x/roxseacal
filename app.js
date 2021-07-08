@@ -1,9 +1,9 @@
-import CustomSelect from './header.js';
+// import CustomSelect from './header.js';
 
 new Vue({
   el: '#app',
   components: {
-    CustomSelect
+    //CustomSelect
   },
   data() {
     return {
@@ -171,7 +171,7 @@ new Vue({
       })
     },
     req_1() {
-      return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_weapon.json');
+      return axios.get('./data/jsonformatter_weapon.json');
     },
     req_2() {
       return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json');
@@ -293,6 +293,8 @@ new Vue({
               temp[xKe1] = xValue
             }
           });
+          temp["itemname"] = element.itemname
+
           element.effectbase = temp
         }
         uu.push(element)
@@ -332,11 +334,11 @@ new Vue({
     this.requestHandlder();
   },
   computed: {
-    dex() {
-      let dex_withoutEq = Number(this.stats.dex.withoutEq)
-      let dex_withEq = Number(this.stats.dex.withEq)
-      return dex_withoutEq + dex_withEq
-    },
+    // dex() {
+    //   let dex_withoutEq = Number(this.stats.dex.withoutEq)
+    //   let dex_withEq = Number(this.stats.dex.withEq)
+    //   return dex_withEq
+    // },
     enchant() {
       let x = this.enchantResults
       console.log(x)
@@ -346,10 +348,13 @@ new Vue({
       let p_atk_withEq = 0
       let p_atk_multiply = Number(this.stats.p_atk.multiply)
       let equipmentResults = this.equipmentResults
-      let dex = this.stats.dex.withoutEq
-      let dex_to_atk = dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
+      let dex_withoutEq = Number(this.stats.dex.withoutEq)
+      let dex_withEq = 0
+
       let enchant_p_atk = 0
+      let card_p_atk = 0
       let enchantResults = this.enchantResults
+      let cardResults = this.cardResults
 
       // enchant calculation
       for(let enchant_key in enchantResults) {
@@ -360,6 +365,11 @@ new Vue({
             enchant_p_atk += parseInt(enchantResults[enchant_key][1])
           }
         }
+
+        if(enchantResults[enchant_key][0] === "靈巧" && enchantResults[enchant_key][1] != null) {
+          dex_withEq += parseInt(enchantResults[enchant_key][1])
+        }
+
       }
       // console.log(enchant_p_atk, p_atk_multiply)
       // console.log('end')
@@ -380,9 +390,27 @@ new Vue({
       }
 
       // card calculation
-      console.log(this.cardResults)
-
-      let p_atk = p_atk_withEq + p_atk_withoutEq + dex_to_atk + enchant_p_atk
+      for(let card_key in cardResults) {
+        if(cardResults[card_key] != null) {
+          let results = cardResults[card_key]
+          for(let target in results) {
+            if(target === "物理攻擊") {
+              if(results[target].includes("%")){
+                p_atk_multiply += parseInt(results[target])
+              }else{
+                card_p_atk += parseInt(results[target])
+              }
+            }
+          }
+        }
+      }
+      
+      let dex = dex_withEq+dex_withoutEq
+      console.log(dex_withEq, dex_withoutEq)
+      let dex_to_atk = dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
+      let p_atk = p_atk_withEq + p_atk_withoutEq + dex_to_atk + enchant_p_atk + card_p_atk
+      console.log("物理攻擊:", p_atk , "物理攻擊加成:", p_atk_multiply+"%", "附魔物理攻击:", enchant_p_atk, "dex:", dex, "dex转物理攻击:", dex_to_atk, "卡物理攻击:", card_p_atk)
+      this.stats.dex.withEq = dex
       return p_atk * ( 1 + p_atk_multiply / 100 )
 
       // if(this.eq_stats != null){
