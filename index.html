@@ -386,23 +386,22 @@
             <b-tab title="Weapons" active>
               <b-row>
                 <b-col cols="4">
-
                   <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass == null" 
-                    :options="filteredWeapons(selectedClass,'1:武器')" value-field="effectbase" text-field="itemname">
+                    :options="filteredWeapons(selectedClass)" value-field=baseProperty text-field="name">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
                     </template>
                   </b-form-select>
 
                   <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null"
-                    :options="upgradeOptions" value-field="data" text-field="level">
+                    :options="filteredUpgrade()" value-field="effect" text-field="name">
                     <template #first>
                       <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
                     </template>
                   </b-form-select>
 
                   <b-form-select v-model="refineResults.refine_1" :disabled="equipmentResults.equipment_1 == null"
-                    :options="refineOptions" value-field="data" text-field="level">
+                    :options="filteredRefine('equipment_1')" value-field="refineValue" text-field="refine_lv">
                     <template #first>
                       <b-form-select-option :value="null">-- Refine --</b-form-select-option>
                     </template>
@@ -491,7 +490,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_2" :disabled="selectedClass == null" 
-                    :options="filteredTalisman()" value-field="effectbase" text-field="itemname">
+                    :options="filteredTalisman()" value-field="baseProperty" text-field="name">
                     <template #first>
                       <b-form-select-option :value="null">-- Talisman --</b-form-select-option>
                     </template>
@@ -591,7 +590,7 @@
                 <b-col cols="4">
             
                   <b-form-select v-model="equipmentResults.equipment_3" :disabled="selectedClass == null"
-                    :options="filteredAccessory()" value-field="effectbase" text-field="itemname">
+                    :options="filteredAccessory()" value-field="baseProperty" text-field="name">
                     <template #first>
                       <b-form-select-option :value="null">-- Accessory I --</b-form-select-option>
                     </template>
@@ -691,7 +690,7 @@
                 <b-col cols="4">
             
                   <b-form-select v-model="equipmentResults.equipment_4" :disabled="selectedClass == null"
-                    :options="filteredAccessory()" value-field="effectbase" text-field="itemname">
+                    :options="filteredAccessory()" value-field="baseProperty" text-field="name">
                     <template #first>
                       <b-form-select-option :value="null">-- Accessory II --</b-form-select-option>
                     </template>
@@ -796,15 +795,17 @@
 
         <span>{{ equipmentResults }}</span><br>
         <br>
-
+        
         <span>{{ enchantResults }}</span><br>
+        <br>
+
+        <span>{{ refineResults }}</span><br>
         <br>
         <span>Selected Card: {{ selected_card }}</span><br>
         <span>Selected Enchant: {{ selected_enchant }}</span><br>
         <span>Selected Enchant Level: {{ selected_enchantLevel }}</span><br>
         <span>{{ cardResults }}</span><br>
 <br><br>
-
 
 
       </div>

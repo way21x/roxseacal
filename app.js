@@ -8,10 +8,13 @@ new Vue({
   data() {
     return {
       classOptions: [
-        "弓箭手", "獵人", "神射手", "盜賊", "刺客", "十字刺客"
+        "弓箭手", "猎人", "神射手", "游侠", "盗贼", "刺客", "十字刺客", "十字切割者"
       ],
       refineOptions: [
-        { level: "Lv 1 - 物理攻击 +10%, 攻速 +10%", data: "物理攻击 +10%, 攻速 +10%" },
+        { id: 1, 物理攻击: "10%", 攻速: "25%", name: "物理攻击 +10%, 攻速 +25%" },
+        { id: 2, 物理攻击: "20%", 攻速: "50%", name: "物理攻击 +20%, 攻速 +50%" },
+        { id: 3, 物理攻击: "30%", 攻速: "75%", name: "物理攻击 +30%, 攻速 +75%" },
+        { id: 4, 物理攻击: "40%", 攻速: "100%", name: "物理攻击 +40%, 攻速 +100%" },
       ],
       upgradeOptions: [
         { level: "Lv 1 - 物理攻击 +25, 攻速 +25", data: "物理攻击 +25, 攻速 +25" },
@@ -108,6 +111,89 @@ new Vue({
       weapons: [], // raw data
       cards: [], // raw data
       enchants: [], // raw data
+      upgrade: {
+        "2": {
+          "id": 2,
+          "level": 1,
+          "name": "Lv1: 魔法攻击 +2, 魔防穿透 +2",
+          "effect": {
+            "魔法攻击": 2,
+            "魔防穿透": 2
+          }
+        },
+        "3": {
+          "id": 3,
+          "level": 2,
+          "name": "Lv2: 魔法攻击 +4, 魔防穿透 +4",
+          "effect": {
+            "魔法攻击": 4,
+            "魔防穿透": 4
+          }
+        },
+        "4": {
+          "id": 4,
+          "level": 3,
+          "name": "Lv3: 魔法攻击 +6, 魔防穿透 +6",
+          "effect": {
+            "魔法攻击": 6,
+            "魔防穿透": 6
+          }
+        },
+        "5": {
+          "id": 5,
+          "level": 4,
+          "name": "Lv4: 魔法攻击 +8, 魔防穿透 +8",
+          "effect": {
+            "魔法攻击": 8,
+            "魔防穿透": 8
+          }
+        },
+        "6": {
+          "id": 6,
+          "level": 5,
+          "name": "Lv5: 魔法攻击 +10, 魔防穿透 +10",
+          "effect": {
+            "魔法攻击": 10,
+            "魔防穿透": 10
+          }
+        },
+        "7": {
+          "id": 7,
+          "level": 6,
+          "name": "Lv6: 魔法攻击 +12, 魔防穿透 +12",
+          "effect": {
+            "魔法攻击": 12,
+            "魔防穿透": 12
+          }
+        },
+        "8": {
+          "id": 8,
+          "level": 7,
+          "name": "Lv7: 魔法攻击 +14, 魔防穿透 +14",
+          "effect": {
+            "魔法攻击": 14,
+            "魔防穿透": 14
+          }
+        },
+        "9": {
+          "id": 9,
+          "level": 8,
+          "name": "Lv8: 魔法攻击 +16, 魔防穿透 +16",
+          "effect": {
+            "魔法攻击": 16,
+            "魔防穿透": 16
+          }
+        },
+        "10": {
+          "id": 10,
+          "level": 9,
+          "name": "Lv9: 魔法攻击 +18, 魔防穿透 +18",
+          "effect": {
+            "魔法攻击": 18,
+            "魔防穿透": 18
+          }
+        }
+      }, // raw data
       accessoryCards: [], // store for reuse
       weaponCards: [], // store for reuse
       accessoryEnchants: [], // store for reuse
@@ -154,16 +240,19 @@ new Vue({
       selected_enchantLevel: '',
       enchantOption: { test: null},
       from_amount: [],
-      to_amount: ""
+      to_amount: "",
+      kkk: {},
     }
   },
   methods: {
     requestHandlder() {
-      axios.all([this.req_1(), this.req_2(), this.req_3()]).then(
+      axios.all([this.req_1(), this.req_2(), this.req_3(), this.req_4(), this.req_5()]).then(
         axios.spread((...response) => {
           this.weapons = response[0].data;
           this.cards = response[1].data;
           this.enchants = response[2].data;
+          this.upgrade = response[3].data;
+          this.refine = response[4].data;
           this.accessoryCards = response[1].data.filter(v => v.itemsubtype.match('06:飾品'))
         })
       ).catch(errors => {
@@ -171,27 +260,59 @@ new Vue({
       })
     },
     req_1() {
-      return axios.get('./data/jsonformatter_weapon.json');
+      return axios.get('./data/weapon_v1.json');
     },
     req_2() {
-      return axios.get('https://raw.githubusercontent.com/way21x/roxseacal/main/data/jsonformatter_cards.json');
+      return axios.get('./data/jsonformatter_cards.json');
     },
     req_3() {
-      return axios.get(
-        './data/jsonformatter_enchant.json');
+      return axios.get('./data/jsonformatter_enchant.json');
     },
-    filteredWeapons(job, weapon) {
-      //let filtered = ["1-15:長弓", "1-17:短弓", "弓箭手", "1:武器"];
-      return this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon))
-      // this.weapons.filter(v => v.joblimit.match(job) && v.itemtype.match(weapon)).map(function(x){
-      // return { valueData : x.effectbase, y : x.itemname };
-      // });
+    req_4() {
+      return axios.get('./data/refine_v1.json');
+    },
+    req_5() {
+      return axios.get('./data/refine_v1.json');
+    },
+    filteredWeapons(job) {
+      return this.weapons.filter(v => v.jobLimit != null 
+        && v.slotList != null 
+        && v.slotList.indexOf('武器') > -1 
+        && v.jobLimit.indexOf(job) > -1
+        )
+    },
+    filteredUpgrade() {
+      // return this.upgrade.filter(v => v.effect.match('攻速'))
+      //return console.log(this.upgrade)
+      // for(let x in this.upgrade) {
+      //   if(this.upgrade[x].effect.hasOwnProperty('魔法攻击') && this.upgrade[x].effect.hasOwnProperty('魔防穿透')) {
+      //     console.log(this.upgrade[x].effect)
+      //     return this.upgrade
+      //   }
+      // }
+    },
+    filteredRefine(equipment_x) {
+      var res = this.equipmentResults
+      for (var key in res) {
+        if (key == equipment_x) {    
+          for(var i in res[key]) {
+            if(i == "RefineID"){
+              // console.log(this.refine.filter(v => v.refineId != null && v.refineId === res[key][i]))
+              var k = this.refine.filter(v => v.refineId != null && v.refineId === res[key][i])
+              k.forEach(z => {
+                z.refine_lv = "+"+z.refine_lv
+              })
+              return k
+            }
+          }
+        }
+      }
     },
     filteredTalisman() {
-      return this.weapons.filter(v => v.itemsubtype.match('5-2:護符'))
+      return this.weapons.filter(v => v.slotList != null && v.slotList.indexOf('护符') > -1)
     },
     filteredAccessory() {
-      return this.weapons.filter(v => v.itemsubtype.match('5-1:飾品'))
+      return this.weapons.filter(v => v.slotList != null && v.slotList.indexOf('饰品') > -1)
     },
     filteredCards(attr) {
       return this.cards.filter(v => v.itemsubtype.match(attr))
@@ -325,6 +446,233 @@ new Vue({
       });
       console.log(uu)
       return uu
+    },
+    testabc() {
+      const uu = [
+        'baseLevelLimit', 'breakReturnItemNum', 'InheritZeny', 'itemID', 'itemNum', 
+        "breakReturnItemID", "propID", "propNum", "zeny", "basicRate", "strengthenId", "successRate"
+      ]
+
+      // this.kkk.forEach(element => {
+      //   uu.forEach(v => delete element[v])
+      // });
+
+      
+
+      for(let i in this.kkk){
+        // console.log(this.kkk[i], 'end')
+        // i = [1], [2], [3]
+        let propNum = {}
+        let propID = {}
+        let arr = {}
+        
+
+
+        if(this.kkk[i].propNum != null) {
+          this.kkk[i].propNum.forEach((element, index) => {
+            propNum[index]=element
+          });
+        }
+
+        if(this.kkk[i].propID != null) {
+          this.kkk[i].propID.forEach((element, index) => {
+            switch(element) {
+              case 1:
+                element = "力量"
+                break;
+              case 2:
+                element = "敏捷"
+                break;
+              case 3:
+                element = "体质"
+                break;
+              case 4:
+                element = "智力"
+                break;
+              case 5:
+                element = "灵巧"
+                break;
+              case 6:
+                element = "幸运"
+                break;
+              case 10:
+                element = "物理攻击"
+                break;
+              case 11:
+                element = "魔法攻击"
+                break;
+              case 12:
+                element = "物防穿透"
+                break;
+              case 13:
+                element = "魔防穿透"
+                break;
+              case 14:
+                element = "攻速"
+                break;
+              case 15:
+                element = "最终攻速"
+                break;
+              case 16:
+                element = "急速"
+                break;
+              case 17:
+                element = "最终急速"
+                break;
+              case 18:
+                element = "命中"
+                break;
+              case 19:
+                element = "最终伤害加深"
+                break;
+              case 20:
+                element = "最终暴击"
+                break;
+              case 21:
+                element = "暴击"
+                break;
+              case 22:
+                element = "暴伤附加"
+                break;
+              case 23:
+                element = "物理防御"
+                break;
+              case 24:
+                element = "魔法防御"
+                break;
+              case 25:
+                element = "最终闪避"
+                break;
+              case 26:
+                element = "闪避"
+                break;
+              case 28:
+                element = "最终伤害减免"
+                break;
+              case 31:
+                element = "防暴"
+                break;
+              case 32:
+                element = "最大HP"
+                break;
+              case 33:
+                element = "最大SP"
+                break;
+              case 301:
+                element = "物伤附加"
+                break;
+              case 302:
+                element = "魔伤附加"
+                break;
+              case 303:
+                element = "物伤减免"
+                break;
+              case 304:
+                element = "魔伤减免"
+                break;
+              case 305:
+                element = "魔法攻击"
+                break;
+              case 306:
+                element = "物防穿透"
+                break;
+              case 320:
+                element = "PVP物伤减免"
+                break;
+              case 321:
+                element = "PVP魔伤减免"
+                break;
+              case 322:
+                element = "PVP最终物伤减免"
+                break;
+              case 323:
+                element = "PVP最终魔伤减免"
+                break;
+              case 324:
+                element = "PVP负面状态减免"
+                break;
+              case 325:
+                element = "PVP负面状态抵抗"
+                break;
+            }
+            propID[index] = element
+
+            arr[propID[index]] = propNum[index]
+            // this.kkk[i].effect = arr
+            if(this.kkk[i].id){
+              if(propID[1]) {
+                this.kkk[i].name = `Lv${this.kkk[i].level}: ${propID[0]} +${propNum[0]}, ${propID[1]} +${propNum[1]}`
+              }else{
+                this.kkk[i].name = `Lv${this.kkk[i].level}: ${propID[0]} +${propNum[0]}`
+              }
+            }
+
+            // console.log('y')
+          });
+          if(this.kkk[i].id){
+            this.kkk[i].effect = arr
+          }
+          // console.log('x')
+        }
+
+        if(!this.kkk[i].hasOwnProperty("propID") || !this.kkk[i].hasOwnProperty("level")){
+          delete this.kkk[i]
+        }
+
+        for(let m in this.kkk[i]) {
+          uu.forEach((element, index) => {
+            if( m == element){
+              delete this.kkk[i][element]              
+            }
+          });
+          //console.log(this.kkk[i].effect)
+
+        }
+
+
+        // arr[propID[0]] = propNum[0]
+        // arr[propID[1]] = propNum[1]
+        
+        //console.log(arr)
+        // uu.forEach(v => {
+        //   console.log(v) // v = each property name
+        //   delete this.kkk[i][v]
+        //   // if(this.kkk[i].propID[0] == 11){
+        //   //   this.kkk[i].propID[0] = "atk"
+        //   // }
+        // })
+
+        // this.kkk[i].propID.forEach(element => { // element = this.kkk[i].propID
+        //   let key = element
+        //   c[key] = 'val'
+        //   switch(this.kkk[i].propID[index]) {
+        //     case 11:
+        //       this.kkk[i].propID[index] = "atk"
+        //       break;
+        //     case 13:
+        //       this.kkk[i].propID[index] = "aspd"
+        //       break;
+        //   }
+
+        //   console.log(this.kkk[i].propNum, "propnum")
+        // });
+
+        // if(this.kkk[i].propID != null) {
+        //   this.kkk[i].propID = c
+        // }
+
+
+      }
+      //console.log(this.kkk)
+      return this.kkk
+    },
+    testest() {
+      for(let x in this.upgrade) {
+        //console.log(x)
+      }
+
+      console.log(this.upgrade)
+      
     }
   },
   watch: {
@@ -358,7 +706,7 @@ new Vue({
 
       // enchant calculation
       for(let enchant_key in enchantResults) {
-        if(enchantResults[enchant_key][0] === "物理攻擊" && enchantResults[enchant_key][1] != null) {
+        if(enchantResults[enchant_key][0] === "物理攻击" && enchantResults[enchant_key][1] != null) {
           if(enchantResults[enchant_key][1].includes("%")) {
             p_atk_multiply += parseInt(enchantResults[enchant_key][1])
           }else{
@@ -366,7 +714,7 @@ new Vue({
           }
         }
 
-        if(enchantResults[enchant_key][0] === "靈巧" && enchantResults[enchant_key][1] != null) {
+        if(enchantResults[enchant_key][0] === "灵巧" && enchantResults[enchant_key][1] != null) {
           dex_withEq += parseInt(enchantResults[enchant_key][1])
         }
 
@@ -382,7 +730,7 @@ new Vue({
           // equipmentResults[equipment_key]["物理攻擊"] = eq_1.result.物理攻擊
           let results = equipmentResults[equipment_key]
           for(let target in results) {
-            if(target == "物理攻擊"){
+            if(target == "物理攻击"){
               p_atk_withEq += parseInt(results[target])
             }
           }
@@ -394,7 +742,7 @@ new Vue({
         if(cardResults[card_key] != null) {
           let results = cardResults[card_key]
           for(let target in results) {
-            if(target === "物理攻擊") {
+            if(target === "物理攻击") {
               if(results[target].includes("%")){
                 p_atk_multiply += parseInt(results[target])
               }else{
@@ -409,7 +757,7 @@ new Vue({
       console.log(dex_withEq, dex_withoutEq)
       let dex_to_atk = dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
       let p_atk = p_atk_withEq + p_atk_withoutEq + dex_to_atk + enchant_p_atk + card_p_atk
-      console.log("物理攻擊:", p_atk , "物理攻擊加成:", p_atk_multiply+"%", "附魔物理攻击:", enchant_p_atk, "dex:", dex, "dex转物理攻击:", dex_to_atk, "卡物理攻击:", card_p_atk)
+      console.log("物理攻击:", p_atk , "物理攻击加成:", p_atk_multiply+"%", "附魔物理攻击:", enchant_p_atk, "dex:", dex, "dex转物理攻击:", dex_to_atk, "卡物理攻击:", card_p_atk)
       this.stats.dex.withEq = dex
       return p_atk * ( 1 + p_atk_multiply / 100 )
 
