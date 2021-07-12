@@ -297,10 +297,9 @@ new Vue({
         if (key == equipment_x) {    
           for(var i in res[key]) {
             if(i == "RefineID"){
-              // console.log(this.refine.filter(v => v.refineId != null && v.refineId === res[key][i]))
-              var k = this.refine.filter(v => v.refineId != null && v.refineId === res[key][i])
+              var k = this.refine.filter(v => v.refineId != null && v.refineId === res[key][i] && v.refine_lv != null)
               k.forEach(z => {
-                z.refine_lv = "+"+z.refine_lv
+                z.refine_lv = "+"+ (z.refine_lv.indexOf("+") == 0 ? z.refine_lv.substr(1) : z.refine_lv);
               })
               return k
             }
