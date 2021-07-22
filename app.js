@@ -8,18 +8,14 @@ new Vue({
   data() {
     return {
       classOptions: [
-        "弓箭手", "猎人", "神射手", "游侠", "盗贼", "刺客", "十字刺客", "十字切割者"
+        { name: "弓箭手系", value: "弓箭手" }, 
+        { name: "盗贼系", value: "盗贼"},
+        { name: "剑士系", value: "剑士"},
+        { name: "商人系", value: "商人"},
+        { name: "服事系", value: "服事"},
+        { name: "魔法师系", value: "魔法师"},
       ],
-      refineOptions: [
-        { id: 1, 物理攻击: "10%", 攻速: "25%", name: "物理攻击 +10%, 攻速 +25%" },
-        { id: 2, 物理攻击: "20%", 攻速: "50%", name: "物理攻击 +20%, 攻速 +50%" },
-        { id: 3, 物理攻击: "30%", 攻速: "75%", name: "物理攻击 +30%, 攻速 +75%" },
-        { id: 4, 物理攻击: "40%", 攻速: "100%", name: "物理攻击 +40%, 攻速 +100%" },
-      ],
-      upgradeOptions: [
-        { level: "Lv 1 - 物理攻击 +25, 攻速 +25", data: "物理攻击 +25, 攻速 +25" },
-      ],
-      selectedClass: '弓箭手',
+      selectedClass: {name:"弓箭手", baselv: null, value: null},
       cardResults: {
         card_1: null,
         card_2: null,
@@ -108,92 +104,11 @@ new Vue({
         refine_7: null,
         refine_8: null
       },
+      growth: [],
       weapons: [], // raw data
       cards: [], // raw data
       enchants: [], // raw data
-      upgrade: {
-        "2": {
-          "id": 2,
-          "level": 1,
-          "name": "Lv1: 魔法攻击 +2, 魔防穿透 +2",
-          "effect": {
-            "魔法攻击": 2,
-            "魔防穿透": 2
-          }
-        },
-        "3": {
-          "id": 3,
-          "level": 2,
-          "name": "Lv2: 魔法攻击 +4, 魔防穿透 +4",
-          "effect": {
-            "魔法攻击": 4,
-            "魔防穿透": 4
-          }
-        },
-        "4": {
-          "id": 4,
-          "level": 3,
-          "name": "Lv3: 魔法攻击 +6, 魔防穿透 +6",
-          "effect": {
-            "魔法攻击": 6,
-            "魔防穿透": 6
-          }
-        },
-        "5": {
-          "id": 5,
-          "level": 4,
-          "name": "Lv4: 魔法攻击 +8, 魔防穿透 +8",
-          "effect": {
-            "魔法攻击": 8,
-            "魔防穿透": 8
-          }
-        },
-        "6": {
-          "id": 6,
-          "level": 5,
-          "name": "Lv5: 魔法攻击 +10, 魔防穿透 +10",
-          "effect": {
-            "魔法攻击": 10,
-            "魔防穿透": 10
-          }
-        },
-        "7": {
-          "id": 7,
-          "level": 6,
-          "name": "Lv6: 魔法攻击 +12, 魔防穿透 +12",
-          "effect": {
-            "魔法攻击": 12,
-            "魔防穿透": 12
-          }
-        },
-        "8": {
-          "id": 8,
-          "level": 7,
-          "name": "Lv7: 魔法攻击 +14, 魔防穿透 +14",
-          "effect": {
-            "魔法攻击": 14,
-            "魔防穿透": 14
-          }
-        },
-        "9": {
-          "id": 9,
-          "level": 8,
-          "name": "Lv8: 魔法攻击 +16, 魔防穿透 +16",
-          "effect": {
-            "魔法攻击": 16,
-            "魔防穿透": 16
-          }
-        },
-        "10": {
-          "id": 10,
-          "level": 9,
-          "name": "Lv9: 魔法攻击 +18, 魔防穿透 +18",
-          "effect": {
-            "魔法攻击": 18,
-            "魔防穿透": 18
-          }
-        }
-      }, // raw data
+      upgrade: [], // raw data
       accessoryCards: [], // store for reuse
       weaponCards: [], // store for reuse
       accessoryEnchants: [], // store for reuse
@@ -212,13 +127,14 @@ new Vue({
         haste: {withoutEq: null, withEq: null, multiply: null,},
         hp: {withoutEq: null, withEq: null, multiply: null,},
         sp: {withoutEq: null, withEq: null, multiply: null,},
-        def: {withoutEq: null, withEq: null, multiply: null,},
+        p_def: {withoutEq: null, withEq: null, multiply: null,},
         hit: {withoutEq: null, withEq: null, multiply: null,},
         flee: {withoutEq: null, withEq: null, multiply: null,},
         anti_crit: {withoutEq: null, withEq: null, multiply: null,},
         m_atk: {withoutEq: null, withEq: null, multiply: null,},
         m_def: {withoutEq: null, withEq: null, multiply: null,},
         m_pen: {withoutEq: null, withEq: null, multiply: null,},
+        dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
         final_aspd: {withoutEq: null, withEq: null, multiply: null,},
         final_crit: {withoutEq: null, withEq: null, multiply: null,},
         crit_bonus: {withoutEq: 200, withEq: null, multiply: null,},
@@ -226,6 +142,8 @@ new Vue({
         final_m_def: {withoutEq: null, withEq: null, multiply: null,},
         final_p_pen: {withoutEq: null, withEq: null, multiply: null,},
         final_m_pen: {withoutEq: null, withEq: null, multiply: null,},
+        final_dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
+        final_haste: {withoutEq: null, withEq: null, multiply: null,},
         hp_regen: {withoutEq: null, withEq: null, multiply: null,},
         sp_regen: {withoutEq: null, withEq: null, multiply: null,},
         p_dmg_reduction: {withoutEq: null, withEq: null, multiply: null,},
@@ -233,7 +151,9 @@ new Vue({
         move_speed: {withoutEq: null, withEq: null, multiply: null,},
       },
       eq_stats: [],
-      test: {hp: 10, mp: 12},
+      upgradeAwakening: 1,
+      refineAwakening: 1,
+      enchantAwakening: 1,
       selected: null,
       selected_card: '',
       selected_enchant: '',
@@ -246,14 +166,15 @@ new Vue({
   },
   methods: {
     requestHandlder() {
-      axios.all([this.req_1(), this.req_2(), this.req_3(), this.req_4(), this.req_5()]).then(
+      axios.all([this.req_1(), this.req_2(), this.req_3(), this.req_4(), this.req_5(), this.req_6()]).then(
         axios.spread((...response) => {
           this.weapons = response[0].data;
           this.cards = response[1].data;
           this.enchants = response[2].data;
           this.upgrade = response[3].data;
           this.refine = response[4].data;
-          this.accessoryCards = response[1].data.filter(v => v.itemsubtype.match('06:飾品'))
+          this.growth = response[5].data;
+          //this.accessoryCards = response[1].data.filter(v => v.itemsubtype.match('06:飾品'))
         })
       ).catch(errors => {
         console.log(errors);
@@ -263,33 +184,113 @@ new Vue({
       return axios.get('./data/weapon_v1.json');
     },
     req_2() {
-      return axios.get('./data/jsonformatter_cards.json');
-    },
+      return axios.get('./data/card_v1.json');
+    },  
     req_3() {
-      return axios.get('./data/jsonformatter_enchant.json');
+      return axios.get('./data/enchant_v1.json');
     },
     req_4() {
-      return axios.get('./data/refine_v1.json');
+      return axios.get('./data/upgrade_v1.json');
     },
     req_5() {
       return axios.get('./data/refine_v1.json');
     },
+    req_6() {
+      return axios.get('./data/levelGrowth_v1.json');
+    },
     filteredWeapons(job) {
-      return this.weapons.filter(v => v.jobLimit != null 
-        && v.slotList != null 
-        && v.slotList.indexOf('武器') > -1 
+      // var weapons = this.weapons.filter(v => v.jobLimit != null 
+      //   && v.slotList != null 
+      //   && v.name != null 
+      //   && v.slotList.indexOf('武器') > -1 
+      //   && v.jobLimit.indexOf(job) > -1
+      //   )
+
+      var weapons = this.weapons.filter(v => v.jobLimit != null 
+        && v.equipmentType
+        && v.name != null 
+        && Object.keys(v.equipmentType).indexOf('武器') > -1
         && v.jobLimit.indexOf(job) > -1
         )
+
+      weapons.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          return 0;
+      })
+    
+      return weapons;
     },
-    filteredUpgrade() {
-      // return this.upgrade.filter(v => v.effect.match('攻速'))
-      //return console.log(this.upgrade)
-      // for(let x in this.upgrade) {
-      //   if(this.upgrade[x].effect.hasOwnProperty('魔法攻击') && this.upgrade[x].effect.hasOwnProperty('魔防穿透')) {
-      //     console.log(this.upgrade[x].effect)
-      //     return this.upgrade
-      //   }
-      // }
+    filteredArmor(job, parts) {
+      var weapons = this.weapons.filter(v => v.jobLimit != null 
+        && v.slotList != null 
+        && v.name != null 
+        && v.slotList.indexOf(parts) > -1 
+        && v.jobLimit.indexOf(job) > -1
+        )
+      // 盔甲
+      // var weapons = this.weapons.filter(v => v.jobLimit != null 
+      //   && v.equipmentType
+      //   && v.name != null 
+      //   && Object.keys(v.equipmentType).indexOf('武器') > -1
+      //   && v.jobLimit.indexOf(job) > -1
+      //   )
+
+      weapons.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          return 0;
+      })
+    
+      return weapons;
+    },
+    filteredCostume(parts) {
+      var weapons = this.weapons.filter(v => v.name != null && v.baseProperty != null && v.baseProperty.parts != null && v.baseProperty.parts == parts)
+      // 头部 眼睛 嘴巴
+      // var weapons = this.weapons.filter(v => v.jobLimit != null 
+      //   && v.equipmentType
+      //   && v.name != null 
+      //   && Object.keys(v.equipmentType).indexOf('武器') > -1
+      //   && v.jobLimit.indexOf(job) > -1
+      //   )
+
+      weapons.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          return 0;
+      })
+    return weapons
+    },
+    filteredUpgrade(equipment_x) {
+      var res = this.equipmentResults
+      for (var key in res) {
+        if (key == equipment_x) {    
+          for(var i in res[key]) {
+            if(i == "StrengthenID"){
+              var k = this.upgrade.filter(v => v.strengthenId != null && v.level != null && v.strengthenId === res[key][i])
+              return k
+            }
+          }
+        }
+      }
     },
     filteredRefine(equipment_x) {
       var res = this.equipmentResults
@@ -297,9 +298,9 @@ new Vue({
         if (key == equipment_x) {    
           for(var i in res[key]) {
             if(i == "RefineID"){
-              var k = this.refine.filter(v => v.refineId != null && v.refineId === res[key][i] && v.refine_lv != null)
+              var k = this.refine.filter(v => v.refineId != null && v.refineValue != null && v.refineId === res[key][i])
               k.forEach(z => {
-                z.refine_lv = "+"+ (z.refine_lv.indexOf("+") == 0 ? z.refine_lv.substr(1) : z.refine_lv);
+                z.refine_lv = "+" + (String(z.refine_lv).indexOf("+") == 0 ? String(z.refine_lv).substr(1) : z.refine_lv);
               })
               return k
             }
@@ -308,370 +309,239 @@ new Vue({
       }
     },
     filteredTalisman() {
-      return this.weapons.filter(v => v.slotList != null && v.slotList.indexOf('护符') > -1)
-    },
+      var weapons = this.weapons.filter(v => v.slotList != null && v.name != null && v.slotList.indexOf('护符') > -1)
+      weapons.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          return 0;
+      })
+   
+      return weapons;
+     },
     filteredAccessory() {
-      return this.weapons.filter(v => v.slotList != null && v.slotList.indexOf('饰品') > -1)
+      var weapons = this.weapons.filter(v => v.slotList != null && v.name != null && v.slotList.indexOf('饰品') > -1)
+      
+      weapons.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+          return 0;
+      })
+   
+      return weapons;
     },
     filteredCards(attr) {
-      return this.cards.filter(v => v.itemsubtype.match(attr))
+      return this.cards.filter(v => v.itemname != null && v.itemSubType != null && v.itemSubType.match(attr))
     },
-    filteredEnchant(attr) {
-      // return this.enchants.filter(v => v.parts.match(attr))
-      const k = this.enchants.filter(v => v.parts.match(attr))
-      let tempArray = [];
-      for (let item of k) {
-        (tempItem => {
-          if (!(tempItem.length > 0 && tempItem.find(x => x.attrName === item.attrName))) tempArray.push(item);
-        })(tempArray.filter(x => x.attrName === item.attrName))
+    filteredEnchant(equipment_x) {
+      var res = this.equipmentResults
+      var parts
+      for (var key in res) {
+        if (key == equipment_x) {
+          if(this.equipmentResults[key] !== null) {
+            parts = this.equipmentResults[key].parts
+
+            const k = this.enchants.filter(v => v.parts.match(parts))
+            let tempArray = [];
+            for (let item of k) {
+              (tempItem => {
+                if (!(tempItem.length > 0 && tempItem.find(x => x.text === item.text))) tempArray.push(item);
+              })(tempArray.filter(x => x.text === item.text))
+            }
+            return tempArray;
+
+          }else{
+            return null
+          }
+        }
       }
-      return tempArray;
+
+      // const k = this.enchants.filter(v => v.parts.match(attr))
+      // let tempArray = [];
+      // for (let item of k) {
+      //   (tempItem => {
+      //     if (!(tempItem.length > 0 && tempItem.find(x => x.text === item.text))) tempArray.push(item);
+      //   })(tempArray.filter(x => x.text === item.text))
+      // }
+      // return tempArray;
     },
-    filteredEnchantLevel(attr, enchant) {
+    filteredEnchantLevel(enchant_x) {
       // return this.enchants.filter(v => v.parts.match(attr))
-      const k = this.enchants.filter(v => v.parts.match(attr) && v.attrName.match(enchant))
-      let tempArray = [];
-      for (let item of k) {
-        (tempItem => {
-          if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
-        })(tempArray.filter(x => x.attrValue === item.attrValue))
+
+      var res = this.enchantResults
+      var selected
+      var enchant
+      var parts
+      for (var key in res) {
+        if (key == enchant_x) {
+          if(this.enchantResults[key][0] !== null) {
+            selected = this.enchantResults[key][0].location
+            enchant = this.enchantResults[key][0].attrName
+            parts = this.enchantResults[key][0].parts
+
+            const k = this.enchants.filter(v => v.parts.match(parts) && v.attrName.match(enchant) && v.location.match(selected))
+            let tempArray = [];
+            for (let item of k) {
+              (tempItem => {
+                if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
+              })(tempArray.filter(x => x.attrValue === item.attrValue))
+            }
+            return tempArray;
+
+          }else{
+            return null
+          }
+          // if(this.enchantResults[key][2] !== null) {
+          //   // selected = this.enchantResults[key][2].split(" - ")[0]
+          //   // enchant = this.enchantResults[key][2].split(" - ")[1]
+          //   selected = this.enchantResults[key].location
+          //   enchant = this.enchantResults[key].attrName
+          // }
+        }
       }
-      return tempArray;
+      // const k = this.enchants.filter(v => v.parts.match(attr) && v.attrName.match(enchant) && v.location.match(selected))
+      // let tempArray = [];
+      // for (let item of k) {
+      //   (tempItem => {
+      //     if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
+      //   })(tempArray.filter(x => x.attrValue === item.attrValue))
+      // }
+      // return tempArray;
+    },
+    filteredBaseLevel(val) {
+      return this.growth.filter(v => v.basicJob != null && v.basicJob.match(val))
     },
     common(value, M, B) {
       let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
     },
-    test_p_atk(event, eq) {
-      // let results = this.equipmentResults
-      // let sum = 0
-      // for(let key in results) {
-      //   if(results[key] != null){ 
-      //     // key = eq_1
-      //     // results[key] = eq_1.result
-      //     // results[key]["物理攻擊"] = eq_1.result.物理攻擊
-      //     let x = results[key]
-      //     for(let t in x) {
-      //       if(t == "物理攻擊"){
-      //         sum += parseInt(x[t])
-      //       }
-      //     }
-      //   }
-      // }
-      // console.log(sum)
+    awaken(v) {
+      if(v == 0) { return 1 }
+      if(v == 1) { return 1 }
+      if(v == 2) { return this.upgradeAwakening }
+      if(v == 3) { return this.refineAwakening }
+      if(v == 4) { return this.enchantAwakening }
 
-      // console.log(str)
-      // if(str!= null){
-      //   let res = str.split(",")
-      //   var res1 = res.filter(v => v.length > 0 && v.indexOf("+") > -1).map(function(x){
-      //     var xres = x.split("+");
-      //     var xKey = xres[0];
-      //     var xValue = xres[1];
-      //     tempArray = ({eq_id: eq, effectName : xKey, effectValue : xValue}) 
-      //       //this.stats.p_atk.withEq = xValue
-      //       //Vue.set(this.stats.p_atk, 'withEq', xValue)
-      //  });
-      // //  return Vue.set(this,'eq_stats',tempArray)
-      // if(this.eq_stats.length == 0){
-      //   this.eq_stats.push(tempArray)
-      //   console.log(tempArray)
-      // }else{
-      //   this.eq_stats.forEach((element, index) => {
-      //     console.log(element)
-
-      //     // this.eq_stats.push(tempArray)
-      //     // console.log(element.eq_id, index)
-      //      if(element.eq_id === tempArray.eq_id){
-      //        console.log(index)
-      //       this.eq_stats.splice(index, 1)
-      //      }
-  
-      //    });
-      //    this.eq_stats.push(tempArray)
-
-      // }
-
-      // //  return Vue.set(this,'eq_stats',tempArray)
-      // // return this.eq_stats.push(tempArray)
-
-      // }
     },
-    edit_file_weapon() {
-      let uu = []
-      this.weapons.forEach((element, index) => {
-        let temp = {}
-        let str = element.effectbase
+    searchAttr(cn, en, method) {
+      let res = 0
+      // [0] eq = all number // done
+      // [1] card = number + % // done
+      // [2] upgrade = all number // done
+      // [3] refine = all % // done
+      // [4] enchant = number + % // done
 
-        if(str.length > 0) {
-          let res = str.split(",")
-          res.forEach(element => {
-            if(element.length > 0){
-              let xres = element.split("+")
-              var xKe1 = xres[0];
-              var xValue = xres[1];
-              //temp.push(`${xKe1}: ${xValue}`)
-              temp[xKe1] = xValue
-            }
-          });
-          temp["itemname"] = element.itemname
-
-          element.effectbase = temp
-        }
-        uu.push(element)
-      });
-      console.log(uu)
-      return uu
-    },
-    edit_file_card() {
-      let uu = []
-      this.cards.forEach((element, index) => {
-        let temp = {}
-        let str = element.effect
-
-        if(str.length > 0) {
-          let res = str.split(",")
-          res.forEach(element => {
-            if(element.length > 0){
-              let xres = element.split("+")
-              var xKe1 = xres[0];
-              var xValue = xres[1];
-              //temp.push(`${xKe1}: ${xValue}`)
-              temp[xKe1] = xValue
-            }
-          });
-          element.effect = temp
-        }
-        uu.push(element)
-      });
-      console.log(uu)
-      return uu
-    },
-    testabc() {
-      const uu = [
-        'baseLevelLimit', 'breakReturnItemNum', 'InheritZeny', 'itemID', 'itemNum', 
-        "breakReturnItemID", "propID", "propNum", "zeny", "basicRate", "strengthenId", "successRate"
-      ]
-
-      // this.kkk.forEach(element => {
-      //   uu.forEach(v => delete element[v])
-      // });
-
-      
-
-      for(let i in this.kkk){
-        // console.log(this.kkk[i], 'end')
-        // i = [1], [2], [3]
-        let propNum = {}
-        let propID = {}
-        let arr = {}
-        
-
-
-        if(this.kkk[i].propNum != null) {
-          this.kkk[i].propNum.forEach((element, index) => {
-            propNum[index]=element
-          });
-        }
-
-        if(this.kkk[i].propID != null) {
-          this.kkk[i].propID.forEach((element, index) => {
-            switch(element) {
-              case 1:
-                element = "力量"
-                break;
-              case 2:
-                element = "敏捷"
-                break;
-              case 3:
-                element = "体质"
-                break;
-              case 4:
-                element = "智力"
-                break;
-              case 5:
-                element = "灵巧"
-                break;
-              case 6:
-                element = "幸运"
-                break;
-              case 10:
-                element = "物理攻击"
-                break;
-              case 11:
-                element = "魔法攻击"
-                break;
-              case 12:
-                element = "物防穿透"
-                break;
-              case 13:
-                element = "魔防穿透"
-                break;
-              case 14:
-                element = "攻速"
-                break;
-              case 15:
-                element = "最终攻速"
-                break;
-              case 16:
-                element = "急速"
-                break;
-              case 17:
-                element = "最终急速"
-                break;
-              case 18:
-                element = "命中"
-                break;
-              case 19:
-                element = "最终伤害加深"
-                break;
-              case 20:
-                element = "最终暴击"
-                break;
-              case 21:
-                element = "暴击"
-                break;
-              case 22:
-                element = "暴伤附加"
-                break;
-              case 23:
-                element = "物理防御"
-                break;
-              case 24:
-                element = "魔法防御"
-                break;
-              case 25:
-                element = "最终闪避"
-                break;
-              case 26:
-                element = "闪避"
-                break;
-              case 28:
-                element = "最终伤害减免"
-                break;
-              case 31:
-                element = "防暴"
-                break;
-              case 32:
-                element = "最大HP"
-                break;
-              case 33:
-                element = "最大SP"
-                break;
-              case 301:
-                element = "物伤附加"
-                break;
-              case 302:
-                element = "魔伤附加"
-                break;
-              case 303:
-                element = "物伤减免"
-                break;
-              case 304:
-                element = "魔伤减免"
-                break;
-              case 305:
-                element = "魔法攻击"
-                break;
-              case 306:
-                element = "物防穿透"
-                break;
-              case 320:
-                element = "PVP物伤减免"
-                break;
-              case 321:
-                element = "PVP魔伤减免"
-                break;
-              case 322:
-                element = "PVP最终物伤减免"
-                break;
-              case 323:
-                element = "PVP最终魔伤减免"
-                break;
-              case 324:
-                element = "PVP负面状态减免"
-                break;
-              case 325:
-                element = "PVP负面状态抵抗"
-                break;
-            }
-            propID[index] = element
-
-            arr[propID[index]] = propNum[index]
-            // this.kkk[i].effect = arr
-            if(this.kkk[i].id){
-              if(propID[1]) {
-                this.kkk[i].name = `Lv${this.kkk[i].level}: ${propID[0]} +${propNum[0]}, ${propID[1]} +${propNum[1]}`
-              }else{
-                this.kkk[i].name = `Lv${this.kkk[i].level}: ${propID[0]} +${propNum[0]}`
+      let all = [this.equipmentResults, this.cardResults, this.upgradeResults, this.refineResults, this.enchantResults]
+      for(let i in all) {
+        for(let x in all[i]) {
+          if(i == 4) { // enchant
+            if(all[i][x][0] !== null && all[i][x][1] !== null && (all[i][x][0].attrName == cn || all[i][x][0].attrName == en)) {
+              let value = parseFloat(all[i][x][1])
+              if(method == 'number' && value > 1) {
+                res += value * this.awaken(i)
+                // console.log('i==4 > 1', res)
+              }
+              if(method == 'percentage' && value < 1) {
+                res += value * this.awaken(i)
+                // console.log('i==4 < 1', res)
               }
             }
-
-            // console.log('y')
-          });
-          if(this.kkk[i].id){
-            this.kkk[i].effect = arr
           }
-          // console.log('x')
-        }
 
-        if(!this.kkk[i].hasOwnProperty("propID") || !this.kkk[i].hasOwnProperty("level")){
-          delete this.kkk[i]
-        }
-
-        for(let m in this.kkk[i]) {
-          uu.forEach((element, index) => {
-            if( m == element){
-              delete this.kkk[i][element]              
+          if(i == 3) { // refine
+            for(let z in all[i][x]) {
+              if(z == cn || z == en) {
+                let value = parseFloat(all[i][x][z])
+                if(value !== null) {
+                  // if(method == 'number' && value > 1) {
+                  //   res += value * this.awaken(i)
+                  // }
+                  if(method == 'percentage' && value > 0) {
+                    res += value * this.awaken(i)
+                    // console.log('i==3', res)
+                  }
+                }
+              }              
             }
-          });
-          //console.log(this.kkk[i].effect)
+          }
+
+          if(i == 0 || i == 1 || i == 2) { // equi, upgrade, card
+            for(let z in all[i][x]) {
+              if(z == cn || z == en) {
+                let value = parseFloat(all[i][x][z])
+                if(value !== null) {
+                  if(method == 'number' && value > 1) {
+                    res += value * this.awaken(i)
+                    // console.log('i==012 > 1', res)
+                  }
+                  if(method == 'percentage' && value < 1) {
+                    res += value * this.awaken(i)
+                    // console.log('i==012 < 1', res)
+                  }
+                }
+              }              
+            }
+          }
 
         }
-
-
-        // arr[propID[0]] = propNum[0]
-        // arr[propID[1]] = propNum[1]
-        
-        //console.log(arr)
-        // uu.forEach(v => {
-        //   console.log(v) // v = each property name
-        //   delete this.kkk[i][v]
-        //   // if(this.kkk[i].propID[0] == 11){
-        //   //   this.kkk[i].propID[0] = "atk"
-        //   // }
-        // })
-
-        // this.kkk[i].propID.forEach(element => { // element = this.kkk[i].propID
-        //   let key = element
-        //   c[key] = 'val'
-        //   switch(this.kkk[i].propID[index]) {
-        //     case 11:
-        //       this.kkk[i].propID[index] = "atk"
-        //       break;
-        //     case 13:
-        //       this.kkk[i].propID[index] = "aspd"
-        //       break;
-        //   }
-
-        //   console.log(this.kkk[i].propNum, "propnum")
-        // });
-
-        // if(this.kkk[i].propID != null) {
-        //   this.kkk[i].propID = c
-        // }
-
-
       }
-      //console.log(this.kkk)
-      return this.kkk
+      // console.log('res', res)
+      return res
     },
-    testest() {
-      for(let x in this.upgrade) {
-        //console.log(x)
-      }
+    p_damage() {
+      let p_atk = parseFloat(this.stats.p_atk.withEq)
+      let p_pen = parseFloat(this.stats.final_p_pen.withEq)
+      let dmg_bonus = parseFloat(this.stats.dmg_bonus.withEq)
+      let final_dmg_bonus = parseFloat(this.stats.final_dmg_bonus.withEq)
+      let total = p_atk * (1 + final_dmg_bonus) * (1 + p_pen) + dmg_bonus
+      return total
+    },
+    p_crit_damage() {
+      let p_atk = parseFloat(this.stats.p_atk.withEq)
+      let p_pen = parseFloat(this.stats.final_p_pen.withEq)
+      let dmg_bonus = parseFloat(this.stats.dmg_bonus.withEq)
+      let final_dmg_bonus = parseFloat(this.stats.final_dmg_bonus.withEq)
+      let crit_bonus = parseFloat(this.stats.crit_bonus.withEq)
+      let total = p_atk * (1 + final_dmg_bonus) * (1 + p_pen) * crit_bonus + dmg_bonus
+      return total
+    },
+    p_dps() {
+      let p_damage = parseFloat(this.p_damage())
+      let final_aspd = this.stats.final_aspd.withEq * 100
+      let total = Math.floor(p_damage * parseFloat((final_aspd + 100) / 180))
+      return total
+    },
+    p_crit_dps() {
+      let p_damage = parseFloat(this.p_damage())
+      let p_crit_damage = parseFloat(this.p_crit_damage())
 
-      console.log(this.upgrade)
-      
+      let final_crit = this.stats.final_crit.withEq
+      let final_aspd = this.stats.final_aspd.withEq * 100
+      let total = Math.floor((p_damage * (1 - final_crit) + (p_crit_damage * final_crit)) * (parseFloat((final_aspd + 100) / 180)))
+      return total
+    },
+    skillCD() {
+      let haste = parseFloat(this.stats.haste.withEq)
+      let final_haste = parseFloat(this.stats.final_haste.withEq) * 100
+      let total = (Math.floor(Number(this.common(haste, 50, 25).toFixed(2))*10)/10) + final_haste * 0.4
+      return total + ' sec'
+    },
+    channeling() {
+      let haste = parseFloat(this.stats.haste.withEq)
+      let final_haste = parseFloat(this.stats.final_haste.withEq) * 100
+      let total = (Math.floor(Number(this.common(haste, 50, 100).toFixed(2))*10)/10) + final_haste * 0.1
+      return total + ' sec'
     }
   },
   watch: {
@@ -681,148 +551,162 @@ new Vue({
     this.requestHandlder();
   },
   computed: {
-    // dex() {
-    //   let dex_withoutEq = Number(this.stats.dex.withoutEq)
-    //   let dex_withEq = Number(this.stats.dex.withEq)
-    //   return dex_withEq
-    // },
-    enchant() {
-      let x = this.enchantResults
-      console.log(x)
+    str() {
+      let str_withoutEq = Number(this.stats.str.withoutEq)     
+      let str_withEq = this.searchAttr('力量', 'str', 'number')
+      let str_multiply = this.searchAttr('力量提升', 'str%', 'percentage')
+      let total = (str_withEq + str_withoutEq) * (1 + str_multiply)
+      this.stats.str.withEq = total
+      return total
+    },
+    luk() {
+      let withoutEq = Number(this.stats.luk.withoutEq)
+      let withEq = this.searchAttr('幸运', 'luk', 'number')
+      let multiply = this.searchAttr('幸运提升', 'luk%', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.luk.withEq = total
+      return total
+    },
+    agi() {
+      let withoutEq = Number(this.stats.agi.withoutEq)
+      let withEq = this.searchAttr('敏捷', 'agi', 'number')
+      let multiply = this.searchAttr('敏捷提升', 'agi%', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.agi.withEq = total
+      return total
+    },
+    dex() {
+      let withoutEq = Number(this.stats.dex.withoutEq)
+      let withEq = this.searchAttr('灵巧', 'dex', 'number')
+      let multiply = this.searchAttr('灵巧提升', 'dex%', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.dex.withEq = total
+      return total
     },
     p_atk() {
       let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
-      let p_atk_withEq = 0
-      let p_atk_multiply = Number(this.stats.p_atk.multiply)
-      let equipmentResults = this.equipmentResults
-      let dex_withoutEq = Number(this.stats.dex.withoutEq)
-      let dex_withEq = 0
+      let p_atk_withEq = this.searchAttr('物理攻击', 'p_atk', 'number')
+      let p_atk_multiply = this.searchAttr('物理攻击', 'p_atk', 'percentage')
 
-      let enchant_p_atk = 0
-      let card_p_atk = 0
-      let enchantResults = this.enchantResults
-      let cardResults = this.cardResults
+      // convert stats to p_atk
+      let dex = this.stats.dex.withEq
+      let luk = this.stats.luk.withEq
+      let str = this.stats.str.withEq
+      let selected = this.selectedClass.name
 
-      // enchant calculation
-      for(let enchant_key in enchantResults) {
-        if(enchantResults[enchant_key][0] === "物理攻击" && enchantResults[enchant_key][1] != null) {
-          if(enchantResults[enchant_key][1].includes("%")) {
-            p_atk_multiply += parseInt(enchantResults[enchant_key][1])
-          }else{
-            enchant_p_atk += parseInt(enchantResults[enchant_key][1])
-          }
-        }
-
-        if(enchantResults[enchant_key][0] === "灵巧" && enchantResults[enchant_key][1] != null) {
-          dex_withEq += parseInt(enchantResults[enchant_key][1])
-        }
-
-      }
-      // console.log(enchant_p_atk, p_atk_multiply)
-      // console.log('end')
+      let dex_to_atk = selected == '弓箭手' ? dex * 4 * (1 + 0.05 * Math.floor(dex / 100)) : 0
+      let luk_to_atk = Math.floor(luk * 0.5)
+      let str_to_atk = selected == '弓箭手' ? Math.floor(str * 0.2) : str * 4 * (1 + 0.05 * Math.floor(str / 100))
       
-      // equipment calculation
-      for(let equipment_key in equipmentResults) {
-        if(equipmentResults[equipment_key] != null){ 
-          // equipment_key = eq_1
-          // equipmentResults[equipment_key] = eq_1.result
-          // equipmentResults[equipment_key]["物理攻擊"] = eq_1.result.物理攻擊
-          let results = equipmentResults[equipment_key]
-          for(let target in results) {
-            if(target == "物理攻击"){
-              p_atk_withEq += parseInt(results[target])
-            }
-          }
+      // baselv reward p_atk
+      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null){
+        let baseReward = this.growth.filter(v => v.level == this.selectedClass.baselv && v.basicJob == this.selectedClass.name)[0]
+        if(baseReward.p_atk) {
+          p_atk_withEq += baseReward.p_atk
         }
       }
 
-      // card calculation
-      for(let card_key in cardResults) {
-        if(cardResults[card_key] != null) {
-          let results = cardResults[card_key]
-          for(let target in results) {
-            if(target === "物理攻击") {
-              if(results[target].includes("%")){
-                p_atk_multiply += parseInt(results[target])
-              }else{
-                card_p_atk += parseInt(results[target])
-              }
-            }
-          }
-        }
-      }
-      
-      let dex = dex_withEq+dex_withoutEq
-      console.log(dex_withEq, dex_withoutEq)
-      let dex_to_atk = dex * 4 * (1 + 0.05 * Math.floor(dex / 100))
-      let p_atk = p_atk_withEq + p_atk_withoutEq + dex_to_atk + enchant_p_atk + card_p_atk
-      console.log("物理攻击:", p_atk , "物理攻击加成:", p_atk_multiply+"%", "附魔物理攻击:", enchant_p_atk, "dex:", dex, "dex转物理攻击:", dex_to_atk, "卡物理攻击:", card_p_atk)
-      this.stats.dex.withEq = dex
-      return p_atk * ( 1 + p_atk_multiply / 100 )
 
-      // if(this.eq_stats != null){
-      //   let x = this.eq_stats.filter(v => v.effectName.match('物理攻擊'))
-      //   if(x[0] != null){
-      //     return p_atk_withoutEq + Number(x[0].effectValue)
-      //   }else{
-      //     return p_atk_withoutEq
-      //   }
-      // }
-      // store to data propety
-      // return Vue.set(this.stats.p_atk, 'withEq', Number(this.stats.p_atk.withoutEq) * 5)
-    },
-    p_pen() {
-      let p_pen_withoutEq = Number(this.stats.p_pen.withoutEq)
-      let p_pen_withEq = Number(this.stats.p_pen.withEq)
-      return p_pen_withoutEq + p_pen_withEq
+      let total = (p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk) * (1 + p_atk_multiply)
+      this.stats.p_atk.withEq = total
+      return total
     },
     aspd() {
-      let aspd_withoutEq = Number(this.stats.aspd.withoutEq)
-      let aspd_withEq = Number(this.stats.aspd.withEq)
-      return aspd_withoutEq + aspd_withEq
-    },
-    crit() {
-      let p_crit_withoutEq = Number(this.stats.crit.withoutEq)
-      let p_crit_withEq = Number(this.stats.crit.withEq)
-      return p_crit_withoutEq + p_crit_withEq
-    },
-    haste() {
-      let haste_withoutEq = Number(this.stats.haste.withoutEq)
-      return haste_withoutEq * 5
+      let withoutEq = Number(this.stats.aspd.withoutEq)
+      let withEq = this.searchAttr('攻速', 'aspd', 'number')
+      let multiply = this.searchAttr('攻速提升', 'aspd%', 'percentage')
+      let agi = this.stats.agi.withEq
+      let agi_to_aspd = Math.floor(agi * 2)
+      let total = (withEq + withoutEq + agi_to_aspd) * (1 + multiply)
+      this.stats.aspd.withEq = total
+      return total
     },
     final_aspd() {
-      let aspd_withoutEq = Number(this.stats.aspd.withoutEq)
-      let aspd_withEq = Number(this.stats.aspd.withEq)
-      let final_aspd_withEq = Number(this.stats.final_aspd.withEq)
-      let value = aspd_withoutEq + aspd_withEq
-      let common = Number(this.common(value, 50, 1).toFixed(2))
-      let total = final_aspd_withEq + common + "%"
+      let withoutEq = Number(this.stats.final_aspd.withoutEq) / 100
+      // let withEq = this.searchAttr('最终攻速', 'final_aspd', 'number')
+      let multiply = this.searchAttr('最终攻速', 'final_aspd', 'percentage')
+      let aspd = Number(this.common(this.stats.aspd.withEq, 50, 1).toFixed(2)) / 100
+      let total = withoutEq + aspd + multiply
+      this.stats.final_aspd.withEq = total
+      return (total * 100) + "%"
+    },    
+    crit() {
+      let withoutEq = Number(this.stats.crit.withoutEq)
+      let withEq = this.searchAttr('暴击', 'crit', 'number')
+      let multiply = this.searchAttr('暴击', 'crit', 'percentage')
+      let luk = this.stats.luk.withEq
+      let luk_to_crit = Math.floor(luk * 2)
+      let total = (withEq + withoutEq + luk_to_crit) * (1 + multiply)
+      this.stats.crit.withEq = total
       return total
     },
-    final_p_crit() {
-      let p_crit_withoutEq = Number(this.stats.crit.withoutEq)
-      let p_crit_withEq = Number(this.stats.crit.withEq)
-      let final_crit_withEq = Number(this.stats.final_crit.withEq)
-      let value = p_crit_withoutEq + p_crit_withEq
-      let common = Number(this.common(value, 25, 5).toFixed(2))
-      let total = final_crit_withEq + common + "%"
-      return total
+    final_crit() {
+      let withoutEq = Number(this.stats.final_crit.withoutEq) / 100
+      // let withEq = this.searchAttr('最终暴击', 'final_crit', 'number')
+      let multiply = this.searchAttr('最终暴击', 'final_crit', 'percentage')
+      let crit = Number(this.common(this.stats.crit.withEq, 25, 5).toFixed(2)) / 100
+      let total = withoutEq + crit + multiply
+      this.stats.final_crit.withEq = total
+      return (total * 100) + "%"
     },
     crit_bonus() {
-      let crit_bonus_withoutEq = Number(this.stats.crit_bonus.withoutEq)
-      let crit_bonus_withEq = Number(this.stats.crit_bonus.withEq)
-      return crit_bonus_withoutEq + crit_bonus_withEq
+      let withoutEq = Number(this.stats.crit_bonus.withoutEq)
+      let withEq = this.searchAttr('暴伤附加', 'crit_bonus', 'number')
+      let multiply = this.searchAttr('暴伤附加', 'crit_bonus', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply) / 100
+      this.stats.crit_bonus.withEq = total
+      return (total * 100) + "%"
+    },
+    haste() {
+      let withoutEq = Number(this.stats.haste.withoutEq)
+      let withEq = this.searchAttr('急速', 'haste', 'number')
+      let multiply = this.searchAttr('急速', 'haste', 'percentage')
+      let dex = this.stats.dex.withEq
+      let dex_to_haste = Math.floor(dex * 2)
+      let total = (withEq + withoutEq + dex_to_haste) * (1 + multiply)
+      this.stats.haste.withEq = total
+      return total
+    },
+    p_pen() {
+      let withoutEq = Number(this.stats.p_pen.withoutEq)
+      let withEq = this.searchAttr('物防穿透', 'p_pen', 'number')
+      let multiply = this.searchAttr('物防穿透', 'p_pen', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.p_pen.withEq = total
+      return total
     },
     final_p_pen() {
-      let p_pen_withoutEq = Number(this.stats.p_pen.withoutEq)
-      let p_pen_withEq = Number(this.stats.p_pen.withEq)
-      let final_p_pen_withEq = Number(this.stats.final_p_pen.withEq)
-      let value = p_pen_withoutEq + p_pen_withEq
-      let common = Number(this.common(value, 25, 5).toFixed(2))
-      let total = final_p_pen_withEq + common + "%"
+      let withoutEq = Number(this.stats.final_p_pen.withoutEq) / 100
+      // let withEq = this.searchAttr('最终物防穿透', 'final_p_pen', 'number')
+      let multiply = this.searchAttr('最终物防穿透', 'final_p_pen', 'percentage')
+      let p_pen = Number(this.common(this.stats.p_pen.withEq, 25, 5).toFixed(2)) / 100
+      let total = withoutEq + p_pen + multiply
+      this.stats.final_p_pen.withEq = total
+      return (total * 100) + "%"
+    },
+    dmg_bonus() {
+      let withoutEq = Number(this.stats.dmg_bonus.withoutEq)
+      let withEq = this.searchAttr('物伤附加', 'dmg_bonus', 'number')
+      let multiply = this.searchAttr('物伤附加', 'dmg_bonus', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.dmg_bonus.withEq = total
       return total
+    },
+    final_dmg_bonus() {
+      let withoutEq = Number(this.stats.final_dmg_bonus.withoutEq) / 100
+      // let withEq = this.searchAttr('最终物伤附加', 'final_dmg_bonus', 'number')
+      let multiply = this.searchAttr('最终物伤附加', 'final_dmg_bonus', 'percentage')
+      let total = withoutEq + multiply
+      this.stats.final_dmg_bonus.withEq = total
+      return (total * 100) + "%"
+    },
+    final_haste() {
+      let withoutEq = Number(this.stats.final_haste.withoutEq) / 100
+      // let withEq = this.searchAttr('最终急速', 'final_haste', 'number')
+      let multiply = this.searchAttr('最终急速', 'final_haste', 'percentage')
+      let total = withoutEq + multiply
+      this.stats.final_haste.withEq = total
+      return (total * 100) + "%"
     },
   },
 })
-
-

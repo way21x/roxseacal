@@ -1,0 +1,2645 @@
+[
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101001,
+        "effect": {
+            "攻速": "60"
+        },
+        "itemname": "绿棉虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101002,
+        "effect": {
+            "魔法攻击": "60"
+        },
+        "itemname": "疯兔卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101003,
+        "effect": {
+            "魔法攻击": "30",
+            "魔防穿透": "30"
+        },
+        "itemname": "吸血蝙蝠卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101004,
+        "effect": {
+            "暴击": "60"
+        },
+        "itemname": "浮勒盗虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10101005,
+        "effect": {
+            "最大HP": "4800"
+        },
+        "itemname": "摇滚蝗虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101006,
+        "effect": {
+            "魔法攻击": "30",
+            "魔伤附加": "30"
+        },
+        "itemname": "小野猪卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101007,
+        "effect": {
+            "最终攻速": "0.4"
+        },
+        "itemname": "狼卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101008,
+        "effect": {
+            "魔伤附加": "60"
+        },
+        "itemname": "曼陀罗魔花卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101009,
+        "effect": {
+            "魔法攻击": "60",
+            "魔防穿透": "60"
+        },
+        "itemname": "刺猬虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101010,
+        "effect": {
+            "物防穿透": "60"
+        },
+        "itemname": "土波利卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101011,
+        "effect": {
+            "魔法攻击": "120"
+        },
+        "itemname": "海葵卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101013,
+        "effect": {
+            "魔法攻击": "60"
+        },
+        "itemname": "漂浮虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101014,
+        "effect": {
+            "物理攻击": "10"
+        },
+        "itemname": "贝壳魔灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101015,
+        "effect": {
+            "物理攻击": "0.03",
+            "最终物伤附加": "0.03"
+        },
+        "itemname": "螃蟹卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101016,
+        "effect": {
+            "物理攻击": "0.06"
+        },
+        "itemname": "水母卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101017,
+        "effect": {
+            "对小体型魔物增伤": "0.1"
+        },
+        "itemname": "狄奥斯卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101019,
+        "effect": {
+            "对昆虫系魔物增伤": "0.125"
+        },
+        "itemname": "弓箭哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101020,
+        "effect": {
+            "对龙族系魔物增伤": "0.125"
+        },
+        "itemname": "喷射哥布灵卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101021,
+        "effect": {
+            "物理攻击": "30",
+            "物伤附加": "30"
+        },
+        "itemname": "蜂兵卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101022,
+        "effect": {
+            "魔法攻击": "60",
+            "魔伤附加": "120"
+        },
+        "itemname": "噬人花卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101023,
+        "effect": {
+            "急速": "60"
+        },
+        "itemname": "大嘴鸟蛋卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101024,
+        "effect": {
+            "物理攻击": "0.03",
+            "最终物防穿透": "0.03"
+        },
+        "itemname": "白蚁卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101025,
+        "effect": {
+            "物理攻击": "60"
+        },
+        "itemname": "红蝙蝠卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10101026,
+        "effect": {
+            "最终攻速": "0.3"
+        },
+        "itemname": "巨石怪卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101027,
+        "effect": {
+            "魔法攻击": "0.03",
+            "最终魔伤附加": "0.03"
+        },
+        "itemname": "沙漠之狼卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101028,
+        "effect": {
+            "最终攻速": "0.3"
+        },
+        "itemname": "蝎子卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101029,
+        "effect": {
+            "对大体型魔物增伤": "0.1"
+        },
+        "itemname": "邪骸战士卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101030,
+        "effect": {
+            "最终魔防穿透": "0.06"
+        },
+        "itemname": "木乃伊卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101031,
+        "effect": {
+            "魔法攻击": "0.03",
+            "最终魔防穿透": "0.03"
+        },
+        "itemname": "邪骸弓箭手卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101032,
+        "effect": {
+            "魔法攻击": "0.06"
+        },
+        "itemname": "米洛斯卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101033,
+        "effect": {
+            "物理攻击": "120"
+        },
+        "itemname": "重金属蝗虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101034,
+        "effect": {
+            "魔伤附加": "240"
+        },
+        "itemname": "毒蛇卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101035,
+        "effect": {
+            "最终急速": "0.03"
+        },
+        "itemname": "黑蛇卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101036,
+        "effect": {
+            "最终暴击": "0.06"
+        },
+        "itemname": "魔锅蛋卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101037,
+        "effect": {
+            "对人形系魔物增伤": "0.125"
+        },
+        "itemname": "兽人女战士卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101038,
+        "effect": {
+            "对恶魔系魔物增伤": "0.125"
+        },
+        "itemname": "邪骸兽人卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101039,
+        "effect": {
+            "对不死系魔物增伤": "0.125"
+        },
+        "itemname": "兹诺克卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101040,
+        "effect": {
+            "物理攻击": "60",
+            "物伤附加": "120"
+        },
+        "itemname": "赤苍蝇卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101041,
+        "effect": {
+            "对动物系魔物增伤": "0.125"
+        },
+        "itemname": "直升机哥布灵卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "武器卡片",
+        "staticId": 10101043,
+        "effect": {
+            "地属性增强": "0.15",
+            "火属性增强": "0.15"
+        },
+        "itemname": "海盗之王卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10101044,
+        "effect": {
+            "最大HP": "0.3"
+        },
+        "itemname": "海神卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "武器卡片",
+        "staticId": 10101046,
+        "effect": {
+            "对大体型魔物增伤": "0.15"
+        },
+        "itemname": "皮里恩卡片【昼】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10101047,
+        "effect": {
+            "最终急速": "0.03"
+        },
+        "itemname": "邪骸士兵卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101048,
+        "effect": {
+            "暴击": "120"
+        },
+        "itemname": "邪骸矿工卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101049,
+        "effect": {
+            "对无形系魔物增伤": "0.125"
+        },
+        "itemname": "毕帝特地龙卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101050,
+        "effect": {
+            "地属性增强": "0.1",
+            "火属性增强": "0.1"
+        },
+        "itemname": "诺可伊卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101051,
+        "effect": {
+            "念属性增强": "0.1",
+            "毒属性增强": "0.1"
+        },
+        "itemname": "青蛇卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101052,
+        "effect": {
+            "智力": "3",
+            "魔防穿透": "0.05"
+        },
+        "itemname": "亡灵巫师卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101053,
+        "effect": {
+            "最终攻速": "0.3"
+        },
+        "itemname": "死灵卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101054,
+        "effect": {},
+        "itemname": "半龙人卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10101055,
+        "effect": {
+            "最大HP": "0.3"
+        },
+        "itemname": "德古拉男爵卡片【昼】"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101056,
+        "effect": {},
+        "itemname": "暗黑祭司卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101057,
+        "effect": {
+            "命中": "-10"
+        },
+        "itemname": "巴风特卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101058,
+        "effect": {
+            "物防穿透": "120"
+        },
+        "itemname": "变异幽浮水母卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10101059,
+        "effect": {
+            "物理防御": "60",
+            "物伤减免": "120"
+        },
+        "itemname": "石斧海盗骷髅卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101060,
+        "effect": {
+            "魔法攻击": "0.06"
+        },
+        "itemname": "工蚁卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101061,
+        "effect": {
+            "诅咒抗性": "0.3"
+        },
+        "itemname": "链锤哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101062,
+        "effect": {
+            "出血抗性": "0.3"
+        },
+        "itemname": "刺锤犬妖卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101063,
+        "effect": {
+            "中毒抗性": "0.3"
+        },
+        "itemname": "刺锤哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101064,
+        "effect": {
+            "铠甲损坏抗性": "0.3"
+        },
+        "itemname": "榔头哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10101065,
+        "effect": {
+            "物理吸血": "0.1"
+        },
+        "itemname": "榔头犬妖卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10101066,
+        "effect": {
+            "可变冷却": "2500"
+        },
+        "itemname": "大斧哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10101067,
+        "effect": {
+            "最大HP": "0.2"
+        },
+        "itemname": "刺刀哥布灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10101068,
+        "effect": {
+            "最终魔防效果": "0.05",
+            "最终魔伤减免": "-0.05"
+        },
+        "itemname": "大斧犬妖卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101069,
+        "effect": {
+            "念属性增强": "0.15",
+            "毒属性增强": "0.15"
+        },
+        "itemname": "龙蝇卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101070,
+        "effect": {
+            "圣属性增强": "0.15",
+            "无属性增强": "0.15"
+        },
+        "itemname": "俄塞里斯卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101071,
+        "effect": {
+            "最终攻速": "0.6"
+        },
+        "itemname": "幽灵波利卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101072,
+        "effect": {
+            "最终暴击": "0.12"
+        },
+        "itemname": "蜂后卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101073,
+        "effect": {
+            "对中体型魔物增伤": "0.15"
+        },
+        "itemname": "魔鬼大乌贼卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101074,
+        "effect": {
+            "对小体型魔物增伤": "0.15"
+        },
+        "itemname": "虎王卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101075,
+        "effect": {
+            "最终攻速": "0.75"
+        },
+        "itemname": "海神卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101076,
+        "effect": {
+            "最终急速": "0.075"
+        },
+        "itemname": "月夜猫卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101077,
+        "effect": {
+            "最终暴击": "0.15"
+        },
+        "itemname": "德古拉男爵卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101078,
+        "effect": {
+            "物理攻击": "0.075",
+            "最终物防穿透": "0.075"
+        },
+        "itemname": "蛙王卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101079,
+        "effect": {
+            "物理攻击": "0.075",
+            "最终物伤附加": "0.075"
+        },
+        "itemname": "恶魔波利卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101080,
+        "effect": {
+            "物理攻击": "0.15"
+        },
+        "itemname": "天使波利卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101081,
+        "effect": {
+            "魔法攻击": "0.075",
+            "最终魔伤附加": "0.075"
+        },
+        "itemname": "法老王卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101082,
+        "effect": {
+            "魔法攻击": "0.15"
+        },
+        "itemname": "兽人酋长卡片【夜】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101083,
+        "effect": {
+            "对植物系魔物增伤": "0.125"
+        },
+        "itemname": "腐尸战俘卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101084,
+        "effect": {
+            "最终攻速": "0.5"
+        },
+        "itemname": "史汀卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101085,
+        "effect": {
+            "最终急速": "0.05"
+        },
+        "itemname": "深渊骑士卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101086,
+        "effect": {
+            "最终暴击": "0.1"
+        },
+        "itemname": "幽灵弓箭手卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101087,
+        "effect": {
+            "PVP最终物伤附加": "0.045",
+            "PVP物伤附加": "270"
+        },
+        "itemname": "古埃及王卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101088,
+        "effect": {
+            "PVP最终魔伤附加": "0.045",
+            "PVP魔伤附加": "270"
+        },
+        "itemname": "古埃及王卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101089,
+        "effect": {
+            "最终物防穿透": "0.09",
+            "最终物伤附加": "0.09"
+        },
+        "itemname": "古埃及王卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101090,
+        "effect": {
+            "最终魔防穿透": "0.09",
+            "最终魔伤附加": "0.09"
+        },
+        "itemname": "死灵卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10101091,
+        "effect": {
+            "暴伤附加": "0.18",
+            "最终物伤附加": "0.09"
+        },
+        "itemname": "流浪之狼卡片【夜】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10102001,
+        "effect": {
+            "物理攻击": "60"
+        },
+        "itemname": "波利卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10102002,
+        "effect": {
+            "最大HP": "1200"
+        },
+        "itemname": "虫蛹卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102003,
+        "effect": {
+            "最大HP": "1200"
+        },
+        "itemname": "小鸡卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10102004,
+        "effect": {
+            "魔伤减免": "60"
+        },
+        "itemname": "盗虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102005,
+        "effect": {
+            "物理防御": "120"
+        },
+        "itemname": "罗达蛙卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10102006,
+        "effect": {
+            "最终物防效果": "0.03",
+            "最终物伤减免": "-0.03"
+        },
+        "itemname": "卡那多斯卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102007,
+        "effect": {
+            "最终魔防效果": "0.06"
+        },
+        "itemname": "异变鱼卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102008,
+        "effect": {
+            "受火属性魔物减伤": "-0.1",
+            "受念属性魔物减伤": "-0.1",
+            "受地属性魔物减伤": "-0.1"
+        },
+        "itemname": "马克卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102009,
+        "effect": {
+            "最终物防效果": "0.06"
+        },
+        "itemname": "艾吉欧蜈蚣卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10102010,
+        "effect": {
+            "魔法防御": "60",
+            "魔伤减免": "120"
+        },
+        "itemname": "大嘴鸟卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10102011,
+        "effect": {
+            "魔法防御": "30",
+            "魔伤减免": "30"
+        },
+        "itemname": "沙漠幼狼卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102013,
+        "effect": {
+            "魔法防御": "60"
+        },
+        "itemname": "绿苍蝇卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102014,
+        "effect": {
+            "魔法防御": "120"
+        },
+        "itemname": "野猪卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102015,
+        "effect": {
+            "受水属性魔物减伤": "-0.1",
+            "受不死属性魔物减伤": "-0.1",
+            "受毒属性魔物减伤": "-0.1"
+        },
+        "itemname": "土人卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10102016,
+        "effect": {
+            "物伤附加": "60"
+        },
+        "itemname": "蝗虫卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102017,
+        "effect": {
+            "受火属性魔物减伤": "-0.15",
+            "受念属性魔物减伤": "-0.15",
+            "受地属性魔物减伤": "-0.15"
+        },
+        "itemname": "幽灵波利卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102018,
+        "effect": {
+            "最终物防效果": "0.15"
+        },
+        "itemname": "天使波利卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102019,
+        "effect": {
+            "物理防御": "60"
+        },
+        "itemname": "蛋壳小鸡卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102020,
+        "effect": {
+            "最大HP": "0.12"
+        },
+        "itemname": "雪熊卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102021,
+        "effect": {
+            "受无属性魔物减伤": "-0.1",
+            "受暗属性魔物减伤": "-0.1",
+            "受风属性魔物减伤": "-0.1"
+        },
+        "itemname": "帕莎纳卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102022,
+        "effect": {
+            "最大HP": "1",
+            "物理防御": "-0.5",
+            "魔法防御": "-0.5"
+        },
+        "itemname": "塔奥群卡卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102023,
+        "effect": {},
+        "itemname": "凯美拉卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102024,
+        "effect": {
+            "最终魔防效果": "0.15"
+        },
+        "itemname": "兽人酋长卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10102025,
+        "effect": {
+            "急速": "120"
+        },
+        "itemname": "短剑海盗骷髅卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102026,
+        "effect": {
+            "受水属性魔物减伤": "-0.15",
+            "受不死属性魔物减伤": "-0.15",
+            "受毒属性魔物减伤": "-0.15"
+        },
+        "itemname": "皮里恩卡片【夜】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102027,
+        "effect": {
+            "最终物防效果": "0.1"
+        },
+        "itemname": "瑞比欧卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10102028,
+        "effect": {
+            "PVP魔伤减免": "270",
+            "PVP物伤减免": "270"
+        },
+        "itemname": "暗黑祭司卡片【夜】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103001,
+        "effect": {
+            "魔伤减免": "240"
+        },
+        "itemname": "白幽灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103002,
+        "effect": {
+            "最终魔伤减免": "-0.06"
+        },
+        "itemname": "乌贼卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103003,
+        "effect": {
+            "物伤减免": "60"
+        },
+        "itemname": "秃鹰卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103004,
+        "effect": {
+            "最大HP": "0.12"
+        },
+        "itemname": "蚯蚓卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10103005,
+        "effect": {
+            "最终魔防效果": "0.03",
+            "最终魔伤减免": "-0.03"
+        },
+        "itemname": "蛇女伊丝卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103006,
+        "effect": {
+            "最终物伤减免": "-0.06"
+        },
+        "itemname": "伞蜥卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103007,
+        "effect": {
+            "受恶魔系魔物减伤": "-0.1",
+            "受鱼贝系魔物减伤": "-0.1",
+            "受龙族系魔物减伤": "-0.1"
+        },
+        "itemname": "九尾狐卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103008,
+        "effect": {
+            "受无形系魔物减伤": "-0.1",
+            "受人形系魔物减伤": "-0.1",
+            "受植物系魔物减伤": "-0.1"
+        },
+        "itemname": "兽人腐尸卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103009,
+        "effect": {
+            "受昆虫系魔物减伤": "-0.1",
+            "受不死系魔物减伤": "-0.1",
+            "受动物系魔物减伤": "-0.1"
+        },
+        "itemname": "南瓜先生卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103010,
+        "effect": {
+            "最大HP": "0.2"
+        },
+        "itemname": "傀儡娃娃卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10103011,
+        "effect": {
+            "最终物伤减免": "-0.15"
+        },
+        "itemname": "蛙王卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10103012,
+        "effect": {
+            "受无形系魔物减伤": "-0.15",
+            "受人形系魔物减伤": "-0.15",
+            "受植物系魔物减伤": "-0.15"
+        },
+        "itemname": "波利之王卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10103013,
+        "effect": {
+            "受无属性魔物减伤": "-0.15",
+            "受暗属性魔物减伤": "-0.15",
+            "受风属性魔物减伤": "-0.15"
+        },
+        "itemname": "龙蝇卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103014,
+        "effect": {
+            "暴伤附加": "0.05"
+        },
+        "itemname": "流浪之狼卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103015,
+        "effect": {
+            "受恶魔系魔物减伤": "-0.15",
+            "受鱼贝系魔物减伤": "-0.15",
+            "受龙族系魔物减伤": "-0.15"
+        },
+        "itemname": "蓝疯兔卡片【昼】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10103016,
+        "effect": {
+            "沉默抗性": "0.3"
+        },
+        "itemname": "兽人婴儿卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10103017,
+        "effect": {
+            "最终魔伤减免": "-0.15"
+        },
+        "itemname": "恶魔波利卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103018,
+        "effect": {
+            "物伤减免": "240"
+        },
+        "itemname": "麦斯特卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103019,
+        "effect": {
+            "最终魔伤减免": "-0.1"
+        },
+        "itemname": "小巴风特卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10103020,
+        "effect": {
+            "最终物伤减免": "-0.1"
+        },
+        "itemname": "巨大白幽灵卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10103021,
+        "effect": {
+            "受昆虫系魔物减伤": "-0.15",
+            "受不死系魔物减伤": "-0.15",
+            "受动物系魔物减伤": "-0.15"
+        },
+        "itemname": "魔鬼大乌贼卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "披风卡片",
+        "staticId": 10103022,
+        "effect": {
+            "PVP最终魔伤减免": "0.09"
+        },
+        "itemname": "黑暗之王卡片【冥】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104001,
+        "effect": {
+            "物理防御": "30",
+            "物伤减免": "30"
+        },
+        "itemname": "玛勒盗虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104002,
+        "effect": {
+            "最大HP": "1200"
+        },
+        "itemname": "苍蝇卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104003,
+        "effect": {
+            "HP恢复": "0.2",
+            "SP回复": "0.2"
+        },
+        "itemname": "人鱼士兵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104004,
+        "effect": {
+            "最大HP": "0.12"
+        },
+        "itemname": "黑狐卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10104005,
+        "effect": {
+            "最终魔伤附加": "0.06"
+        },
+        "itemname": "毕莱特卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104006,
+        "effect": {
+            "最大HP": "4800"
+        },
+        "itemname": "腐尸卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104007,
+        "effect": {
+            "受中体型魔物减伤": "-0.1"
+        },
+        "itemname": "转转蛋卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104008,
+        "effect": {
+            "受大体型魔物减伤": "-0.1"
+        },
+        "itemname": "鬼女卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104009,
+        "effect": {
+            "最终物防效果": "0.05",
+            "最终物伤减免": "-0.05"
+        },
+        "itemname": "幽灵剑士卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104010,
+        "effect": {
+            "受小体型魔物减伤": "-0.15",
+            "最大HP": "-0.25"
+        },
+        "itemname": "虎王卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104011,
+        "effect": {
+            "最大HP": "0.3",
+            "移动速度": "0.25"
+        },
+        "itemname": "月夜猫卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104012,
+        "effect": {
+            "魔法攻击": "0.1",
+            "最大SP": "-0.5",
+            "对天使系魔物增伤": "0.3"
+        },
+        "itemname": "堕落的大神官卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104013,
+        "effect": {},
+        "itemname": "古埃及王卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104014,
+        "effect": {},
+        "itemname": "黑暗之王卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104015,
+        "effect": {
+            "魔法防御": "30"
+        },
+        "itemname": "狂暴月夜猫卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104016,
+        "effect": {
+            "受小体型魔物减伤": "-0.1"
+        },
+        "itemname": "邪骸战士长卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104017,
+        "effect": {
+            "受大体型魔物减伤": "-0.15"
+        },
+        "itemname": "幽灵波利卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104018,
+        "effect": {
+            "受中体型魔物减伤": "-0.15"
+        },
+        "itemname": "蜂后卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104019,
+        "effect": {
+            "最终物防效果": "0.075",
+            "最终物伤减免": "-0.075"
+        },
+        "itemname": "大脚龙虾卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104020,
+        "effect": {
+            "最终魔防效果": "0.075",
+            "最终魔伤减免": "-0.075"
+        },
+        "itemname": "兽人英雄卡片【夜】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104021,
+        "effect": {
+            "PVP魔伤减免": "360"
+        },
+        "itemname": "邪恶使者卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10104022,
+        "effect": {
+            "PVP最终物伤减免": "0.09"
+        },
+        "itemname": "黑暗之王卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105001,
+        "effect": {
+            "魔防穿透": "60"
+        },
+        "itemname": "树精卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105002,
+        "effect": {
+            "魔法攻击": "120"
+        },
+        "itemname": "松鼠卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105003,
+        "effect": {
+            "物理攻击": "120"
+        },
+        "itemname": "瓢虫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105004,
+        "effect": {
+            "物伤附加": "240"
+        },
+        "itemname": "基尔瑟卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105005,
+        "effect": {
+            "可变吟唱": "625"
+        },
+        "itemname": "绿腐尸卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105006,
+        "effect": {
+            "黑暗抗性": "0.3"
+        },
+        "itemname": "长老树精卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105007,
+        "effect": {
+            "接受治疗加成": "0.1"
+        },
+        "itemname": "小恶魔卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105008,
+        "effect": {
+            "每5秒恢复HP": "0.05"
+        },
+        "itemname": "梦魇卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10105009,
+        "effect": {
+            "体质": "3"
+        },
+        "itemname": "蓝鼠卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105010,
+        "effect": {
+            "最终魔防穿透": "0.12"
+        },
+        "itemname": "蜂后卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105011,
+        "effect": {
+            "治疗加成": "0.15",
+            "眩晕抗性": "1"
+        },
+        "itemname": "兽人英雄卡片【昼】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105012,
+        "effect": {
+            "最终物伤附加": "0.06"
+        },
+        "itemname": "马尔杜克卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105013,
+        "effect": {
+            "魔防穿透": "120"
+        },
+        "itemname": "土拨鼠卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105014,
+        "effect": {
+            "每5秒恢复HP": "0.075",
+            "sp消耗减少": "0.3"
+        },
+        "itemname": "法老王卡片【昼】"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105015,
+        "effect": {
+            "最大HP": "-0.1",
+            "最大SP": "-0.1",
+            "冷却缩减": "-0.3",
+            "吟唱减少": "0.2"
+        },
+        "itemname": "迷幻之王卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105016,
+        "effect": {},
+        "itemname": "狂暴蚁后卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105017,
+        "effect": {
+            "负面状态减免": "0.1875"
+        },
+        "itemname": "大脚龙虾卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105018,
+        "effect": {
+            "物理攻击": "0.12"
+        },
+        "itemname": "蓝疯兔卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105019,
+        "effect": {
+            "魔法攻击": "0.12"
+        },
+        "itemname": "龙蝇卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105020,
+        "effect": {
+            "最终物防穿透": "0.12"
+        },
+        "itemname": "波利之王卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105021,
+        "effect": {
+            "最终物伤附加": "0.12"
+        },
+        "itemname": "皮里恩卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105022,
+        "effect": {
+            "最终魔伤附加": "0.12"
+        },
+        "itemname": "虎王卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105023,
+        "effect": {
+            "负面状态抵抗": "0.1875"
+        },
+        "itemname": "恶魔波利卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105024,
+        "effect": {
+            "接受治疗加成": "0.15"
+        },
+        "itemname": "蚁后卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105025,
+        "effect": {
+            "每5秒恢复SP": "0.075"
+        },
+        "itemname": "兽人酋长卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105026,
+        "effect": {
+            "PVP最终物伤附加": "0.075"
+        },
+        "itemname": "年兽卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105027,
+        "effect": {
+            "PVP最终魔伤附加": "0.075"
+        },
+        "itemname": "年兽卡片【夜】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105028,
+        "effect": {
+            "治疗加成": "0.1"
+        },
+        "itemname": "卡拉特小丑卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105029,
+        "effect": {
+            "每5秒恢复SP": "0.05"
+        },
+        "itemname": "米诺斯卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "鞋子卡片",
+        "staticId": 10105030,
+        "effect": {
+            "PVP物伤减免": "360"
+        },
+        "itemname": "邪骸战俘卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105031,
+        "effect": {
+            "PVP最终物伤附加": "0.09"
+        },
+        "itemname": "暗黑祭司卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105032,
+        "effect": {
+            "PVP最终魔伤附加": "0.09"
+        },
+        "itemname": "死灵卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "头饰卡片",
+        "staticId": 10105033,
+        "effect": {
+            "PVP负面状态减免": "0.09"
+        },
+        "itemname": "暗黑祭司卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106001,
+        "effect": {
+            "急速": "60"
+        },
+        "itemname": "白鼠卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106002,
+        "effect": {
+            "物防穿透": "60"
+        },
+        "itemname": "魔菇卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106003,
+        "effect": {
+            "物防穿透": "120"
+        },
+        "itemname": "溜溜猴卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106004,
+        "effect": {
+            "魔防穿透": "60"
+        },
+        "itemname": "波波利卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106005,
+        "effect": {
+            "攻速": "120"
+        },
+        "itemname": "狸猫卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106006,
+        "effect": {
+            "物伤附加": "60"
+        },
+        "itemname": "克瑞米卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106007,
+        "effect": {
+            "急速": "120"
+        },
+        "itemname": "库克雷卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106008,
+        "effect": {
+            "魔伤附加": "60"
+        },
+        "itemname": "毒魔菇卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106009,
+        "effect": {
+            "魔防穿透": "120"
+        },
+        "itemname": "邪骸海盗卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106010,
+        "effect": {
+            "最终魔防穿透": "0.06"
+        },
+        "itemname": "剑鱼卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106011,
+        "effect": {
+            "最终物伤附加": "0.06"
+        },
+        "itemname": "气泡虫卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106012,
+        "effect": {
+            "眩晕抗性": "0.3"
+        },
+        "itemname": "人鱼卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "披风卡片",
+        "staticId": 10106013,
+        "effect": {
+            "最大HP": "4800"
+        },
+        "itemname": "猎蝇卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106014,
+        "effect": {
+            "魔伤附加": "240"
+        },
+        "itemname": "螳螂卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106015,
+        "effect": {
+            "物伤附加": "240"
+        },
+        "itemname": "摩卡卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106016,
+        "effect": {
+            "石化抗性": "0.3"
+        },
+        "itemname": "将军魔碑卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106018,
+        "effect": {
+            "睡眠抗性": "0.3"
+        },
+        "itemname": "鬼火卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106019,
+        "effect": {
+            "冰冻抗性": "0.3"
+        },
+        "itemname": "森灵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106020,
+        "effect": {
+            "定身抗性": "0.3"
+        },
+        "itemname": "妖道卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106021,
+        "effect": {
+            "魔法吸血": "0.1"
+        },
+        "itemname": "兽人弓箭手卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10106024,
+        "effect": {
+            "对鱼贝系魔物增伤": "0.125"
+        },
+        "itemname": "犬妖弓箭手卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106026,
+        "effect": {
+            "最终物防穿透": "0.12"
+        },
+        "itemname": "俄塞里斯卡片【昼】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106027,
+        "effect": {
+            "最终魔伤附加": "0.06"
+        },
+        "itemname": "杰洛米卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106028,
+        "effect": {
+            "最终物防穿透": "0.06"
+        },
+        "itemname": "黑蚁卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106029,
+        "effect": {
+            "吟唱减少": "0.3"
+        },
+        "itemname": "贝雷杰卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106030,
+        "effect": {},
+        "itemname": "鹗袅首领卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106031,
+        "effect": {},
+        "itemname": "鹗袅男爵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10106032,
+        "effect": {
+            "最终物防穿透": "0.06"
+        },
+        "itemname": "兵蚁卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106033,
+        "effect": {
+            "魔法反弹": "0.1"
+        },
+        "itemname": "风魔巫师卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106034,
+        "effect": {
+            "暴伤减免": "0.2"
+        },
+        "itemname": "恶灵卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106036,
+        "effect": {
+            "最终攻速": "0.6"
+        },
+        "itemname": "黄金虫卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106037,
+        "effect": {
+            "最终急速": "0.06"
+        },
+        "itemname": "海盗之王卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106038,
+        "effect": {
+            "最终魔防穿透": "0.12"
+        },
+        "itemname": "蓝疯兔卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106039,
+        "effect": {
+            "最终物伤附加": "0.12"
+        },
+        "itemname": "波利之王卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106040,
+        "effect": {
+            "最终魔伤附加": "0.12"
+        },
+        "itemname": "魔鬼大乌贼卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106041,
+        "effect": {
+            "物理吸血": "0.15"
+        },
+        "itemname": "大脚龙虾卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106042,
+        "effect": {
+            "物理反弹": "0.15"
+        },
+        "itemname": "蛙王卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106043,
+        "effect": {
+            "魔法吸血": "0.15"
+        },
+        "itemname": "天使波利卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106044,
+        "effect": {
+            "魔法反弹": "0.15"
+        },
+        "itemname": "蚁后卡片【夜】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106045,
+        "effect": {
+            "暴伤附加": "0.3"
+        },
+        "itemname": "兽人英雄卡片【冥】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106046,
+        "effect": {
+            "暴伤减免": "0.3"
+        },
+        "itemname": "法老王卡片【冥】"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106047,
+        "effect": {
+            "暴伤附加": "0.2"
+        },
+        "itemname": "血腥骑士卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106048,
+        "effect": {
+            "物理反弹": "0.1"
+        },
+        "itemname": "贤者虫卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106049,
+        "effect": {
+            "PVP物伤附加": "540"
+        },
+        "itemname": "流浪之狼卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106050,
+        "effect": {
+            "PVP魔伤附加": "540"
+        },
+        "itemname": "死灵卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "饰品卡片",
+        "staticId": 10106051,
+        "effect": {
+            "PVP负面状态抵抗": "0.09"
+        },
+        "itemname": "流浪之狼卡片【冥】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "饰品卡片",
+        "staticId": 10107001,
+        "effect": {
+            "攻速": "60"
+        },
+        "itemname": "盗虫卵卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107002,
+        "effect": {
+            "物理攻击": "30",
+            "物防穿透": "30"
+        },
+        "itemname": "蜗牛卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10107003,
+        "effect": {
+            "物理防御": "5",
+            "冰冻抗性": "0.5"
+        },
+        "itemname": "邪骸食人鱼卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107004,
+        "effect": {
+            "受无形系魔物减伤": "-0.2"
+        },
+        "itemname": "梅纳海葵卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107005,
+        "effect": {
+            "受人形系魔物减伤": "-0.15"
+        },
+        "itemname": "突变蛙卡片"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107006,
+        "effect": {
+            "物理攻击": "60",
+            "物防穿透": "60"
+        },
+        "itemname": "艾斯蜘蛛卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10107007,
+        "effect": {
+            "物理攻击": "0.06"
+        },
+        "itemname": "蚂蚁幼虫卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107008,
+        "effect": {
+            "水属性增强": "0.1",
+            "风属性增强": "0.1"
+        },
+        "itemname": "卷甲虫卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107009,
+        "effect": {
+            "圣属性增强": "0.1",
+            "无属性增强": "0.1"
+        },
+        "itemname": "大脚熊卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107010,
+        "effect": {
+            "对中体型魔物增伤": "0.1"
+        },
+        "itemname": "僵尸卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "头饰卡片",
+        "staticId": 10107011,
+        "effect": {
+            "武器损坏抗性": "0.3"
+        },
+        "itemname": "兽人战士卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10107012,
+        "effect": {
+            "最终魔防效果": "0.1"
+        },
+        "itemname": "兽人战士长卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107013,
+        "effect": {
+            "最终暴击": "0.08"
+        },
+        "itemname": "安毕斯卡片"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "武器卡片",
+        "staticId": 10107015,
+        "effect": {
+            "水属性增强": "0.15",
+            "风属性增强": "0.15"
+        },
+        "itemname": "黄金虫卡片【昼】"
+    },
+    {
+        "cardQuality": "传说",
+        "IsMvpCard": 1,
+        "itemSubType": "武器卡片",
+        "staticId": 10107016,
+        "effect": {
+            "魔法攻击": "0.075",
+            "最终魔防穿透": "0.075"
+        },
+        "itemname": "蚁后卡片【昼】"
+    },
+    {
+        "cardQuality": "普通",
+        "IsMvpCard": 0,
+        "itemSubType": "武器卡片",
+        "staticId": 10107017,
+        "effect": {
+            "攻速": "120"
+        },
+        "itemname": "锹形虫卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "盔甲卡片",
+        "staticId": 10107018,
+        "effect": {
+            "最大HP": "0.2"
+        },
+        "itemname": "毕帝特飞龙卡片"
+    },
+    {
+        "cardQuality": "稀有",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107019,
+        "effect": {},
+        "itemname": "狂暴木乃伊卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107020,
+        "effect": {
+            "受大体型魔物减伤": "-0.15",
+            "物理防御": "10"
+        },
+        "itemname": "行刑者卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107021,
+        "effect": {
+            "受中体型魔物减伤": "-0.15",
+            "物理防御": "10"
+        },
+        "itemname": "兽牙怪卡片"
+    },
+    {
+        "cardQuality": "史诗",
+        "IsMvpCard": 0,
+        "itemSubType": "副手卡片",
+        "staticId": 10107022,
+        "effect": {
+            "受小体型魔物减伤": "-0.15",
+            "物理防御": "10"
+        },
+        "itemname": "弑神者卡片"
+    }
+]
