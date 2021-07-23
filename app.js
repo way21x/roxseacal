@@ -104,6 +104,11 @@ new Vue({
         refine_7: null,
         refine_8: null
       },
+      passiveSkill: {
+        knight: {spear: false, rider: false},
+        hunter: null,
+        priest: null,
+      },
       growth: [],
       weapons: [], // raw data
       cards: [], // raw data
@@ -426,6 +431,9 @@ new Vue({
       let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
     },
+    statBonus(v, m) {
+      return v * m * (1 + 0.05 * Math.floor(v / 100))
+    },
     awaken(v) {
       if(v == 0) { return 1 }
       if(v == 1) { return 1 }
@@ -499,6 +507,17 @@ new Vue({
       // console.log('res', res)
       return res
     },
+    baseReward(val) {
+      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null){
+        let baseReward = this.growth.filter(v => v.level == this.selectedClass.baselv && v.basicJob == this.selectedClass.name)[0]
+        return val == 'p_def' ? (baseReward.p_def ? baseReward.p_def : 0) : 
+        val == 'p_atk' ? (baseReward.p_atk ? baseReward.p_atk : 0) : 
+        val == 'm_atk' ? (baseReward.m_atk ? baseReward.m_atk : 0) : 
+        val == 'm_def' ? (baseReward.m_def ? baseReward.m_def : 0) : 0
+      }else{
+        return 0
+      }
+    },
     p_damage() {
       let p_atk = parseFloat(this.stats.p_atk.withEq)
       let p_pen = parseFloat(this.stats.final_p_pen.withEq)
@@ -542,6 +561,16 @@ new Vue({
       let final_haste = parseFloat(this.stats.final_haste.withEq) * 100
       let total = (Math.floor(Number(this.common(haste, 50, 100).toFixed(2))*10)/10) + final_haste * 0.1
       return total + ' sec'
+    },
+    skill() {
+      let res = 0
+      let dex = this.stats.dex.withEq
+      let knightSkills = this.passiveSkill.knight
+      for(let key in knightSkills) {
+        res += key == 'spear' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
+        res += key == 'rider' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
+      }
+      return res
     }
   },
   watch: {
@@ -583,6 +612,22 @@ new Vue({
       this.stats.dex.withEq = total
       return total
     },
+    vit() {
+      let withoutEq = Number(this.stats.vit.withoutEq)
+      let withEq = this.searchAttr('体质', 'vit', 'number')
+      let multiply = this.searchAttr('体质提升', 'vit%', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.vit.withEq = total
+      return total
+    },
+    int() {
+      let withoutEq = Number(this.stats.int.withoutEq)
+      let withEq = this.searchAttr('智力', 'int', 'number')
+      let multiply = this.searchAttr('智力提升', 'int%', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.int.withEq = total
+      return total
+    },
     p_atk() {
       let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
       let p_atk_withEq = this.searchAttr('物理攻击', 'p_atk', 'number')
@@ -594,9 +639,9 @@ new Vue({
       let str = this.stats.str.withEq
       let selected = this.selectedClass.name
 
-      let dex_to_atk = selected == '弓箭手' ? dex * 4 * (1 + 0.05 * Math.floor(dex / 100)) : 0
-      let luk_to_atk = Math.floor(luk * 0.5)
-      let str_to_atk = selected == '弓箭手' ? Math.floor(str * 0.2) : str * 4 * (1 + 0.05 * Math.floor(str / 100))
+      let dex_to_atk = selected == '弓箭手' ? this.statBonus(dex, 4) : 0
+      let luk_to_atk = this.statBonus(luk, 0.5)
+      let str_to_atk = selected == '弓箭手' ? this.statBonus(str, 0.2) : this.statBonus(str, 4)
       
       // baselv reward p_atk
       if(this.selectedClass.name !== null && this.selectedClass.baselv !== null){
@@ -606,17 +651,78 @@ new Vue({
         }
       }
 
+      // skill
+      let skillResult = this.skill()
 
-      let total = (p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk) * (1 + p_atk_multiply)
+      let total = (p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk + skillResult) * (1 + p_atk_multiply)
       this.stats.p_atk.withEq = total
       return total
+    },
+    p_def() {
+      let withoutEq = Number(this.stats.p_def.withoutEq)
+      let withEq = this.searchAttr('物理防御', 'def', 'number')
+      let multiply = this.searchAttr('物理防御', 'def', 'percentage')
+
+      // convert stats to p_def
+      let vit = this.stats.vit.withEq
+      let vit_to_def = this.statBonus(vit, 2)
+
+      // baselv reward p_def
+      withEq += this.baseReward('p_def')
+
+      let total = (withEq + withoutEq + vit_to_def) * (1 + multiply)
+      this.stats.p_def.withEq = total
+      return total
+    },
+    m_atk() {
+      let withoutEq = Number(this.stats.m_atk.withoutEq)
+      let withEq = this.searchAttr('魔法攻击', 'm_atk', 'number')
+      let multiply = this.searchAttr('魔法攻击', 'm_atk', 'percentage')
+
+      // convert stats to m_atk
+      let int = this.stats.int.withEq
+      let int_to_matk = this.statBonus(int, 4)
+
+      // baselv reward m_atk
+      withEq += this.baseReward('m_atk')
+
+      let total = (withEq + withoutEq + int_to_matk) * (1 + multiply)
+      this.stats.m_atk.withEq = total
+      return total
+    },
+    m_def() {
+      let withoutEq = Number(this.stats.m_def.withoutEq)
+      let withEq = this.searchAttr('魔法防御', 'm_def', 'number')
+      let multiply = this.searchAttr('魔法防御', 'm_def', 'percentage')
+
+      // convert stats to p_def
+      let int = this.stats.int.withEq
+      let int_to_def = this.statBonus(int, 2)
+
+      // baselv reward p_def
+      withEq += this.baseReward('m_def')
+
+      let total = (withEq + withoutEq + int_to_def) * (1 + multiply)
+      this.stats.m_def.withEq = total
+      return total      
+    },
+    m_pen() {
+      let withoutEq = Number(this.stats.m_pen.withoutEq)
+      let withEq = this.searchAttr('魔防穿透', 'm_pen', 'number')
+      let multiply = this.searchAttr('魔防穿透', 'm_pen', 'percentage')
+      let total = (withEq + withoutEq) * (1 + multiply)
+      this.stats.m_pen.withEq = total
+      return total      
+    },
+    final_m_pen() {
+      //
     },
     aspd() {
       let withoutEq = Number(this.stats.aspd.withoutEq)
       let withEq = this.searchAttr('攻速', 'aspd', 'number')
       let multiply = this.searchAttr('攻速提升', 'aspd%', 'percentage')
       let agi = this.stats.agi.withEq
-      let agi_to_aspd = Math.floor(agi * 2)
+      let agi_to_aspd = this.statBonus(agi, 2)
       let total = (withEq + withoutEq + agi_to_aspd) * (1 + multiply)
       this.stats.aspd.withEq = total
       return total
@@ -635,7 +741,7 @@ new Vue({
       let withEq = this.searchAttr('暴击', 'crit', 'number')
       let multiply = this.searchAttr('暴击', 'crit', 'percentage')
       let luk = this.stats.luk.withEq
-      let luk_to_crit = Math.floor(luk * 2)
+      let luk_to_crit = this.statBonus(luk, 2)
       let total = (withEq + withoutEq + luk_to_crit) * (1 + multiply)
       this.stats.crit.withEq = total
       return total
@@ -662,7 +768,7 @@ new Vue({
       let withEq = this.searchAttr('急速', 'haste', 'number')
       let multiply = this.searchAttr('急速', 'haste', 'percentage')
       let dex = this.stats.dex.withEq
-      let dex_to_haste = Math.floor(dex * 2)
+      let dex_to_haste = this.statBonus(dex, 2)
       let total = (withEq + withoutEq + dex_to_haste) * (1 + multiply)
       this.stats.haste.withEq = total
       return total

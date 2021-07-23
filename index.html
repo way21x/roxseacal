@@ -85,10 +85,10 @@
 
                 <div class="col-4">VIT</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.vit.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="vit" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">DEX</div>
@@ -120,10 +120,10 @@
 
                 <div class="col-4">INT</div>
                 <div class="col-4">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="stats.int.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="int" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">LUK</div>
@@ -172,10 +172,10 @@
 
                 <div class="col-4">DEF</div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="stats.p_def.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="p_def" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">P.PEN</div>
@@ -237,29 +237,29 @@
 
                 <div class="col-4">M.ATK</div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="stats.m_atk.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="m_atk" class="form-control" disabled>
                 </div>
 
                 <div class="col-4">M.DEF</div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="stats.m_def.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="m_def" class="form-control" disabled>
                 </div>
 
-                <div class="col-4">M.DEF PEN</div>
+                <div class="col-4">M.PEN</div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="stats.m_pen.withoutEq" class="form-control">
                 </div>
                 <div class="col-4">
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" v-model="m_pen" class="form-control" disabled>
                 </div>
 
-                <div class="col-4">haste</div>
+                <div class="col-4">Haste</div>
                 <div class="col-4">
                   <input type="text" v-model.lazy="stats.haste.withoutEq" class="form-control">
                 </div>
@@ -398,6 +398,14 @@
                 </div>
                 <div class="col-4">
                   <input type="text" v-model="final_haste" class="form-control" disabled>
+                </div>
+
+                <div class="col-4">Final M.Pen</div>
+                <div class="col-4">
+                  <input type="text" v-model.lazy="stats.final_m_pen.withoutEq" class="form-control">
+                </div>
+                <div class="col-4">
+                  <input type="text" v-model="final_m_pen" class="form-control" disabled>
                 </div>
 
               </div>
@@ -1351,10 +1359,32 @@
 
         </div>
 
-
         <hr class="my-4">
 
-        <!-- Advance -->
+        <!-- Calculator -->
+        <div class="col-12">
+          <h4 class="mb-3">Skills</h4>
+
+          <div class="row">
+            <div class="col-12">
+
+              <b-form-checkbox v-model="passiveSkill.knight.spear" switch size="lg">
+                spear training
+              </b-form-checkbox>
+
+              <b-form-checkbox v-model="passiveSkill.knight.rider" switch size="lg">
+                rider training
+              </b-form-checkbox>
+
+            </div>
+            </div>
+
+          </div>
+
+        
+        <hr class="my-4">
+
+        <!-- Calculator -->
         <div class="col-12">
           <h4 class="mb-3">DPS Calculator</h4>
 
@@ -1407,6 +1437,10 @@
 
           </div>
         </div>
+
+        
+        <span>{{ passiveSkill }}</span><br>
+        <br>
         <span>{{ selectedClass }}</span><br>
         <br>
 
