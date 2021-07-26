@@ -105,10 +105,17 @@ new Vue({
         refine_8: null
       },
       passiveSkill: {
-        knight: {spear: false, rider: false},
-        hunter: null,
-        priest: null,
+        knight: {spear_proficiency: false, cavalry_training: false},
+        hunter: {improve_concentration: false, elemental_arrow: false, owls_eye: false},
+        priest: {blessing_agility: false, impositio_manus: false, gloria: false},
       },
+      mons_size: 1,
+      elementBonus: 1,
+      mons_list: [
+        {name: '木桩人', anti_crit: 0, flee: 0, maxHp: 100000000, m_def: 0, p_def: 0},
+        {name: '马尔杜克', anti_crit: 71, flee: 71, maxHp: 201495, m_def: 427, p_def: 284},
+      ],
+      mons_test: '木桩人',
       growth: [],
       weapons: [], // raw data
       cards: [], // raw data
@@ -139,7 +146,7 @@ new Vue({
         m_atk: {withoutEq: null, withEq: null, multiply: null,},
         m_def: {withoutEq: null, withEq: null, multiply: null,},
         m_pen: {withoutEq: null, withEq: null, multiply: null,},
-        dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
+        p_dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
         final_aspd: {withoutEq: null, withEq: null, multiply: null,},
         final_crit: {withoutEq: null, withEq: null, multiply: null,},
         crit_bonus: {withoutEq: 200, withEq: null, multiply: null,},
@@ -147,7 +154,7 @@ new Vue({
         final_m_def: {withoutEq: null, withEq: null, multiply: null,},
         final_p_pen: {withoutEq: null, withEq: null, multiply: null,},
         final_m_pen: {withoutEq: null, withEq: null, multiply: null,},
-        final_dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
+        final_p_dmg_bonus: {withoutEq: null, withEq: null, multiply: null,},
         final_haste: {withoutEq: null, withEq: null, multiply: null,},
         hp_regen: {withoutEq: null, withEq: null, multiply: null,},
         sp_regen: {withoutEq: null, withEq: null, multiply: null,},
@@ -155,18 +162,18 @@ new Vue({
         m_dmg_reduction: {withoutEq: null, withEq: null, multiply: null,},
         move_speed: {withoutEq: null, withEq: null, multiply: null,},
       },
-      eq_stats: [],
+      // eq_stats: [],
       upgradeAwakening: 1,
       refineAwakening: 1,
       enchantAwakening: 1,
-      selected: null,
-      selected_card: '',
-      selected_enchant: '',
-      selected_enchantLevel: '',
-      enchantOption: { test: null},
-      from_amount: [],
-      to_amount: "",
-      kkk: {},
+      // selected: null,
+      // selected_card: '',
+      // selected_enchant: '',
+      // selected_enchantLevel: '',
+      // enchantOption: { test: null},
+      // from_amount: [],
+      // to_amount: "",
+      // kkk: {},
     }
   },
   methods: {
@@ -203,7 +210,7 @@ new Vue({
     req_6() {
       return axios.get('./data/levelGrowth_v1.json');
     },
-    filteredWeapons(job) {
+    filteredWeapons(job, type) {
       // var weapons = this.weapons.filter(v => v.jobLimit != null 
       //   && v.slotList != null 
       //   && v.name != null 
@@ -216,7 +223,16 @@ new Vue({
         && v.name != null 
         && Object.keys(v.equipmentType).indexOf('武器') > -1
         && v.jobLimit.indexOf(job) > -1
-        )
+      )
+      
+      if(job != '弓箭手') {
+        if(type == 'offHand') {
+          weapons = this.weapons.filter(v => v.equipmentType
+            && v.name != null 
+            && Object.values(v.equipmentType).indexOf('盾牌') > -1
+          )
+        }        
+      }
 
       weapons.sort(function(a, b) {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
@@ -300,15 +316,17 @@ new Vue({
     filteredRefine(equipment_x) {
       var res = this.equipmentResults
       for (var key in res) {
-        if (key == equipment_x) {    
-          for(var i in res[key]) {
-            if(i == "RefineID"){
-              var k = this.refine.filter(v => v.refineId != null && v.refineValue != null && v.refineId === res[key][i])
-              k.forEach(z => {
-                z.refine_lv = "+" + (String(z.refine_lv).indexOf("+") == 0 ? String(z.refine_lv).substr(1) : z.refine_lv);
-              })
-              return k
-            }
+        if (key == equipment_x) {
+          if(res[key] !== null) {
+            for(var i in res[key]) {
+              if(i == "RefineID" && this.refine){
+                var k = this.refine.filter(v => v.refineId != null && v.refineValue != null && v.refineId === res[key][i])
+                k.forEach(z => {
+                  z.refine_lv = "+" + (String(z.refine_lv).indexOf("+") == 0 ? String(z.refine_lv).substr(1) : z.refine_lv);
+                })
+                return k
+              }
+            }            
           }
         }
       }
@@ -432,7 +450,7 @@ new Vue({
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
     },
     statBonus(v, m) {
-      return v * m * (1 + 0.05 * Math.floor(v / 100))
+      return Math.floor(v * m * (1 + 0.05 * Math.floor(v / 100)))
     },
     awaken(v) {
       if(v == 0) { return 1 }
@@ -508,7 +526,7 @@ new Vue({
       return res
     },
     baseReward(val) {
-      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null){
+      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null && this.growth.length !== 0){
         let baseReward = this.growth.filter(v => v.level == this.selectedClass.baselv && v.basicJob == this.selectedClass.name)[0]
         return val == 'p_def' ? (baseReward.p_def ? baseReward.p_def : 0) : 
         val == 'p_atk' ? (baseReward.p_atk ? baseReward.p_atk : 0) : 
@@ -520,20 +538,134 @@ new Vue({
     },
     p_damage() {
       let p_atk = parseFloat(this.stats.p_atk.withEq)
-      let p_pen = parseFloat(this.stats.final_p_pen.withEq)
-      let dmg_bonus = parseFloat(this.stats.dmg_bonus.withEq)
-      let final_dmg_bonus = parseFloat(this.stats.final_dmg_bonus.withEq)
-      let total = p_atk * (1 + final_dmg_bonus) * (1 + p_pen) + dmg_bonus
-      return total
+      let final_p_pen = parseFloat(this.stats.final_p_pen.withEq)
+      let p_dmg_bonus = parseFloat(this.stats.p_dmg_bonus.withEq)
+      let final_p_dmg_bonus = parseFloat(this.stats.final_p_dmg_bonus.withEq)
+      let elementBonus = parseFloat(this.elementBonus)
+      let mons_size = parseFloat(this.mons_size)
+      let p_atk_buff = 0
+      let p_atk_debuff = 0
+      let size_buff = 0
+      let size_debuff = 0
+      let element_buff = 0
+      let element_debuff = 0
+      let race_buff = 0
+      let race_debuff = 0
+      let mons_final_p_def = 0
+      let mons_final_p_dmg_red = 0
+      let mons_p_dmg_red = 0
+      let mons_anti_crit = 0
+      let mons_p_pen = 0
+      // let elemental_arrow = this.passiveSkill.hunter.elemental_arrow ? 0.1 : 0
+      // p_atk_buff += elemental_arrow
+
+      if(this.mons_test == '马尔杜克') {
+        mons_final_p_def = Number(this.common(284, 25, 5).toFixed(2)) / 100
+        mons_p_pen = Number(this.common(142, 25, 5).toFixed(2)) / 100
+        p_atk_buff += 0
+      }
+      if(this.mons_test == '木桩人') {
+        size_buff = 0.02
+      }
+      // 5609 * 1.23 * (1.3397 - 0.2673) * 0.75 + 787
+      let total = p_atk * (1 + final_p_dmg_bonus - mons_final_p_dmg_red) * (1 + final_p_pen - mons_final_p_def) * elementBonus * (1 + element_buff - element_debuff) * mons_size * (1 + size_buff - size_debuff) * (1 + race_buff - race_debuff) * (1 + p_atk_buff) * (1 - p_atk_debuff) + (p_dmg_bonus - mons_p_dmg_red)
+
+      console.log(p_atk, final_p_dmg_bonus, final_p_pen, mons_size, elementBonus, mons_final_p_def)
+
+      return total.toFixed()
+
+      // 10521 buff
+      // 15320 buff crit
+      // 10279 no buff
+      // 14958 buff crit
+      
+      // 6803 buff marduk
+      // 11473 buff crit marduk
+      // 6654 no buff marduk
+      // 11207 no buff crit marduk
+
+      // 10871 no buff lunatic
+      // 16070 no buff crit lunatic
+
+      // "LuckyRefineTitle": "幸运精炼",
+      // "LuckyRefineTips1": "装备精炼如果不成功，将会获得幸运值",
+      // "LuckyRefineTips2": "武器精炼失败产生武器精炼幸运值，防具精炼失败产生防具精炼幸运值，饰品精炼失败产生饰品精炼幸运值",
+      // "LuckyRefineTips3": "积攒够一定数量的幸运值后，可以使用幸运精炼，幸运精炼将会使精炼成功率提升至100%",
+      // "LuckyRefineTips4": "品质或类型不同的装备，精炼失败产生的幸运值不同，幸运精炼需要消耗的幸运值也不同",
+      // 物理防御 convert to 最终物防效果
+      // (最终魔防穿透 - 最终魔防效果) = (Final M.PEN - Final Magic Defense) // 魔穿
+      // (最终物防穿透 - 最终物防效果) = (Final P.PEN - Final Physical DEF) // 物穿
+      // (最终魔伤附加 - 最终魔伤减免) = (Final M.DMG Bonus - Final M.DMG RED) // 最终魔伤
+      // (最终物伤附加 - 最终物伤减免) = (Final P.DMG Bonus - Final P.DMG RED) // 最终物伤
+      // (物伤附加 - 物伤减免) = (P.DMG Bonus - P.DMG Reduction) // 物伤
+      // (魔伤附加 - 魔伤减免) = (M.DMG Bonus - M.DMG Reduction) // 魔伤
+      // (暴伤附加 - 暴伤减免) = (Crit DMG Bonus - Crit DMG Reduction)
+      // (最终伤害加深 - 最终伤害减免) = (Final Damage Bonus - Final DMG Reduction)
+
+
+      // ｛原始傷害
+      // ×（1+final_p_pen−最終防禦）／（1＋final_p_pen/2，if神聖傷害）／（crit_bonus，if暴擊）
+      // ×（elementBonus）×（1＋屬性增傷−屬性減傷）×（mons_size）×（1＋體型增傷−體型減傷）
+      // ×（1＋種族增傷 −種族減傷）×（1＋狀態增傷）×（1−狀態減傷）×（1＋final_p_dmg_bonus−終傷減免）
+      // ＋dmg_bonus−傷害減免｝×段數
+
+      // Damage per hit：
+      // { [ (Original Dmg）×（1＋%DMG−%DMG）×（1＋%PEN−%DEF）
+      // ×（Elem）×（1＋eleBuff−eleDef）×（Size）×（1＋SizeBuff−SizeDef）
+      // ×（1＋TypeBuff−TypeDef）］×［1＋Buff］×［1−DeBuff］
+      // ＋DMG−DMG｝
+      
+      // 原始傷害：（（攻擊×技能倍率）＋技能點數）＊陷阱、獵鷹 有 專屬公式
+      
+      // 技能倍率愈高，代表提升攻擊力效率愈高；而技能點數，只能用技能等級、穿透、終傷附加提高。
+
+      // ｛原始傷害
+      // ×（1+最終穿透−最終防禦）／（1＋最終穿透/2，if神聖傷害）／（暴擊附加，if暴擊）
+      // ×（屬性修正）×（1＋屬性增傷−屬性減傷）×（體型修正）×（1＋體型增傷−體型減傷）
+      // ×（1＋種族增傷 −種族減傷）×（1＋狀態增傷）×（1−狀態減傷）×（1＋終傷附加−終傷減免）
+      // ＋傷害附加−傷害減免｝×段數
+      
+       
+      
+      // 暴擊、神聖傷害（無視防禦）時：
+      // ｛［原始傷害×（1＋終傷附加−終傷減免）×（1+最終穿透−最終防禦）
+      // ×（屬性修正＋屬性增傷−屬性減傷）×（體型修正＋體型增傷−體型減傷）
+      // ×（1＋種族增傷 −種族減傷）×（1＋狀態增傷）×（1−狀態減傷）
+      // ＋傷害附加−傷害減免｝×段數
+      
+       
+      
+      // ＊每段 （ ）內數值，最大為 200%，最小為 0%。
+
+
     },
     p_crit_damage() {
       let p_atk = parseFloat(this.stats.p_atk.withEq)
-      let p_pen = parseFloat(this.stats.final_p_pen.withEq)
-      let dmg_bonus = parseFloat(this.stats.dmg_bonus.withEq)
-      let final_dmg_bonus = parseFloat(this.stats.final_dmg_bonus.withEq)
+      let final_p_pen = parseFloat(this.stats.final_p_pen.withEq)
+      let p_dmg_bonus = parseFloat(this.stats.p_dmg_bonus.withEq)
+      let final_p_dmg_bonus = parseFloat(this.stats.final_p_dmg_bonus.withEq)
+      let elementBonus = parseFloat(this.elementBonus)
+      let mons_size = parseFloat(this.mons_size)
+      let p_atk_buff = 0
+      let p_atk_debuff = 0
+      let size_buff = 0
+      let size_debuff = 0
+      let element_buff = 0
+      let element_debuff = 0
+      let race_buff = 0
+      let race_debuff = 0
+      let mons_final_p_def = 0
+      let mons_final_p_dmg_red = 0
+      let mons_p_dmg_red = 0
       let crit_bonus = parseFloat(this.stats.crit_bonus.withEq)
-      let total = p_atk * (1 + final_dmg_bonus) * (1 + p_pen) * crit_bonus + dmg_bonus
-      return total
+
+      if(this.mons_test == '木桩人') {
+        size_buff = 0.02
+      }
+
+      let total = p_atk * (1 + final_p_dmg_bonus) * elementBonus * (1 + element_buff - element_debuff) * mons_size * (1 + size_buff - size_debuff) * (1 + race_buff - race_debuff) * (1 + p_atk_buff) * (1 - p_atk_debuff) * crit_bonus + (p_dmg_bonus - mons_p_dmg_red)
+
+      return total.toFixed()
     },
     p_dps() {
       let p_damage = parseFloat(this.p_damage())
@@ -567,17 +699,112 @@ new Vue({
       let dex = this.stats.dex.withEq
       let knightSkills = this.passiveSkill.knight
       for(let key in knightSkills) {
-        res += key == 'spear' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
-        res += key == 'rider' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
+        res += key == 'spear_proficiency' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
+        res += key == 'cavalry_training' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
       }
       return res
+    },
+    reset() {
+      localStorage.clear()
+      location.reload()
     }
   },
   watch: {
-
+    selectedClass: {
+      handler(newVal) {
+          localStorage.setItem('selectedClass', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    equipmentResults: {
+      handler(newVal) {
+          localStorage.setItem('equipmentResults', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    refineResults: {
+      handler(newVal) {
+          localStorage.setItem('refineResults', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    upgradeResults: {
+      handler(newVal) {
+          localStorage.setItem('upgradeResults', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    enchantResults: {
+      handler(newVal) {
+          localStorage.setItem('enchantResults', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    cardResults: {
+      handler(newVal) {
+          localStorage.setItem('cardResults', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    passiveSkill: {
+      handler(newVal) {
+          localStorage.setItem('passiveSkill', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    stats: {
+      handler(newVal) {
+          localStorage.setItem('stats', JSON.stringify(newVal))
+      },
+      deep: true,
+    },
+    upgradeAwakening: function(newVal) {
+      localStorage.setItem('upgradeAwakening', JSON.stringify(newVal))
+    },
+    refineAwakening: function(newVal) {
+      localStorage.setItem('refineAwakening', JSON.stringify(newVal))
+    },
+    enchantAwakening: function(newVal) {
+      localStorage.setItem('enchantAwakening', JSON.stringify(newVal))
+    },
   },
   mounted() {
     this.requestHandlder();
+  },
+  created() {
+    if(localStorage.equipmentResults) {
+      this.equipmentResults = JSON.parse(localStorage.getItem('equipmentResults'))
+    }
+    if(localStorage.refineResults) {
+      this.refineResults = JSON.parse(localStorage.getItem('refineResults'))
+    }
+    if(localStorage.upgradeResults) {
+      this.upgradeResults = JSON.parse(localStorage.getItem('upgradeResults'))
+    }
+    if(localStorage.enchantResults) {
+      this.enchantResults = JSON.parse(localStorage.getItem('enchantResults'))
+    }
+    if(localStorage.cardResults) {
+      this.cardResults = JSON.parse(localStorage.getItem('cardResults'))
+    }
+    if(localStorage.selectedClass) {
+      this.selectedClass = JSON.parse(localStorage.getItem('selectedClass'))
+    }
+    if(localStorage.passiveSkill) {
+      this.passiveSkill = JSON.parse(localStorage.getItem('passiveSkill'))
+    }
+    if(localStorage.stats) {
+      this.stats = JSON.parse(localStorage.getItem('stats'))
+    }
+    if(localStorage.upgradeAwakening) {
+      this.upgradeAwakening = JSON.parse(localStorage.getItem('upgradeAwakening'))
+    }
+    if(localStorage.refineAwakening) {
+      this.refineAwakening = JSON.parse(localStorage.getItem('refineAwakening'))
+    }
+    if(localStorage.enchantAwakening) {
+      this.enchantAwakening = JSON.parse(localStorage.getItem('enchantAwakening'))
+    }
   },
   computed: {
     str() {
@@ -592,7 +819,11 @@ new Vue({
       let withoutEq = Number(this.stats.luk.withoutEq)
       let withEq = this.searchAttr('幸运', 'luk', 'number')
       let multiply = this.searchAttr('幸运提升', 'luk%', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply)
+
+      // gloria buff
+      let gloria = this.passiveSkill.priest.gloria ? 40 : 0
+
+      let total = (withEq + withoutEq + gloria) * (1 + multiply)
       this.stats.luk.withEq = total
       return total
     },
@@ -600,7 +831,12 @@ new Vue({
       let withoutEq = Number(this.stats.agi.withoutEq)
       let withEq = this.searchAttr('敏捷', 'agi', 'number')
       let multiply = this.searchAttr('敏捷提升', 'agi%', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply)
+
+      // buff
+      let improve_concentration = this.passiveSkill.priest.improve_concentration ? 20 : 0
+      let buffs = improve_concentration
+
+      let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.agi.withEq = total
       return total
     },
@@ -608,7 +844,14 @@ new Vue({
       let withoutEq = Number(this.stats.dex.withoutEq)
       let withEq = this.searchAttr('灵巧', 'dex', 'number')
       let multiply = this.searchAttr('灵巧提升', 'dex%', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply)
+      
+      // buff
+      let blessing_agility = this.passiveSkill.priest.blessing_agility ? 20 : 0
+      let improve_concentration = this.passiveSkill.priest.improve_concentration ? 20 : 0
+      let owls_eye = this.passiveSkill.priest.owls_eye ? 30 : 0
+      let buffs = blessing_agility + improve_concentration + owls_eye
+
+      let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.dex.withEq = total
       return total
     },
@@ -633,6 +876,10 @@ new Vue({
       let p_atk_withEq = this.searchAttr('物理攻击', 'p_atk', 'number')
       let p_atk_multiply = this.searchAttr('物理攻击', 'p_atk', 'percentage')
 
+      // impositio_manus buff
+      let impositio_manus = this.passiveSkill.priest.impositio_manus ? 0.1 : 0
+      p_atk_multiply += impositio_manus
+
       // convert stats to p_atk
       let dex = this.stats.dex.withEq
       let luk = this.stats.luk.withEq
@@ -644,7 +891,7 @@ new Vue({
       let str_to_atk = selected == '弓箭手' ? this.statBonus(str, 0.2) : this.statBonus(str, 4)
       
       // baselv reward p_atk
-      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null){
+      if(this.selectedClass.name !== null && this.selectedClass.baselv !== null && this.growth.length !== 0){
         let baseReward = this.growth.filter(v => v.level == this.selectedClass.baselv && v.basicJob == this.selectedClass.name)[0]
         if(baseReward.p_atk) {
           p_atk_withEq += baseReward.p_atk
@@ -654,8 +901,10 @@ new Vue({
       // skill
       let skillResult = this.skill()
 
-      let total = (p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk + skillResult) * (1 + p_atk_multiply)
+
+      let total = Math.ceil((p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk + skillResult) * (1 + p_atk_multiply))
       this.stats.p_atk.withEq = total
+
       return total
     },
     p_def() {
@@ -751,7 +1000,7 @@ new Vue({
       // let withEq = this.searchAttr('最终暴击', 'final_crit', 'number')
       let multiply = this.searchAttr('最终暴击', 'final_crit', 'percentage')
       let crit = Number(this.common(this.stats.crit.withEq, 25, 5).toFixed(2)) / 100
-      let total = withoutEq + crit + multiply
+      let total = (withoutEq + crit + multiply).toFixed(5)
       this.stats.final_crit.withEq = total
       return (total * 100) + "%"
     },
@@ -790,20 +1039,23 @@ new Vue({
       this.stats.final_p_pen.withEq = total
       return (total * 100) + "%"
     },
-    dmg_bonus() {
-      let withoutEq = Number(this.stats.dmg_bonus.withoutEq)
-      let withEq = this.searchAttr('物伤附加', 'dmg_bonus', 'number')
-      let multiply = this.searchAttr('物伤附加', 'dmg_bonus', 'percentage')
+    p_dmg_bonus() {
+      let withoutEq = Number(this.stats.p_dmg_bonus.withoutEq)
+      let withEq = this.searchAttr('物伤附加', 'p_dmg_bonus', 'number')
+      let multiply = this.searchAttr('物伤附加', 'p_dmg_bonus', 'percentage')
       let total = (withEq + withoutEq) * (1 + multiply)
-      this.stats.dmg_bonus.withEq = total
+      this.stats.p_dmg_bonus.withEq = total
       return total
     },
-    final_dmg_bonus() {
-      let withoutEq = Number(this.stats.final_dmg_bonus.withoutEq) / 100
-      // let withEq = this.searchAttr('最终物伤附加', 'final_dmg_bonus', 'number')
-      let multiply = this.searchAttr('最终物伤附加', 'final_dmg_bonus', 'percentage')
-      let total = withoutEq + multiply
-      this.stats.final_dmg_bonus.withEq = total
+    final_p_dmg_bonus() {
+      let withoutEq = Number(this.stats.final_p_dmg_bonus.withoutEq) / 100
+      // let withEq = this.searchAttr('最终物伤附加', 'final_p_dmg_bonus', 'number')
+      let multiply = this.searchAttr('最终物伤附加', 'final_p_dmg_bonus', 'percentage')
+      let total = (withoutEq + multiply).toString()
+      total = total.slice(0, (total.indexOf("."))+5)
+      total = Number(total)
+
+      this.stats.final_p_dmg_bonus.withEq = total
       return (total * 100) + "%"
     },
     final_haste() {
