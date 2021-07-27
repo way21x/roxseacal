@@ -466,6 +466,12 @@ new Vue({
     filteredBaseLevel(val) {
       return this.growth.filter(v => v.basicJob != null && v.basicJob.match(val))
     },
+    cn_lang() {
+      this.lang = 'cn'
+    },
+    en_lang() {
+      this.lang = 'en'
+    },
     common(value, M, B) {
       let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
       return (N * M + (value - M * N * (N + 1) / 2) / (N + 1)) / B
