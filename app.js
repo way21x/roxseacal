@@ -19,7 +19,7 @@ new Vue({
         { name: "服事系", value: "服事"},
         { name: "魔法师系", value: "魔法师"},
       ],
-      selectedClass: {name:"弓箭手", baselv: null, value: null},
+      selectedClass: {name:null, baselv: null, value: null},
       cardResults: {
         card_1: null,
         card_2: null,
@@ -816,6 +816,7 @@ new Vue({
     selectedClass: {
       handler(newVal) {
           localStorage.setItem('selectedClass', JSON.stringify(newVal))
+          localStorage.setItem('ver', 1)
       },
       deep: true,
     },
@@ -875,37 +876,37 @@ new Vue({
     this.requestHandlder();
   },
   created() {
-    if(localStorage.equipmentResults) {
+    if(localStorage.equipmentResults && localStorage.ver == 1) {
       this.equipmentResults = JSON.parse(localStorage.getItem('equipmentResults'))
     }
-    if(localStorage.refineResults) {
+    if(localStorage.refineResults && localStorage.ver == 1) {
       this.refineResults = JSON.parse(localStorage.getItem('refineResults'))
     }
-    if(localStorage.upgradeResults) {
+    if(localStorage.upgradeResults && localStorage.ver == 1) {
       this.upgradeResults = JSON.parse(localStorage.getItem('upgradeResults'))
     }
-    if(localStorage.enchantResults) {
+    if(localStorage.enchantResults && localStorage.ver == 1) {
       this.enchantResults = JSON.parse(localStorage.getItem('enchantResults'))
     }
-    if(localStorage.cardResults) {
+    if(localStorage.cardResults && localStorage.ver == 1) {
       this.cardResults = JSON.parse(localStorage.getItem('cardResults'))
     }
-    if(localStorage.selectedClass) {
+    if(localStorage.selectedClass && localStorage.ver == 1) {
       this.selectedClass = JSON.parse(localStorage.getItem('selectedClass'))
     }
-    if(localStorage.passiveSkill) {
+    if(localStorage.passiveSkill && localStorage.ver == 1) {
       this.passiveSkill = JSON.parse(localStorage.getItem('passiveSkill'))
     }
-    if(localStorage.stats) {
+    if(localStorage.stats && localStorage.ver == 1) {
       this.stats = JSON.parse(localStorage.getItem('stats'))
     }
-    if(localStorage.upgradeAwakening) {
+    if(localStorage.upgradeAwakening && localStorage.ver == 1) {
       this.upgradeAwakening = JSON.parse(localStorage.getItem('upgradeAwakening'))
     }
-    if(localStorage.refineAwakening) {
+    if(localStorage.refineAwakening && localStorage.ver == 1) {
       this.refineAwakening = JSON.parse(localStorage.getItem('refineAwakening'))
     }
-    if(localStorage.enchantAwakening) {
+    if(localStorage.enchantAwakening && localStorage.ver == 1) {
       this.enchantAwakening = JSON.parse(localStorage.getItem('enchantAwakening'))
     }
   },
