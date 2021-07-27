@@ -15,8 +15,37 @@
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link type="text/css" rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vue-select/3.12.1/vue-select.css">
+  <style>
 
-</head>
+.vs__selected-options {
+  flex-wrap: nowrap;
+  max-width: calc(100% - 41px);
+}
+
+.v-select {
+  background-color: white;
+}
+
+.vs__selected {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.vs--open .vs__search {
+  position: static;
+}
+
+.vs__dropdown-toggle {
+  height: 38px;
+}
+
+  </style>
+  </head>
 
 <body class="bg-light">
 
@@ -453,14 +482,23 @@
               <!-- left hand weapon -->
               <b-row>
                 <b-col cols="4">
-                  <b-form-select v-model="equipmentResults.equipment_1" :disabled="selectedClass.name == null"
-                    :options="filteredWeapons(selectedClass.name)" value-field=baseProperty text-field="name">
-                    <template #first>
-                      <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
-                    </template>
-                  </b-form-select>
 
-                  <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null"
+                  <v-select v-model="equipmentResults.equipment_1" :disabled="selectedClass.name == null" 
+                    :options="filteredWeapons(selectedClass.name)" 
+                    :get-option-label="getLabel" :reduce="getValue" placeholder="-- Weapon --">
+                  </v-select>
+
+                  <v-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null" 
+                  :options="filteredUpgrade('equipment_1')" 
+                  :get-option-label="getUpgradeLabel" :reduce="getUpgradeValue" placeholder="-- Upgrade --">
+                </v-select>
+
+                <v-select v-model="refineResults.refine_1" :disabled="equipmentResults.equipment_1 == null" 
+                :options="filteredRefine('equipment_1')" 
+                :get-option-label="getRefineLabel" :reduce="getRefineValue" placeholder="-- Refine --">
+              </v-select>
+
+                  <!-- <b-form-select v-model="upgradeResults.upgrade_1" :disabled="equipmentResults.equipment_1 == null"
                     :options="filteredUpgrade('equipment_1')" value-field="upgradeValue" text-field="level">
                     <template #first>
                       <b-form-select-option :value="null">-- Upgrade --</b-form-select-option>
@@ -472,35 +510,34 @@
                     <template #first>
                       <b-form-select-option :value="null">-- Refine --</b-form-select-option>
                     </template>
-                  </b-form-select>
+                  </b-form-select> -->
                 </b-col>
 
                 <b-col cols="3" style="padding-right: 0%;">
-                  <b-form-select v-model="enchantResults.enchant_1[0]" :disabled="equipmentResults.equipment_1 == null"
-                    :options="filteredEnchant('equipment_1')" value-field="data" text-field="text">
-                    <template #first>
-                      <b-form-select-option :value="null">-- Enchant I --</b-form-select-option>
-                    </template>
-                  </b-form-select>
 
-                  <b-form-select v-model="enchantResults.enchant_2[0]" :disabled="equipmentResults.equipment_1 == null"
-                    :options="filteredEnchant('equipment_1')" value-field="data" text-field="text">
-                    <template #first>
-                      <b-form-select-option :value="null">-- Enchant II --</b-form-select-option>
-                    </template>
-                  </b-form-select>
+                  <v-select v-model="enchantResults.enchant_1[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('equipment_1')" :get-option-label="getEnchantLabel" :reduce="getEnchantValue" placeholder="-- Enchant I --">
+                  </v-select>
 
-                  <b-form-select v-model="enchantResults.enchant_3[0]" :disabled="equipmentResults.equipment_1 == null"
-                    :options="filteredEnchant('equipment_1')" value-field="data" text-field="text">
-                    <template #first>
-                      <b-form-select-option :value="null">-- Enchant III --</b-form-select-option>
-                    </template>
-                  </b-form-select>
+                  <v-select v-model="enchantResults.enchant_2[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('equipment_1')" :get-option-label="getEnchantLabel" :reduce="getEnchantValue" placeholder="-- Enchant II --">
+                  </v-select>
+
+                  <v-select v-model="enchantResults.enchant_3[0]" :disabled="equipmentResults.equipment_1 == null"
+                    :options="filteredEnchant('equipment_1')" :get-option-label="getEnchantLabel" :reduce="getEnchantValue" placeholder="-- Enchant III --">
+                  </v-select>
+
                 </b-col>
 
                 <b-col cols="2" style="padding-left: 0%;">
+
+                  <!-- <v-select v-model="enchantResults.enchant_1[1]" :disabled="enchantResults.enchant_1[0] == null"
+                    :options="filteredEnchantLevel('enchant_1')" label="level" :reduce="getEnchantLevelValue" @option:selected="$emit('select')"
+                    placeholder="-- Enchant Level --">
+                  </v-select> -->
+
                   <b-form-select v-model="enchantResults.enchant_1[1]" 
-                    :disabled="enchantResults.enchant_1[0] == null" :options="filteredEnchantLevel('enchant_1')" 
+                    :disabled="enchantResults.enchant_1[0] == null" :options="filteredEnchantLevel('enchant_2')" 
                     value-field="attrValue" text-field="level">
                     <template #first>
                       <b-form-select-option :value="null">-- Enchant Level --</b-form-select-option>
@@ -526,7 +563,23 @@
                 </b-col>
 
                 <b-col cols="3" style="padding-right: 0%;">
-                  <b-form-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null"
+
+                  <v-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null" 
+                    :options="filteredCards('武器卡片')" 
+                    :get-option-label="getCardLabel" :reduce="getCardValue" placeholder="-- Card I --">
+                  </v-select>
+
+                  <v-select v-model="cardResults.card_2" :disabled="equipmentResults.equipment_1 == null" 
+                  :options="filteredCards('武器卡片')" 
+                  :get-option-label="getCardLabel" :reduce="getCardValue" placeholder="-- Card II --">
+                </v-select>
+
+                <v-select v-model="cardResults.card_3" :disabled="equipmentResults.equipment_1 == null" 
+                :options="filteredCards('武器卡片')" 
+                :get-option-label="getCardLabel" :reduce="getCardValue" placeholder="-- Card III --">
+              </v-select>
+
+                  <!-- <b-form-select v-model="cardResults.card_1" :disabled="equipmentResults.equipment_1 == null"
                     :options="filteredCards('武器卡片')" value-field="effect" text-field="itemname">
                     <template #first>
                       <b-form-select-option :value="null">-- Card I --</b-form-select-option>
@@ -545,7 +598,7 @@
                     <template #first>
                       <b-form-select-option :value="null">-- Card III --</b-form-select-option>
                     </template>
-                  </b-form-select>
+                  </b-form-select> -->
                 </b-col>
               </b-row>
 
@@ -555,7 +608,7 @@
               <b-row v-show="selectedClass.name != '弓箭手'">
                 <b-col cols="4">
                   <b-form-select v-model="equipmentResults.equipment_2" :disabled="equipmentResults.equipment_1 == null" 
-                    :options="filteredWeapons(selectedClass.name, 'offHand')" value-field=baseProperty text-field="name">
+                    :options="filteredWeapons(selectedClass.name, 'offHand')" value-field=baseProperty text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Weapon --</b-form-select-option>
                     </template>
@@ -659,7 +712,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_3" :disabled="selectedClass.name == null"
-                    :options="filteredTalisman()" value-field="baseProperty" text-field="name">
+                    :options="filteredTalisman()" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Talisman --</b-form-select-option>
                     </template>
@@ -760,7 +813,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_4" :disabled="selectedClass.name == null"
-                    :options="filteredAccessory()" value-field="baseProperty" text-field="name">
+                    :options="filteredAccessory()" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Accessory --</b-form-select-option>
                     </template>
@@ -861,7 +914,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_5" :disabled="selectedClass.name == null"
-                    :options="filteredAccessory()" value-field="baseProperty" text-field="name">
+                    :options="filteredAccessory()" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Accessory --</b-form-select-option>
                     </template>
@@ -963,7 +1016,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_6" :disabled="selectedClass.name == null"
-                    :options="filteredArmor(selectedClass.name, '盔甲')" value-field="baseProperty" text-field="name">
+                    :options="filteredArmor(selectedClass.name, '盔甲')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Armor --</b-form-select-option>
                     </template>
@@ -1064,7 +1117,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_7" :disabled="selectedClass.name == null"
-                    :options="filteredArmor(selectedClass.name, '披风')" value-field="baseProperty" text-field="name">
+                    :options="filteredArmor(selectedClass.name, '披风')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Cloak --</b-form-select-option>
                     </template>
@@ -1165,7 +1218,7 @@
                 <b-col cols="4">
 
                   <b-form-select v-model="equipmentResults.equipment_8" :disabled="selectedClass.name == null"
-                    :options="filteredArmor(selectedClass.name, '鞋子')" value-field="baseProperty" text-field="name">
+                    :options="filteredArmor(selectedClass.name, '鞋子')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Shoes --</b-form-select-option>
                     </template>
@@ -1266,7 +1319,7 @@
               <b-row>
                 <b-col cols="3" style="padding-right: 0%;">
                   <b-form-select v-model="equipmentResults.equipment_9" :disabled="selectedClass.name == null"
-                    :options="filteredCostume('头部')" value-field="baseProperty" text-field="name">
+                    :options="filteredCostume('头部')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Head --</b-form-select-option>
                     </template>
@@ -1299,7 +1352,7 @@
               <b-row>
                 <b-col cols="3" style="padding-right: 0%;">
                   <b-form-select v-model="equipmentResults.equipment_10" :disabled="selectedClass.name == null"
-                    :options="filteredCostume('眼睛')" value-field="baseProperty" text-field="name">
+                    :options="filteredCostume('眼睛')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Eyes --</b-form-select-option>
                     </template>
@@ -1332,7 +1385,7 @@
               <b-row>
                 <b-col cols="3" style="padding-right: 0%;">
                   <b-form-select v-model="equipmentResults.equipment_11" :disabled="selectedClass.name == null"
-                    :options="filteredCostume('嘴巴')" value-field="baseProperty" text-field="name">
+                    :options="filteredCostume('嘴巴')" value-field="baseProperty" text-field="baseProperty.name">
                     <template #first>
                       <b-form-select-option :value="null">-- Mouth --</b-form-select-option>
                     </template>
@@ -1485,7 +1538,7 @@
         </div>
 
         <button @click="reset">Reset</button>
-        <!-- <span>{{ mons_size }}</span><br>
+        <span>{{ mons_size }}</span><br>
         <br>
         <span>{{ elementBonus }}</span><br>
         <br>
@@ -1510,7 +1563,7 @@
         <br>
 
         <span>{{ stats }}</span><br>
-        <br> -->
+        <br>
 
         <br><br>
 
@@ -1525,8 +1578,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.21.2/bootstrap-vue.min.js"
     integrity="sha512-Z0dNfC81uEXC2iTTXtE0rM18I3ATkwn1m8Lxe0onw/uPEEkCmVZd+H8GTeYGkAZv50yvoSR5N3hoy/Do2hNSkw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-select/3.12.1/vue-select.js"></script>
 
-  <script type="module" src="app.js"></script>
+    <script type="module" src="app.js"></script>
   <!-- <script type="module" src="header.js"></script> -->
 
 

@@ -1,4 +1,7 @@
 // import CustomSelect from './header.js';
+Vue.component('vue-multiselect', window.VueMultiselect.default)
+Vue.component('v-select', VueSelect.VueSelect);
+
 
 new Vue({
   el: '#app',
@@ -7,6 +10,7 @@ new Vue({
   },
   data() {
     return {
+      lang: 'en',
       classOptions: [
         { name: "弓箭手系", value: "弓箭手" }, 
         { name: "盗贼系", value: "盗贼"},
@@ -220,7 +224,8 @@ new Vue({
 
       var weapons = this.weapons.filter(v => v.jobLimit != null 
         && v.equipmentType
-        && v.name != null 
+        && v.baseProperty
+        && v.baseProperty.en_name
         && Object.keys(v.equipmentType).indexOf('武器') > -1
         && v.jobLimit.indexOf(job) > -1
       )
@@ -228,15 +233,16 @@ new Vue({
       if(job != '弓箭手') {
         if(type == 'offHand') {
           weapons = this.weapons.filter(v => v.equipmentType
-            && v.name != null 
+            && v.baseProperty != null 
+            && v.baseProperty.en_name != null 
             && Object.values(v.equipmentType).indexOf('盾牌') > -1
           )
         }        
       }
 
       weapons.sort(function(a, b) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        var nameA = a.baseProperty.en_name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.baseProperty.en_name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -249,23 +255,25 @@ new Vue({
       return weapons;
     },
     filteredArmor(job, parts) {
+
       var weapons = this.weapons.filter(v => v.jobLimit != null 
         && v.slotList != null 
-        && v.name != null 
+        && v.baseProperty
+        && v.baseProperty.name
         && v.slotList.indexOf(parts) > -1 
         && v.jobLimit.indexOf(job) > -1
         )
-      // 盔甲
+
       // var weapons = this.weapons.filter(v => v.jobLimit != null 
-      //   && v.equipmentType
+      //   && v.slotList != null 
       //   && v.name != null 
-      //   && Object.keys(v.equipmentType).indexOf('武器') > -1
+      //   && v.slotList.indexOf(parts) > -1 
       //   && v.jobLimit.indexOf(job) > -1
       //   )
 
       weapons.sort(function(a, b) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -278,7 +286,13 @@ new Vue({
       return weapons;
     },
     filteredCostume(parts) {
-      var weapons = this.weapons.filter(v => v.name != null && v.baseProperty != null && v.baseProperty.parts != null && v.baseProperty.parts == parts)
+      var weapons = this.weapons.filter(v => 
+        v.baseProperty != null 
+        && v.baseProperty.name != null 
+        && v.baseProperty.parts != null 
+        && v.baseProperty.parts == parts
+        )
+
       // 头部 眼睛 嘴巴
       // var weapons = this.weapons.filter(v => v.jobLimit != null 
       //   && v.equipmentType
@@ -288,8 +302,8 @@ new Vue({
       //   )
 
       weapons.sort(function(a, b) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -332,10 +346,16 @@ new Vue({
       }
     },
     filteredTalisman() {
-      var weapons = this.weapons.filter(v => v.slotList != null && v.name != null && v.slotList.indexOf('护符') > -1)
+      var weapons = this.weapons.filter(v => 
+        v.slotList != null && 
+        v.baseProperty &&
+        v.baseProperty.name != null && 
+        v.slotList.indexOf('护符') > -1
+        )
+
       weapons.sort(function(a, b) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -348,11 +368,16 @@ new Vue({
       return weapons;
      },
     filteredAccessory() {
-      var weapons = this.weapons.filter(v => v.slotList != null && v.name != null && v.slotList.indexOf('饰品') > -1)
+      var weapons = this.weapons.filter(v => 
+        v.slotList != null && 
+        v.baseProperty && 
+        v.baseProperty.name != null && 
+        v.slotList.indexOf('饰品') > -1
+        )
       
       weapons.sort(function(a, b) {
-        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -384,8 +409,6 @@ new Vue({
             }
             return tempArray;
 
-          }else{
-            return null
           }
         }
       }
@@ -422,8 +445,6 @@ new Vue({
             }
             return tempArray;
 
-          }else{
-            return null
           }
           // if(this.enchantResults[key][2] !== null) {
           //   // selected = this.enchantResults[key][2].split(" - ")[0]
@@ -536,6 +557,85 @@ new Vue({
         return 0
       }
     },
+    // customLabel ({ baseProperty }) {
+    //   return `${ baseProperty.name }`
+    // },
+    getLabel (option) {
+      if (typeof option === 'object' && option.baseProperty) {
+        return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+      }
+      return option
+    },
+    getValue (option) {
+      if (typeof option === 'object') {
+        return option.baseProperty
+      }
+      return option
+    },
+    getEnchantLabel (option) {
+      if (option && typeof option === 'object') {
+        return option.text
+        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+      }
+      return option
+    },
+    getEnchantValue (option) {
+      if (option && typeof option === 'object') {
+        return option.data
+      }
+      return option
+    },
+    getEnchantLevelLabel (option) {
+      if (option && typeof option === 'object') {
+        return option.level
+      }
+      return option
+    },
+    getEnchantLevelValue (option) {
+      if (option && typeof option === 'object') {
+        return option.attrValue
+      }
+      return option
+    },
+    getCardLabel (option) {
+      if (option && typeof option === 'object') {
+        return option.itemname
+        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+      }
+      return option
+    },
+    getCardValue (option) {
+      if (option && typeof option === 'object') {
+        return option.effect
+      }
+      return option
+    },
+    getUpgradeLabel (option) {
+      if (option && typeof option === 'object') {
+        return option.level
+        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+      }
+      return option
+    },
+    getUpgradeValue (option) {
+      if (option && typeof option === 'object') {
+        return option.upgradeValue
+      }
+      return option
+    },
+    getRefineLabel (option) {
+      if (option && typeof option === 'object') {
+        return option.refine_lv
+        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+      }
+      return option
+    },
+    getRefineValue (option) {
+      if (option && typeof option === 'object') {
+        return option.refineValue
+      }
+      return option
+    },
     p_damage() {
       let p_atk = parseFloat(this.stats.p_atk.withEq)
       let final_p_pen = parseFloat(this.stats.final_p_pen.withEq)
@@ -570,7 +670,7 @@ new Vue({
       // 5609 * 1.23 * (1.3397 - 0.2673) * 0.75 + 787
       let total = p_atk * (1 + final_p_dmg_bonus - mons_final_p_dmg_red) * (1 + final_p_pen - mons_final_p_def) * elementBonus * (1 + element_buff - element_debuff) * mons_size * (1 + size_buff - size_debuff) * (1 + race_buff - race_debuff) * (1 + p_atk_buff) * (1 - p_atk_debuff) + (p_dmg_bonus - mons_p_dmg_red)
 
-      console.log(p_atk, final_p_dmg_bonus, final_p_pen, mons_size, elementBonus, mons_final_p_def)
+      // console.log(p_atk, final_p_dmg_bonus, final_p_pen, mons_size, elementBonus, mons_final_p_def)
 
       return total.toFixed()
 
@@ -707,7 +807,10 @@ new Vue({
     reset() {
       localStorage.clear()
       location.reload()
-    }
+    },
+    test(val) {
+      console.log(val)
+    },
   },
   watch: {
     selectedClass: {
