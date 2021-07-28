@@ -2,9 +2,111 @@
 Vue.component('vue-multiselect', window.VueMultiselect.default)
 Vue.component('v-select', VueSelect.VueSelect);
 
+const messages = {
+  en: {
+    str: 'STR',
+    vit: 'VIT',
+    dex: 'DEX',
+    agi: 'AGI',
+    int: 'INT',
+    luk: 'LUK',
+    maxhp: 'Max HP',
+    patk: 'P.ATK',
+    def: 'DEF',
+    ppen: 'P.PEN',
+    aspd: 'ASPD',
+    hit: 'HIT',
+    crit: 'CRIT',
+    maxsp: 'Max SP',
+    matk: 'M.ATK',
+    mdef: 'M.DEF',
+    mpen: 'M.PEN',
+    haste: 'Haste',
+    flee: 'Flee',
+    antiCrit: 'Anti-Crit',
+    finalASPD: 'Final Attack Speed',
+    finalCrit: 'Final Crit',
+    hpRegen: 'HP Regen',
+    spRegen: 'SP Regen',
+    critBonus: 'Crit DMG Bonus',
+    movementSpeed: 'Movement Speed',
+    finalPDEF: 'Final Pyhsical DEF',
+    finalMDEF: 'Final Magic DEF',
+    finalPPEN: 'Final P.PEN',
+    finalHaste: 'Final Haste',
+    finalDMGBonus: 'Final DMG Bonus',
+    finalMPEN: 'Final M.PEN',
+    damageBonus: 'Damage Bonus',
+    pdmgRed: 'P.DMG Reduction',
+    upgradeAwaken: 'Upgrade Awaken',
+    refineAwaken: 'Refine Awaken',
+    enchantAwaken: 'Enchant Awaken',
+    pysicalDamage: 'Pysical Damage',
+    critDamage: 'Critical Damage',
+    PDPS: 'Physical DPS',
+    cd: "Skill's CD",
+    magicDamage: 'Magic Damage',
+    MDPS: 'Magic DPS',
+    channeling: 'Channeling Time',
+    weapon: "-- Weapon --",
+
+  },
+  cn: {
+    str: '力量',
+    vit: '体质',
+    dex: '灵巧',
+    agi: '敏捷',
+    int: '智力',
+    luk: '幸运',
+    maxhp: '最大 HP',
+    patk: '物理攻击',
+    def: '物理防御',
+    ppen: '物防穿透',
+    aspd: '攻速',
+    hit: '命中',
+    crit: '暴击',
+    maxsp: '最大 SP',
+    matk: '魔法攻击',
+    mdef: '魔法防御',
+    mpen: '魔防穿透',
+    haste: '急速',
+    flee: '闪避',
+    antiCrit: '防爆',
+    finalASPD: '最终攻速',
+    finalCrit: '最终暴击',
+    hpRegen: 'HP 恢复',
+    spRegen: 'SP 恢复',
+    critBonus: '物伤附加',
+    movementSpeed: '移动速度',
+    finalPDEF: '最终物防效果',
+    finalMDEF: '最终魔防效果',
+    finalPPEN: '最终物防穿透',
+    finalHaste: '最终急速',
+    finalDMGBonus: '最终物伤附加',
+    finalMPEN: '最终魔防穿透',
+    damageBonus: '物伤附加',
+    pdmgRed: '最终物伤减免',
+    upgradeAwaken: '强化觉醒',
+    refineAwaken: '精炼觉醒',
+    enchantAwaken: '附魔觉醒',
+    pysicalDamage: '物理伤害',
+    critDamage: '暴击伤害',
+    PDPS: '物理秒伤',
+    cd: "技能冷却",
+    magicDamage: '魔法伤害',
+    MDPS: '魔法秒伤',
+    channeling: '咏唱时间',
+    weapon: '-- 武器 --'
+  },
+};
+const i18n = new VueI18n({ 
+  locale: 'en',
+  messages: messages 
+});
 
 new Vue({
   el: '#app',
+  i18n: i18n,
   components: {
     //CustomSelect
   },
@@ -349,7 +451,7 @@ new Vue({
       var weapons = this.weapons.filter(v => 
         v.slotList != null && 
         v.baseProperty &&
-        v.baseProperty.name != null && 
+        v.baseProperty.en_name != null && 
         v.slotList.indexOf('护符') > -1
         )
 
@@ -390,7 +492,7 @@ new Vue({
       return weapons;
     },
     filteredCards(attr) {
-      return this.cards.filter(v => v.itemname != null && v.itemSubType != null && v.itemSubType.match(attr))
+      return this.cards.filter(v => v.en_itemname != null && v.itemSubType != null && v.itemSubType.match(attr))
     },
     filteredEnchant(equipment_x) {
       var res = this.equipmentResults
@@ -465,12 +567,6 @@ new Vue({
     },
     filteredBaseLevel(val) {
       return this.growth.filter(v => v.basicJob != null && v.basicJob.match(val))
-    },
-    cn_lang() {
-      this.lang = 'cn'
-    },
-    en_lang() {
-      this.lang = 'en'
     },
     common(value, M, B) {
       let N = Math.floor(((1 + 8 * value / M) ** 0.5 - 1) / 2)
@@ -580,8 +676,7 @@ new Vue({
     },
     getEnchantLabel (option) {
       if (option && typeof option === 'object') {
-        return option.text
-        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+        return this.lang == 'en'? option.en_text : option.text
       }
       return option
     },
@@ -605,8 +700,7 @@ new Vue({
     },
     getCardLabel (option) {
       if (option && typeof option === 'object') {
-        return option.itemname
-        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+        return this.lang == 'en'? option.en_itemname : option.itemname
       }
       return option
     },
