@@ -664,7 +664,7 @@ new Vue({
     // },
     getLabel (option) {
       if (typeof option === 'object' && option.baseProperty) {
-        return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
+        return this.$i18n.locale == 'en'? option.baseProperty.en_name : option.baseProperty.name
       }
       return option
     },
@@ -676,7 +676,7 @@ new Vue({
     },
     getEnchantLabel (option) {
       if (option && typeof option === 'object') {
-        return this.lang == 'en'? option.en_text : option.text
+        return this.$i18n.locale == 'en'? option.en_text : option.text
       }
       return option
     },
@@ -700,7 +700,7 @@ new Vue({
     },
     getCardLabel (option) {
       if (option && typeof option === 'object') {
-        return this.lang == 'en'? option.en_itemname : option.itemname
+        return this.$i18n.locale == 'en'? option.en_itemname : option.itemname
       }
       return option
     },
@@ -913,6 +913,9 @@ new Vue({
     },
   },
   watch: {
+    '$i18n.locale': function(newVal) {
+      localStorage.setItem('lang', newVal)
+    },
     selectedClass: {
       handler(newVal) {
           localStorage.setItem('selectedClass', JSON.stringify(newVal))
@@ -976,6 +979,9 @@ new Vue({
     this.requestHandlder();
   },
   created() {
+    if(localStorage.lang && localStorage.ver == 1) {
+      this.$i18n.locale = localStorage.getItem('lang')
+    }
     if(localStorage.equipmentResults && localStorage.ver == 1) {
       this.equipmentResults = JSON.parse(localStorage.getItem('equipmentResults'))
     }
