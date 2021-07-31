@@ -1,4 +1,5 @@
 // import CustomSelect from './header.js';
+import eq from './eq.js';
 Vue.component('vue-multiselect', window.VueMultiselect.default)
 Vue.component('v-select', VueSelect.VueSelect);
 
@@ -44,10 +45,27 @@ const messages = {
     pysicalDamage: 'Pysical Damage',
     critDamage: 'Critical Damage',
     PDPS: 'Physical DPS',
+    CDPS: 'Critical DPS',
     cd: "Skill's CD",
     magicDamage: 'Magic Damage',
     MDPS: 'Magic DPS',
     channeling: 'Channeling Time',
+    spear_proficiency: 'Spear Proficiency',
+    spear_proficiency_des: 'ATK increases by (80 + 50% of DEX) when equipped with a Spear.',
+    cavalry_training: 'Cavalry Training',
+    lords_aura: "Lord's Aura",
+    improve_concentration: 'Improve Concentration',
+    elemental_arrow: 'Elemental Arrow',
+    owls_eye: "Owl's Eye",
+    ace_tamer: 'Ace Tamer',
+    falcon_eyes: "Falcon Eyes",
+    blessing_agility: "Blessing & Agility",
+    impositio_manus: 'Impositio Manus',
+    gloria: 'Gloria',
+    crazy_uproar: 'Crazy Uproar',
+    weapon_perfection: 'Weapon Perfection',
+    adrenaline_rush: 'Adrenaline Rush',
+    power_thrust: 'Power Thrust',
     weapon: "-- Weapon --",
 
   },
@@ -76,7 +94,7 @@ const messages = {
     finalCrit: '最终暴击',
     hpRegen: 'HP 恢复',
     spRegen: 'SP 恢复',
-    critBonus: '物伤附加',
+    critBonus: '暴击附加',
     movementSpeed: '移动速度',
     finalPDEF: '最终物防效果',
     finalMDEF: '最终魔防效果',
@@ -92,10 +110,27 @@ const messages = {
     pysicalDamage: '物理伤害',
     critDamage: '暴击伤害',
     PDPS: '物理秒伤',
+    CDPS: '暴击秒伤',
     cd: "技能冷却",
     magicDamage: '魔法伤害',
     MDPS: '魔法秒伤',
     channeling: '咏唱时间',
+    spear_proficiency: '长矛熟练度',
+    spear_proficiency_des: "装备长矛时物理攻击提升(80+灵巧x50%)",
+    cavalry_training: '骑兵修炼',
+    lords_aura: "领主光环",
+    improve_concentration: '心神凝聚',
+    elemental_arrow: '元素箭矢',
+    owls_eye: "鹗枭之眼",
+    ace_tamer: "王牌驯兽师",
+    falcon_eyes: "狙杀瞄准",
+    blessing_agility: "天使之赐福 & 加速术",
+    impositio_manus: '神威祈福',
+    gloria: '幸运之颂歌',
+    crazy_uproar: '大声呐喊',
+    weapon_perfection: '无视体型攻击',
+    adrenaline_rush: '速度激发',
+    power_thrust: '凶砍',
     weapon: '-- 武器 --'
   },
 };
@@ -108,11 +143,11 @@ new Vue({
   el: '#app',
   i18n: i18n,
   components: {
-    //CustomSelect
+    eq
+    // CustomSelect
   },
   data() {
     return {
-      lang: 'en',
       classOptions: [
         { name: "弓箭手系", value: "弓箭手" }, 
         { name: "盗贼系", value: "盗贼"},
@@ -211,9 +246,28 @@ new Vue({
         refine_8: null
       },
       passiveSkill: {
-        knight: {spear_proficiency: false, cavalry_training: false},
-        hunter: {improve_concentration: false, elemental_arrow: false, owls_eye: false},
-        priest: {blessing_agility: false, impositio_manus: false, gloria: false},
+        knight: {
+          spear_proficiency: false, 
+          cavalry_training: false,
+          lords_aura: false,
+        },
+        hunter: {
+          improve_concentration: false, 
+          elemental_arrow: false, 
+          ace_tamer: false,
+          falcon_eyes: false,
+        },
+        priest: {
+          blessing_agility: false, 
+          impositio_manus: false, 
+          gloria: false,
+        },
+        merchant: {
+          crazy_uproar: false,
+          weapon_perfection: false,
+          adrenaline_rush: false,
+          power_thrust: false,
+        },
       },
       mons_size: 1,
       elementBonus: 1,
@@ -272,6 +326,7 @@ new Vue({
       upgradeAwakening: 1,
       refineAwakening: 1,
       enchantAwakening: 1,
+      test: 1,
       // selected: null,
       // selected_card: '',
       // selected_enchant: '',
@@ -284,286 +339,9 @@ new Vue({
   },
   methods: {
     requestHandlder() {
-      axios.all([this.req_1(), this.req_2(), this.req_3(), this.req_4(), this.req_5(), this.req_6()]).then(
-        axios.spread((...response) => {
-          this.weapons = response[0].data;
-          this.cards = response[1].data;
-          this.enchants = response[2].data;
-          this.upgrade = response[3].data;
-          this.refine = response[4].data;
-          this.growth = response[5].data;
-          //this.accessoryCards = response[1].data.filter(v => v.itemsubtype.match('06:飾品'))
-        })
-      ).catch(errors => {
-        console.log(errors);
-      })
-    },
-    req_1() {
-      return axios.get('./data/weapon_v1.json');
-    },
-    req_2() {
-      return axios.get('./data/card_v1.json');
-    },  
-    req_3() {
-      return axios.get('./data/enchant_v1.json');
-    },
-    req_4() {
-      return axios.get('./data/upgrade_v1.json');
-    },
-    req_5() {
-      return axios.get('./data/refine_v1.json');
-    },
-    req_6() {
-      return axios.get('./data/levelGrowth_v1.json');
-    },
-    filteredWeapons(job, type) {
-      // var weapons = this.weapons.filter(v => v.jobLimit != null 
-      //   && v.slotList != null 
-      //   && v.name != null 
-      //   && v.slotList.indexOf('武器') > -1 
-      //   && v.jobLimit.indexOf(job) > -1
-      //   )
-
-      var weapons = this.weapons.filter(v => v.jobLimit != null 
-        && v.equipmentType
-        && v.baseProperty
-        && v.baseProperty.en_name
-        && Object.keys(v.equipmentType).indexOf('武器') > -1
-        && v.jobLimit.indexOf(job) > -1
-      )
-      
-      if(job != '弓箭手') {
-        if(type == 'offHand') {
-          weapons = this.weapons.filter(v => v.equipmentType
-            && v.baseProperty != null 
-            && v.baseProperty.en_name != null 
-            && Object.values(v.equipmentType).indexOf('盾牌') > -1
-          )
-        }        
-      }
-
-      weapons.sort(function(a, b) {
-        var nameA = a.baseProperty.en_name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.baseProperty.en_name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-          return 0;
-      })
-    
-      return weapons;
-    },
-    filteredArmor(job, parts) {
-
-      var weapons = this.weapons.filter(v => v.jobLimit != null 
-        && v.slotList != null 
-        && v.baseProperty
-        && v.baseProperty.name
-        && v.slotList.indexOf(parts) > -1 
-        && v.jobLimit.indexOf(job) > -1
-        )
-
-      // var weapons = this.weapons.filter(v => v.jobLimit != null 
-      //   && v.slotList != null 
-      //   && v.name != null 
-      //   && v.slotList.indexOf(parts) > -1 
-      //   && v.jobLimit.indexOf(job) > -1
-      //   )
-
-      weapons.sort(function(a, b) {
-        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-          return 0;
-      })
-    
-      return weapons;
-    },
-    filteredCostume(parts) {
-      var weapons = this.weapons.filter(v => 
-        v.baseProperty != null 
-        && v.baseProperty.name != null 
-        && v.baseProperty.parts != null 
-        && v.baseProperty.parts == parts
-        )
-
-      // 头部 眼睛 嘴巴
-      // var weapons = this.weapons.filter(v => v.jobLimit != null 
-      //   && v.equipmentType
-      //   && v.name != null 
-      //   && Object.keys(v.equipmentType).indexOf('武器') > -1
-      //   && v.jobLimit.indexOf(job) > -1
-      //   )
-
-      weapons.sort(function(a, b) {
-        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-          return 0;
-      })
-    return weapons
-    },
-    filteredUpgrade(equipment_x) {
-      var res = this.equipmentResults
-      for (var key in res) {
-        if (key == equipment_x) {    
-          for(var i in res[key]) {
-            if(i == "StrengthenID"){
-              var k = this.upgrade.filter(v => v.strengthenId != null && v.level != null && v.strengthenId === res[key][i])
-              return k
-            }
-          }
-        }
-      }
-    },
-    filteredRefine(equipment_x) {
-      var res = this.equipmentResults
-      for (var key in res) {
-        if (key == equipment_x) {
-          if(res[key] !== null) {
-            for(var i in res[key]) {
-              if(i == "RefineID" && this.refine){
-                var k = this.refine.filter(v => v.refineId != null && v.refineValue != null && v.refineId === res[key][i])
-                k.forEach(z => {
-                  z.refine_lv = "+" + (String(z.refine_lv).indexOf("+") == 0 ? String(z.refine_lv).substr(1) : z.refine_lv);
-                })
-                return k
-              }
-            }            
-          }
-        }
-      }
-    },
-    filteredTalisman() {
-      var weapons = this.weapons.filter(v => 
-        v.slotList != null && 
-        v.baseProperty &&
-        v.baseProperty.en_name != null && 
-        v.slotList.indexOf('护符') > -1
-        )
-
-      weapons.sort(function(a, b) {
-        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-          return 0;
-      })
-   
-      return weapons;
-     },
-    filteredAccessory() {
-      var weapons = this.weapons.filter(v => 
-        v.slotList != null && 
-        v.baseProperty && 
-        v.baseProperty.name != null && 
-        v.slotList.indexOf('饰品') > -1
-        )
-      
-      weapons.sort(function(a, b) {
-        var nameA = a.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.baseProperty.name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-          return 0;
-      })
-   
-      return weapons;
-    },
-    filteredCards(attr) {
-      return this.cards.filter(v => v.en_itemname != null && v.itemSubType != null && v.itemSubType.match(attr))
-    },
-    filteredEnchant(equipment_x) {
-      var res = this.equipmentResults
-      var parts
-      for (var key in res) {
-        if (key == equipment_x) {
-          if(this.equipmentResults[key] !== null) {
-            parts = this.equipmentResults[key].parts
-
-            const k = this.enchants.filter(v => v.parts.match(parts))
-            let tempArray = [];
-            for (let item of k) {
-              (tempItem => {
-                if (!(tempItem.length > 0 && tempItem.find(x => x.text === item.text))) tempArray.push(item);
-              })(tempArray.filter(x => x.text === item.text))
-            }
-            return tempArray;
-
-          }
-        }
-      }
-
-      // const k = this.enchants.filter(v => v.parts.match(attr))
-      // let tempArray = [];
-      // for (let item of k) {
-      //   (tempItem => {
-      //     if (!(tempItem.length > 0 && tempItem.find(x => x.text === item.text))) tempArray.push(item);
-      //   })(tempArray.filter(x => x.text === item.text))
-      // }
-      // return tempArray;
-    },
-    filteredEnchantLevel(enchant_x) {
-      // return this.enchants.filter(v => v.parts.match(attr))
-
-      var res = this.enchantResults
-      var selected
-      var enchant
-      var parts
-      for (var key in res) {
-        if (key == enchant_x) {
-          if(this.enchantResults[key][0] !== null) {
-            selected = this.enchantResults[key][0].location
-            enchant = this.enchantResults[key][0].attrName
-            parts = this.enchantResults[key][0].parts
-
-            const k = this.enchants.filter(v => v.parts.match(parts) && v.attrName.match(enchant) && v.location.match(selected))
-            let tempArray = [];
-            for (let item of k) {
-              (tempItem => {
-                if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
-              })(tempArray.filter(x => x.attrValue === item.attrValue))
-            }
-            return tempArray;
-
-          }
-          // if(this.enchantResults[key][2] !== null) {
-          //   // selected = this.enchantResults[key][2].split(" - ")[0]
-          //   // enchant = this.enchantResults[key][2].split(" - ")[1]
-          //   selected = this.enchantResults[key].location
-          //   enchant = this.enchantResults[key].attrName
-          // }
-        }
-      }
-      // const k = this.enchants.filter(v => v.parts.match(attr) && v.attrName.match(enchant) && v.location.match(selected))
-      // let tempArray = [];
-      // for (let item of k) {
-      //   (tempItem => {
-      //     if (!(tempItem.length > 0 && tempItem.find(x => x.attrValue === item.attrValue))) tempArray.push(item);
-      //   })(tempArray.filter(x => x.attrValue === item.attrValue))
-      // }
-      // return tempArray;
+      axios
+      .get('./data/levelGrowth_v1.json')
+      .then(response => (this.growth = response.data))
     },
     filteredBaseLevel(val) {
       return this.growth.filter(v => v.basicJob != null && v.basicJob.match(val))
@@ -659,83 +437,6 @@ new Vue({
         return 0
       }
     },
-    // customLabel ({ baseProperty }) {
-    //   return `${ baseProperty.name }`
-    // },
-    getLabel (option) {
-      if (typeof option === 'object' && option.baseProperty) {
-        return this.$i18n.locale == 'en'? option.baseProperty.en_name : option.baseProperty.name
-      }
-      return option
-    },
-    getValue (option) {
-      if (typeof option === 'object') {
-        return option.baseProperty
-      }
-      return option
-    },
-    getEnchantLabel (option) {
-      if (option && typeof option === 'object') {
-        return this.$i18n.locale == 'en'? option.en_text : option.text
-      }
-      return option
-    },
-    getEnchantValue (option) {
-      if (option && typeof option === 'object') {
-        return option.data
-      }
-      return option
-    },
-    getEnchantLevelLabel (option) {
-      if (option && typeof option === 'object') {
-        return option.level
-      }
-      return option
-    },
-    getEnchantLevelValue (option) {
-      if (option && typeof option === 'object') {
-        return option.attrValue
-      }
-      return option
-    },
-    getCardLabel (option) {
-      if (option && typeof option === 'object') {
-        return this.$i18n.locale == 'en'? option.en_itemname : option.itemname
-      }
-      return option
-    },
-    getCardValue (option) {
-      if (option && typeof option === 'object') {
-        return option.effect
-      }
-      return option
-    },
-    getUpgradeLabel (option) {
-      if (option && typeof option === 'object') {
-        return option.level
-        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
-      }
-      return option
-    },
-    getUpgradeValue (option) {
-      if (option && typeof option === 'object') {
-        return option.upgradeValue
-      }
-      return option
-    },
-    getRefineLabel (option) {
-      if (option && typeof option === 'object') {
-        return option.refine_lv
-        // return this.lang == 'en'? option.baseProperty.en_name : option.baseProperty.name
-      }
-      return option
-    },
-    getRefineValue (option) {
-      if (option && typeof option === 'object') {
-        return option.refineValue
-      }
-      return option
-    },
     p_damage() {
       let p_atk = parseFloat(this.stats.p_atk.withEq)
       let final_p_pen = parseFloat(this.stats.final_p_pen.withEq)
@@ -772,7 +473,8 @@ new Vue({
 
       // console.log(p_atk, final_p_dmg_bonus, final_p_pen, mons_size, elementBonus, mons_final_p_def)
 
-      return total.toFixed()
+      // return (Math.floor(total)).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})
+      return Math.floor(total)
 
       // 10521 buff
       // 15320 buff crit
@@ -865,7 +567,8 @@ new Vue({
 
       let total = p_atk * (1 + final_p_dmg_bonus) * elementBonus * (1 + element_buff - element_debuff) * mons_size * (1 + size_buff - size_debuff) * (1 + race_buff - race_debuff) * (1 + p_atk_buff) * (1 - p_atk_debuff) * crit_bonus + (p_dmg_bonus - mons_p_dmg_red)
 
-      return total.toFixed()
+      // return total.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})
+      return Math.floor(total)
     },
     p_dps() {
       let p_damage = parseFloat(this.p_damage())
@@ -905,16 +608,27 @@ new Vue({
       return res
     },
     reset() {
-      localStorage.clear()
+      var lang = localStorage.getItem('lang');
+      var ver = localStorage.getItem('ver');
+      console.log(lang)
+      localStorage.clear();
+      localStorage.setItem('lang', lang);
+      localStorage.setItem('ver', ver);
       location.reload()
-    },
-    test(val) {
-      console.log(val)
     },
   },
   watch: {
     '$i18n.locale': function(newVal) {
       localStorage.setItem('lang', newVal)
+    },
+    test: {
+      handler(newVal) {
+      this.cardResults = newVal.cardResults
+      this.equipmentResults = newVal.equipmentResults
+      this.enchantResults = newVal.enchantResults
+      this.upgradeResults = newVal.upgradeResults
+      this.refineResults = newVal.refineResults
+      }
     },
     selectedClass: {
       handler(newVal) {
@@ -1021,7 +735,13 @@ new Vue({
       let str_withoutEq = Number(this.stats.str.withoutEq)     
       let str_withEq = this.searchAttr('力量', 'str', 'number')
       let str_multiply = this.searchAttr('力量提升', 'str%', 'percentage')
-      let total = (str_withEq + str_withoutEq) * (1 + str_multiply)
+
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
+
+      let total = (str_withEq + str_withoutEq + buffs) * (1 + str_multiply)
       this.stats.str.withEq = total
       return total
     },
@@ -1030,10 +750,12 @@ new Vue({
       let withEq = this.searchAttr('幸运', 'luk', 'number')
       let multiply = this.searchAttr('幸运提升', 'luk%', 'percentage')
 
-      // gloria buff
-      let gloria = this.passiveSkill.priest.gloria ? 40 : 0
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.priest.gloria ? 40 : 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
 
-      let total = (withEq + withoutEq + gloria) * (1 + multiply)
+      let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.luk.withEq = total
       return total
     },
@@ -1042,9 +764,11 @@ new Vue({
       let withEq = this.searchAttr('敏捷', 'agi', 'number')
       let multiply = this.searchAttr('敏捷提升', 'agi%', 'percentage')
 
-      // buff
-      let improve_concentration = this.passiveSkill.priest.improve_concentration ? 20 : 0
-      let buffs = improve_concentration
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.priest.improve_concentration ? 20 : 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
 
       let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.agi.withEq = total
@@ -1055,11 +779,11 @@ new Vue({
       let withEq = this.searchAttr('灵巧', 'dex', 'number')
       let multiply = this.searchAttr('灵巧提升', 'dex%', 'percentage')
       
-      // buff
-      let blessing_agility = this.passiveSkill.priest.blessing_agility ? 20 : 0
-      let improve_concentration = this.passiveSkill.priest.improve_concentration ? 20 : 0
-      let owls_eye = this.passiveSkill.priest.owls_eye ? 30 : 0
-      let buffs = blessing_agility + improve_concentration + owls_eye
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
+      buffs += this.passiveSkill.hunter.improve_concentration ? 20 : 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
 
       let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.dex.withEq = total
@@ -1069,7 +793,12 @@ new Vue({
       let withoutEq = Number(this.stats.vit.withoutEq)
       let withEq = this.searchAttr('体质', 'vit', 'number')
       let multiply = this.searchAttr('体质提升', 'vit%', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply)
+
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+
+      let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.vit.withEq = total
       return total
     },
@@ -1077,7 +806,13 @@ new Vue({
       let withoutEq = Number(this.stats.int.withoutEq)
       let withEq = this.searchAttr('智力', 'int', 'number')
       let multiply = this.searchAttr('智力提升', 'int%', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply)
+
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
+
+      let total = (withEq + withoutEq + buffs) * (1 + multiply)
       this.stats.int.withEq = total
       return total
     },
@@ -1087,8 +822,15 @@ new Vue({
       let p_atk_multiply = this.searchAttr('物理攻击', 'p_atk', 'percentage')
 
       // impositio_manus buff
-      let impositio_manus = this.passiveSkill.priest.impositio_manus ? 0.1 : 0
-      p_atk_multiply += impositio_manus
+      p_atk_multiply += this.passiveSkill.priest.impositio_manus ? 0.1 : 0
+      // ace_tamer
+      p_atk_multiply += this.passiveSkill.hunter.ace_tamer ? 0.15 : 0
+      // lords_aura
+      p_atk_multiply += this.passiveSkill.knight.lords_aura ? 0.10 : 0
+      // power_thrust
+      p_atk_multiply += this.passiveSkill.merchant.power_thrust ? 0.10 : 0
+
+      p_atk_multiply += this.passiveSkill.hunter.falcon_eyes ? 0.20 : 0
 
       // convert stats to p_atk
       let dex = this.stats.dex.withEq
@@ -1114,6 +856,8 @@ new Vue({
 
       let total = Math.ceil((p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk + skillResult) * (1 + p_atk_multiply))
       this.stats.p_atk.withEq = total
+
+console.log('dex:'+dex, 'luk:'+luk, 'str:'+str, 'atk:'+Math.ceil(p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk), 'multiply:'+(1 + p_atk_multiply))
 
       return total
     },
@@ -1182,7 +926,11 @@ new Vue({
       let multiply = this.searchAttr('攻速提升', 'aspd%', 'percentage')
       let agi = this.stats.agi.withEq
       let agi_to_aspd = this.statBonus(agi, 2)
-      let total = (withEq + withoutEq + agi_to_aspd) * (1 + multiply)
+
+      // buffs
+      let buffs = 0
+
+      let total = Math.floor(withEq + withoutEq + agi_to_aspd + buffs) * (1 + multiply)
       this.stats.aspd.withEq = total
       return total
     },
@@ -1191,7 +939,13 @@ new Vue({
       // let withEq = this.searchAttr('最终攻速', 'final_aspd', 'number')
       let multiply = this.searchAttr('最终攻速', 'final_aspd', 'percentage')
       let aspd = Number(this.common(this.stats.aspd.withEq, 50, 1).toFixed(2)) / 100
-      let total = withoutEq + aspd + multiply
+
+      // buffs
+      let buffs = 0
+      buffs += this.passiveSkill.merchant.adrenaline_rush ? Math.floor(parseFloat(this.stats.agi.withEq) / 50) / 100 : 0
+      buffs += this.passiveSkill.merchant.adrenaline_rush ? 0.5 : 0
+
+      let total = withoutEq + aspd + multiply + buffs
       this.stats.final_aspd.withEq = total
       return (total * 100) + "%"
     },    
@@ -1212,13 +966,17 @@ new Vue({
       let crit = Number(this.common(this.stats.crit.withEq, 25, 5).toFixed(2)) / 100
       let total = (withoutEq + crit + multiply).toFixed(5)
       this.stats.final_crit.withEq = total
-      return (total * 100) + "%"
+      return (total * 100).toFixed(2) + "%"
     },
     crit_bonus() {
       let withoutEq = Number(this.stats.crit_bonus.withoutEq)
       let withEq = this.searchAttr('暴伤附加', 'crit_bonus', 'number')
       let multiply = this.searchAttr('暴伤附加', 'crit_bonus', 'percentage')
-      let total = (withEq + withoutEq) * (1 + multiply) / 100
+
+      let buffs = 0
+      buffs += this.passiveSkill.hunter.falcon_eyes ? 50 : 0
+
+      let total = (withEq + withoutEq + buffs) * (1 + multiply) / 100
       this.stats.crit_bonus.withEq = total
       return (total * 100) + "%"
     },
