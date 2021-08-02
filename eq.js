@@ -1122,5 +1122,5 @@ export default {
     if(localStorage.enchantAwakening && localStorage.ver == 1) {
       this.enchantAwakening = JSON.parse(localStorage.getItem('enchantAwakening'))
     }
-  }
+  },
 }

@@ -39,9 +39,9 @@ const messages = {
     finalMPEN: 'Final M.PEN',
     damageBonus: 'Damage Bonus',
     pdmgRed: 'P.DMG Reduction',
-    upgradeAwaken: 'Upgrade Awaken',
-    refineAwaken: 'Refine Awaken',
-    enchantAwaken: 'Enchant Awaken',
+    upgradeAwaken: 'Upgrade Awakening',
+    refineAwaken: 'Refine Awakening',
+    enchantAwaken: 'Enchant Awakening',
     pysicalDamage: 'Pysical Damage',
     critDamage: 'Critical Damage',
     PDPS: 'Physical DPS',
@@ -66,6 +66,12 @@ const messages = {
     weapon_perfection: 'Weapon Perfection',
     adrenaline_rush: 'Adrenaline Rush',
     power_thrust: 'Power Thrust',
+    hunterClass: 'Archer/Hunter/Sniper',
+    assassinClass: 'Thief/Assassin/Assassin Cross',
+    knightClass: 'Swordsman/Knight/Lord Knight',
+    blacksmithClass: 'Merchant/Blacksmith/Whitesmith',
+    priestClass: 'Acolyte/Priest/High Priest',
+    wizClass: 'Magician/Wizard/High Wizard',
     weapon: "-- Weapon --",
 
   },
@@ -131,6 +137,12 @@ const messages = {
     weapon_perfection: '无视体型攻击',
     adrenaline_rush: '速度激发',
     power_thrust: '凶砍',
+    hunterClass: '弓箭手/猎人/神射手',
+    assassinClass: '盗贼/刺客/十字刺客',
+    knightClass: '剑士/骑士/骑士领主',
+    blacksmithClass: '商人/铁匠/神工匠',
+    priestClass: '服侍/牧师/神官',
+    wizClass: '魔法师/巫师/超魔导师',
     weapon: '-- 武器 --'
   },
 };
@@ -148,14 +160,14 @@ new Vue({
   },
   data() {
     return {
-      classOptions: [
-        { name: "弓箭手系", value: "弓箭手" }, 
-        { name: "盗贼系", value: "盗贼"},
-        { name: "剑士系", value: "剑士"},
-        { name: "商人系", value: "商人"},
-        { name: "服事系", value: "服事"},
-        { name: "魔法师系", value: "魔法师"},
-      ],
+      // classOptions: [
+      //   { name: this.$t('archerClass'), value: "弓箭手" }, 
+      //   { name: "盗贼系", value: "盗贼"},
+      //   { name: "剑士系", value: "剑士"},
+      //   { name: "商人系", value: "商人"},
+      //   { name: "服事系", value: "服事"},
+      //   { name: "魔法师系", value: "魔法师"},
+      // ],
       selectedClass: {name:null, baselv: null, value: null},
       cardResults: {
         card_1: null,
@@ -352,6 +364,8 @@ new Vue({
     },
     statBonus(v, m) {
       return Math.floor(v * m * (1 + 0.05 * Math.floor(v / 100)))
+      // 4*A27+0.2*A27*(TRUNC(A27/100))+10*(TRUNC(A27/100))*(1-(TRUNC(A27/100)))
+      // return m * v + 0.2 * v * Math.floor(v / 100) + 10 * Math.floor( v / 100) * (1 - Math.floor(v / 100))
     },
     awaken(v) {
       if(v == 0) { return 1 }
@@ -458,7 +472,7 @@ new Vue({
       let mons_anti_crit = 0
       let mons_p_pen = 0
       // let elemental_arrow = this.passiveSkill.hunter.elemental_arrow ? 0.1 : 0
-      // p_atk_buff += elemental_arrow
+      p_atk_buff += this.passiveSkill.hunter.elemental_arrow ? 0.1 : 0
 
       if(this.mons_test == '马尔杜克') {
         mons_final_p_def = Number(this.common(284, 25, 5).toFixed(2)) / 100
@@ -561,6 +575,8 @@ new Vue({
       let mons_p_dmg_red = 0
       let crit_bonus = parseFloat(this.stats.crit_bonus.withEq)
 
+      p_atk_buff += this.passiveSkill.hunter.elemental_arrow ? 0.1 : 0
+
       if(this.mons_test == '木桩人') {
         size_buff = 0.02
       }
@@ -597,16 +613,6 @@ new Vue({
       let total = (Math.floor(Number(this.common(haste, 50, 100).toFixed(2))*10)/10) + final_haste * 0.1
       return total + ' sec'
     },
-    skill() {
-      let res = 0
-      let dex = this.stats.dex.withEq
-      let knightSkills = this.passiveSkill.knight
-      for(let key in knightSkills) {
-        res += key == 'spear_proficiency' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
-        res += key == 'cavalry_training' && knightSkills[key] == true ? 80 + dex * 0.5 : 0 
-      }
-      return res
-    },
     reset() {
       var lang = localStorage.getItem('lang');
       var ver = localStorage.getItem('ver');
@@ -616,6 +622,14 @@ new Vue({
       localStorage.setItem('ver', ver);
       location.reload()
     },
+    clearOption() {
+      let equipmentResults = this.equipmentResults
+      for(let i in equipmentResults) {
+        if(equipmentResults[7] == null) {
+          this.cardResults['card_16'] = null
+        }
+      }
+    }
   },
   watch: {
     '$i18n.locale': function(newVal) {
@@ -688,6 +702,10 @@ new Vue({
     enchantAwakening: function(newVal) {
       localStorage.setItem('enchantAwakening', JSON.stringify(newVal))
     },
+    equipmentResults: function(newVal) {
+      this.clearOption()
+      console.log('watch')
+    }
   },
   mounted() {
     this.requestHandlder();
@@ -731,47 +749,60 @@ new Vue({
     }
   },
   computed: {
+    classOptions() { 
+      return [
+        { name: this.$t('hunterClass'), value: "弓箭手" }, 
+        { name: this.$t('assassinClass'), value: "盗贼"},
+        { name: this.$t('knightClass'), value: "剑士"},
+        { name: this.$t('blacksmithClass'), value: "商人"},
+        { name: this.$t('priestClass'), value: "服事"},
+        { name: this.$t('wizClass'), value: "魔法师"},
+      ]
+    },
     str() {
-      let str_withoutEq = Number(this.stats.str.withoutEq)     
-      let str_withEq = this.searchAttr('力量', 'str', 'number')
-      let str_multiply = this.searchAttr('力量提升', 'str%', 'percentage')
-
+      let withoutEq = Number(this.stats.str.withoutEq)     
+      let withEq = this.searchAttr('力量', 'str', 'number')
+      let multiply = this.searchAttr('力量提升', 'str%', 'percentage')
+  
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
+      let buff = 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buff += this.passiveSkill.priest.blessing_agility ? 20 : 0
 
-      let total = (str_withEq + str_withoutEq + buffs) * (1 + str_multiply)
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.str.withEq = total
+      this.stats.str.buff = buff * (1 + multiply)
       return total
     },
     luk() {
       let withoutEq = Number(this.stats.luk.withoutEq)
       let withEq = this.searchAttr('幸运', 'luk', 'number')
       let multiply = this.searchAttr('幸运提升', 'luk%', 'percentage')
-
+  
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.priest.gloria ? 40 : 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-
-      let total = (withEq + withoutEq + buffs) * (1 + multiply)
+      let buff = 0
+      buff += this.passiveSkill.priest.gloria ? 40 : 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+  
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.luk.withEq = total
+      this.stats.luk.buff = buff * (1 + multiply)
       return total
     },
     agi() {
       let withoutEq = Number(this.stats.agi.withoutEq)
       let withEq = this.searchAttr('敏捷', 'agi', 'number')
       let multiply = this.searchAttr('敏捷提升', 'agi%', 'percentage')
-
+  
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.priest.improve_concentration ? 20 : 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
-
-      let total = (withEq + withoutEq + buffs) * (1 + multiply)
+      let buff = 0
+      buff += this.passiveSkill.priest.improve_concentration ? 20 : 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buff += this.passiveSkill.priest.blessing_agility ? 20 : 0
+  
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.agi.withEq = total
+      this.stats.agi.buff = buff * (1 + multiply)
       return total
     },
     dex() {
@@ -780,48 +811,61 @@ new Vue({
       let multiply = this.searchAttr('灵巧提升', 'dex%', 'percentage')
       
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
-      buffs += this.passiveSkill.hunter.improve_concentration ? 20 : 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-
-      let total = (withEq + withoutEq + buffs) * (1 + multiply)
+      let buff = 0
+      buff += this.passiveSkill.priest.blessing_agility ? 20 : 0
+      buff += this.passiveSkill.hunter.improve_concentration ? 20 : 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+  
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.dex.withEq = total
+      this.stats.dex.buff = buff * (1 + multiply)
       return total
     },
     vit() {
       let withoutEq = Number(this.stats.vit.withoutEq)
       let withEq = this.searchAttr('体质', 'vit', 'number')
       let multiply = this.searchAttr('体质提升', 'vit%', 'percentage')
-
+  
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-
-      let total = (withEq + withoutEq + buffs) * (1 + multiply)
+      let buff = 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+  
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.vit.withEq = total
+      this.stats.vit.buff = buff * (1 + multiply)
       return total
     },
     int() {
       let withoutEq = Number(this.stats.int.withoutEq)
       let withEq = this.searchAttr('智力', 'int', 'number')
       let multiply = this.searchAttr('智力提升', 'int%', 'percentage')
-
+  
       // buffs
-      let buffs = 0
-      buffs += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
-      buffs += this.passiveSkill.priest.blessing_agility ? 20 : 0
-
-      let total = (withEq + withoutEq + buffs) * (1 + multiply)
+      let buff = 0
+      buff += this.passiveSkill.hunter.falcon_eyes ? 10 : 0
+      buff += this.passiveSkill.priest.blessing_agility ? 20 : 0
+  
+      let total = (withEq + withoutEq + buff) * (1 + multiply)
       this.stats.int.withEq = total
+      this.stats.int.buff = buff * (1 + multiply)
       return total
     },
     p_atk() {
       let p_atk_withoutEq = Number(this.stats.p_atk.withoutEq)
       let p_atk_withEq = this.searchAttr('物理攻击', 'p_atk', 'number')
       let p_atk_multiply = this.searchAttr('物理攻击', 'p_atk', 'percentage')
+      let p_atk_skill = 0
 
-      // impositio_manus buff
+      // convert stats to p_atk
+      let dex = this.stats.dex.withEq
+      let luk = this.stats.luk.withEq
+      let str = this.stats.str.withEq
+      let dex_buff = this.stats.dex.buff
+      let luk_buff = this.stats.luk.buff
+      let str_buff = this.stats.str.buff
+      let selected = this.selectedClass.name
+
+      // impositio_manus
       p_atk_multiply += this.passiveSkill.priest.impositio_manus ? 0.1 : 0
       // ace_tamer
       p_atk_multiply += this.passiveSkill.hunter.ace_tamer ? 0.15 : 0
@@ -829,19 +873,30 @@ new Vue({
       p_atk_multiply += this.passiveSkill.knight.lords_aura ? 0.10 : 0
       // power_thrust
       p_atk_multiply += this.passiveSkill.merchant.power_thrust ? 0.10 : 0
-
+      // falcon_eyes
       p_atk_multiply += this.passiveSkill.hunter.falcon_eyes ? 0.20 : 0
 
-      // convert stats to p_atk
-      let dex = this.stats.dex.withEq
-      let luk = this.stats.luk.withEq
-      let str = this.stats.str.withEq
-      let selected = this.selectedClass.name
+      // spear_proficiency
+      p_atk_skill += this.passiveSkill.knight.spear_proficiency ? 80 + dex * 0.5 : 0 
+      // cavalry_training
+      p_atk_skill += this.passiveSkill.knight.cavalry_training ? 80 + dex * 0.5 : 0 
 
-      let dex_to_atk = selected == '弓箭手' ? this.statBonus(dex, 4) : 0
-      let luk_to_atk = this.statBonus(luk, 0.5)
-      let str_to_atk = selected == '弓箭手' ? this.statBonus(str, 0.2) : this.statBonus(str, 4)
+      // let dex_to_atk = selected == '弓箭手' ? dex*4*(1+0.05*Math.floor(dex/100))-(0.2*dex*Math.max(0,(Math.floor(dex/100)-1))) : 0
+
+      let dex_to_atk = selected == '弓箭手' ? this.statBonus(dex - dex_buff, 4) + dex_buff * (4 + Math.floor((dex - dex_buff) / 100) * 0.2) : 0
+      let luk_to_atk = this.statBonus(luk - luk_buff, 0.5) + this.statBonus(luk_buff, 0.5) 
+      let str_to_atk = selected == '弓箭手' ? this.statBonus(str - str_buff, 0.2) + this.statBonus(str_buff, 0.2) : this.statBonus(str - str_buff, 4) + this.statBonus(str_buff, 4)
+      let stats_to_atk = dex_to_atk + luk_to_atk + str_to_atk
+
+      // 175 + lord + blessing = 195 = 7165 - matched
+      // 175 + lord + improve = 195 = 7157 - matched
+      // 175 + lord + falcon = 185 = 7808 - matched // this.statBonus(dex+improve+blessing+falcon, 4)
       
+      // 175 + lord + improve + falcon = 205 = 8035 - not matched - game = 7990, gap = sys more 45 | multiply = 2.17
+      // 175 + lord + blessing + falcon = 205 = 8044 - not matched - game = 7999, gap = sys more 45 | multiply = 2.17
+      // 175 + lord + blessing + improve = 215 = 7376 - not matched - game = 7330, gap = sys more 46 | multiply = 1.97 // 50
+      // 175 + lord + blessing + improve + falcon = 225 = 8235 - not matched - game = 8181, gap = sys more 54 | multiply = 2.17
+
       // baselv reward p_atk
       if(this.selectedClass.name !== null && this.selectedClass.baselv !== null && this.growth.length !== 0){
         let baseReward = this.growth.filter(v => v.level == this.selectedClass.baselv && v.basicJob == this.selectedClass.name)[0]
@@ -850,16 +905,15 @@ new Vue({
         }
       }
 
-      // skill
-      let skillResult = this.skill()
-
-
-      let total = Math.ceil((p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk + skillResult) * (1 + p_atk_multiply))
+      let total = (p_atk_withEq + p_atk_withoutEq + stats_to_atk + p_atk_skill) * (1 + p_atk_multiply)
       this.stats.p_atk.withEq = total
 
-console.log('dex:'+dex, 'luk:'+luk, 'str:'+str, 'atk:'+Math.ceil(p_atk_withEq + p_atk_withoutEq + dex_to_atk + luk_to_atk + str_to_atk), 'multiply:'+(1 + p_atk_multiply))
+      console.log('dex:'+dex, 'luk:'+luk, 'str:'+str, 
+      'atk:'+p_atk_withEq + p_atk_withoutEq + stats_to_atk, 
+      'multiply:'+(1 + p_atk_multiply), 'total:'+total, 'eq:'+p_atk_withEq + p_atk_withoutEq, 
+      'dex_to_atk:'+dex_to_atk, 'luk_to_atk:'+luk_to_atk, 'str_to_atk:'+str_to_atk)
 
-      return total
+      return Math.floor(total)
     },
     p_def() {
       let withoutEq = Number(this.stats.p_def.withoutEq)
